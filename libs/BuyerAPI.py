@@ -19,7 +19,7 @@ logging.config.fileConfig(LOGGING_CONF)
 ## Description: This class is the database driver for Buyer
 ##
 class BuyerAPI(DataBaseDriver.DataBaseDriver):
-    BUYER_TABLENAME = BUYER_TABLE
+    buyerTablename = BUYER_TABLE
     def __init__(self):
         self.logger = logging.getLogger('Market_Place')
         self.logger.info("IN - BuyerAPI constructor")
@@ -35,7 +35,7 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     ##
     def createBuyer(self, buyer):
         self.logger.info("IN - BuyerAPI createBuyer method")
-        query = "INSERT INTO " + BuyerAPI.BUYER_TABLENAME + " (buyer_id, first_name, last_name, location, skills) VALUES (%s, %s, %s, %s, %s) "
+        query = "INSERT INTO " + BuyerAPI.buyerTablename + " (buyer_id, first_name, last_name, location, skills) VALUES (%s, %s, %s, %s, %s) "
         params = (buyer['buyer_id'], buyer['first_name'],buyer['last_name'] , buyer['location'], buyer['skills'])
         self.logger.debug("Query: " + query)
         self.logger.debug("Params: %s, %s, %s, %s, %s",
@@ -54,7 +54,7 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     def getBuyerInfo(self, buyer_id):
         self.logger.info("IN - BuyerAPI getBuyerInfo method")
         query = "SELECT buyer_id, first_name, last_name, location, skills, creation_time FROM "\
-                + BuyerAPI.BUYER_TABLENAME + " WHERE buyer_id = '" + buyer_id + "'"
+                + BuyerAPI.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query)
 
@@ -70,7 +70,7 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     def getAllBuyers(self):
         self.logger.info("IN - BuyerAPI getAllBuyers method")
         query = "SELECT buyer_id, first_name, last_name, location, skills, creation_time FROM " \
-                + BuyerAPI.BUYER_TABLENAME
+                + BuyerAPI.buyerTablename
         self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query)
 
@@ -85,7 +85,7 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     ##
     def setBuyerFirstName(self, buyer_id, first_name):
         self.logger.info("IN - BuyerAPI setBuyerFirstName method")
-        query = "UPDATE " + BuyerAPI.BUYER_TABLENAME + "SET first_name = ' " + first_name + "' WHERE buyer_id = '" + buyer_id + "'"
+        query = "UPDATE " + BuyerAPI.buyerTablename + "SET first_name = ' " + first_name + "' WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
 
@@ -100,7 +100,7 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     ##
     def setBuyerLastName(self, buyer_id, last_name):
         self.logger.info("IN - BuyerAPI setBuyerLastName method")
-        query = "UPDATE " + BuyerAPI.BUYER_TABLENAME + "SET last_name = ' " + last_name + "' WHERE buyer_id = '" + buyer_id + "'"
+        query = "UPDATE " + BuyerAPI.buyerTablename + "SET last_name = ' " + last_name + "' WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
 
@@ -115,7 +115,7 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     ##
     def setBuyerLocation(self, buyer_id, location):
         self.logger.info("IN - BuyerAPI setBuyerLocation method")
-        query = "UPDATE " + BuyerAPI.BUYER_TABLENAME + "SET location = ' " + location + "' WHERE buyer_id = '" + buyer_id + "'"
+        query = "UPDATE " + BuyerAPI.buyerTablename + "SET location = ' " + location + "' WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
 
@@ -130,7 +130,7 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     ##
     def setBuyerSkills(self, buyer_id, skills):
         self.logger.info("IN - BuyerAPI setBuyerSkills method")
-        query = "UPDATE " + BuyerAPI.BUYER_TABLENAME + "SET skills = ' " + skills + "' WHERE buyer_id = '" + buyer_id + "'"
+        query = "UPDATE " + BuyerAPI.buyerTablename + "SET skills = ' " + skills + "' WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
 

@@ -10,7 +10,6 @@
 
 # Module Import #
 from ProjectAPI import ProjectAPI
-from BidAPI import BidAPI
 from SellerAPI import SellerAPI
 from constants import *
 import logging.config
@@ -25,7 +24,6 @@ class SellerDashboardAPI:
         self.logger = logging.getLogger('Market_Place')
         self.logger.info("IN - SellerDashboardAPI constructor")
         self.Project = ProjectAPI()
-        self.Bid = BidAPI()
         self.Seller = SellerAPI()
         self.sellerId = sellerId
 
