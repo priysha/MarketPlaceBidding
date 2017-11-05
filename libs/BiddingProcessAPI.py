@@ -10,6 +10,9 @@
 # Module Import #
 from ProjectAPI import ProjectAPI
 from BidAPI import BidAPI
+from constants import *
+import logging.config
+logging.config.fileConfig(LOGGING_CONF)
 
 ##
 ## Class: BiddingProcessAPI
@@ -18,6 +21,8 @@ from BidAPI import BidAPI
 class BiddingProcessAPI:
 
     def __init__(self):
+        self.logger = logging.getLogger('Market_Place')
+        self.logger.info("IN - BiddingProcessAPI constructor")
         self.Bid = BidAPI()
         self.Project = ProjectAPI()
 
@@ -32,6 +37,7 @@ class BiddingProcessAPI:
     ## Returns: returns dataframe with all eligible bid info
     ##
     def getAllEligibleBids(self, project_id):
+        self.logger.info("IN - BiddingProcessAPI getAllEligibleBids method")
         project_bid_endtime = self.Project.getBidEndTimeForProject(project_id)
         project_bids = self.Bid.getBidsForProject(project_id)
         project_elgible_bids = project_bids[project_bids.creation_time <= project_bid_endtime]
@@ -48,7 +54,7 @@ class BiddingProcessAPI:
     ## Returns: returns dataframe with minimum bid info
     ##
     def getMinimumBidForProject(self, project_id):
-
+        self.logger.info("IN - BiddingProcessAPI getAllEligibleBids method")
         all_bids = self.getAllEligibleBids(project_id)
         min_bid = all_bids.bid_id[0]
         min_amount = float('inf')
@@ -73,6 +79,7 @@ class BiddingProcessAPI:
     ## projects' info
     ##
     def getMostRecentNProjects(self, n):
+        self.logger.info("IN - BiddingProcessAPI getMostRecentNProjects method")
         all_projects = self.Project.getAllProjects()
 
         top_n_projects = all_projects.sort_values(['creation_time'], ascending=[False]).head(n)
@@ -80,7 +87,7 @@ class BiddingProcessAPI:
         return top_n_projects
 
     ##
-    ## Name: getAllBuyerIDBiddinngForAProject
+    ## Name: getAllBuyerIDBiddingForAProject
     ## Description: This function is called to retrieve all
     ## the buyer IDs bidding for a project
     ##
@@ -88,7 +95,8 @@ class BiddingProcessAPI:
     ##
     ## Returns: returns list of all buyer IDs for a project
     ##
-    def getAllBuyerIDBiddinngForAProject(self, project_id):
+    def getAllBuyerIDBiddingForAProject(self, project_id):
+        self.logger.info("IN - BiddingProcessAPI getAllBuyerIDBiddingForAProject method")
         all_bids = self.Bid.getBidsForProject(project_id)
         buyer_ids = list(all_bids.buyer_id)
         return buyer_ids
@@ -104,9 +112,9 @@ class BiddingProcessAPI:
     ## Returns: returns True if buyer ID is set for project
     ##
     def setBuyerForProject(self, project_id):
+        self.logger.info("IN - BiddingProcessAPI setBuyerForProject method")
         bid = self.getMinimumBidForProject(project_id)
         buyer_id = bid.buyer_id[0]
-
         return self.Project.setBuyerForProject(project_id,buyer_id)
 
 

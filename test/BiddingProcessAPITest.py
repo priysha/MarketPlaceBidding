@@ -78,17 +78,17 @@ class BiddingProcessAPITest(unittest.TestCase):
         self.assertEquals(False, result_2.empty)
 
     ##
-    ## Name: testGetAllBuyerIDBiddinngForAProject
-    ## Description: This method tests getAllBuyerIDBiddinngForAProject()
+    ## Name: testGetAllBuyerIDBiddingForAProject
+    ## Description: This method tests getAllBuyerIDBiddingForAProject()
     ## method for BiddingProcessAPI class
     ##
     ## Parameters: None
     ##
     ## Returns: None
     ##
-    def testGetAllBuyerIDBiddinngForAProject(self):
+    def testGetAllBuyerIDBiddingForAProject(self):
         project_id = 8
-        result_1 = self.BidProcess.getAllBuyerIDBiddinngForAProject(project_id)
+        result_1 = self.BidProcess.getAllBuyerIDBiddingForAProject(project_id)
         self.assertEquals(False, len(result_1)<1)
         self.assertEquals(True, 'priysha' in result_1)
 

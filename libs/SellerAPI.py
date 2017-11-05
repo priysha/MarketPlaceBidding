@@ -11,6 +11,8 @@
 # Module Import #
 import DataBaseDriver
 from constants import *
+import logging.config
+logging.config.fileConfig(LOGGING_CONF)
 
 ##
 ## Class: SellerAPI
@@ -19,6 +21,8 @@ from constants import *
 class SellerAPI(DataBaseDriver.DataBaseDriver):
     SELLER_TABLENAME = SELLER_TABLE
     def __init__(self):
+        self.logger = logging.getLogger('Market_Place')
+        self.logger.info("IN - SellerAPI constructor")
         DataBaseDriver.DataBaseDriver.__init__(self)
 
     ##
@@ -30,9 +34,14 @@ class SellerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: returns True if buyer is created
     ##
     def createSeller(self, seller):
-
-        query = "INSERT INTO " + SellerAPI.SELLER_TABLENAME + " (seller_id, first_name, last_name, location, job_title, company) VALUES (%s, %s, %s, %s, %s, %s) "
+        self.logger.info("IN - SellerAPI createSeller method")
+        query = "INSERT INTO " + SellerAPI.SELLER_TABLENAME + " (seller_id, first_name, last_name, location, job_title, company) " \
+                                                              "VALUES (%s, %s, %s, %s, %s, %s) "
         params = (seller['seller_id'], seller['first_name'],seller['last_name'] , seller['location'], seller['job_title'],seller['company'])
+        self.logger.debug("Query: " + query)
+        self.logger.debug("Params: %s, %s, %s, %s, %s, %s",
+                          seller['seller_id'], seller['first_name'], seller['last_name'], seller['location'],
+                          seller['job_title'], seller['company'])
         return self.runInsertQuery(query, params)
 
     ##
@@ -45,9 +54,10 @@ class SellerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: Dataframe with seller info
     ##
     def getSellerInfo(self, seller_id):
-
+        self.logger.info("IN - SellerAPI getSellerInfo method")
         query = "SELECT seller_id, first_name, last_name, location,job_title, company, creation_time FROM "\
                 + SellerAPI.SELLER_TABLENAME + " WHERE seller_id = '" + seller_id + "'"
+        self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query)
 
     ##
@@ -60,8 +70,10 @@ class SellerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: Dataframe with info of all sellers
     ##
     def getAllSellers(self):
+        self.logger.info("IN - SellerAPI getAllSellers method")
         query = "SELECT seller_id, first_name, last_name, location,job_title, company, creation_time FROM " \
                 + SellerAPI.SELLER_TABLENAME
+        self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query)
 
     ##
@@ -74,8 +86,9 @@ class SellerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: True if updated else false
     ##
     def setSellerFirstName(self, seller_id, first_name):
-
+        self.logger.info("IN - SellerAPI setSellerFirstName method")
         query = "UPDATE " + SellerAPI.SELLER_TABLENAME + "SET first_name = ' " + first_name + "' WHERE seller_id = '" + seller_id + "'"
+        self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
 
     ##
@@ -88,8 +101,9 @@ class SellerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: True if updated else false
     ##
     def setSellerLastName(self, seller_id, last_name):
-
+        self.logger.info("IN - SellerAPI setSellerLastName method")
         query = "UPDATE " + SellerAPI.SELLER_TABLENAME + "SET last_name = ' " + last_name + "' WHERE seller_id = '" + seller_id + "'"
+        self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
 
     ##
@@ -102,8 +116,9 @@ class SellerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: True if updated else false
     ##
     def setSellerLocation(self, seller_id, location):
-
+        self.logger.info("IN - SellerAPI setSellerLocation method")
         query = "UPDATE " + SellerAPI.SELLER_TABLENAME + "SET location = ' " + location + "' WHERE seller_id = '" + seller_id + "'"
+        self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
 
     ##
@@ -116,8 +131,9 @@ class SellerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: True if updated else false
     ##
     def setSellerJobTitle(self, seller_id, job_title):
-
+        self.logger.info("IN - SellerAPI setSellerJobTitle method")
         query = "UPDATE " + SellerAPI.SELLER_TABLENAME + "SET job_title = ' " + job_title + "' WHERE seller_id = '" + seller_id + "'"
+        self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
 
     ##
@@ -130,8 +146,9 @@ class SellerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: True if updated else false
     ##
     def setSellerCompany(self, seller_id, company):
-
+        self.logger.info("IN - SellerAPI setSellerCompany method")
         query = "UPDATE " + SellerAPI.SELLER_TABLENAME + "SET company = ' " + company + "' WHERE seller_id = '" + seller_id + "'"
+        self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
 
     ##
@@ -144,10 +161,13 @@ class SellerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: True if all rows inserted else false
     ##
     def load(self, df):
+        self.logger.info("IN - SellerAPI load method")
         check = True
         for index, row in df.iterrows():
             seller_dict = {'seller_id' : row['seller_id'],'first_name' : row['first_name'], 'last_name' : row['last_name'],
                     'location': row['location'], 'job_title' : row['job_title'], 'company' : row['company']}
             if not self.createSeller(seller_dict):
+                self.logger.error("Could not load data in Seller table: " + row)
                 check = False
+            self.logger.debug("Loaded data in Seller table: " + row)
         return check

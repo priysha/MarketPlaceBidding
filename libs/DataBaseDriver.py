@@ -11,7 +11,9 @@
 import pymysql
 import pandas as pd
 from constants import *
-
+import logging
+import logging.config
+logging.config.fileConfig(LOGGING_CONF)
 ##
 ## Class: DataBaseDriver
 ## Description: This class is a base class for MySql db connection and queries
@@ -19,16 +21,17 @@ from constants import *
 class DataBaseDriver(object):
 
     def __init__(self):
+        self.logger = logging.getLogger('Market_Place')
+        self.logger.info("IN - DataBaseDriver constructor")
         self.conn = pymysql.connect(host=DB_HOST,
                                     user=DB_USER,
                                     passwd=DB_PASSWORD,
                                     db=DB_NAME)
-        self.cursorDict = self.conn.cursor(pymysql.cursors.DictCursor)
         self.cursor = self.conn.cursor()
 
     def __del__(self):
+        self.logger.info("IN - DataBaseDriver destructor")
         self.cursor.close()
-        self.cursorDict.close()
         self.conn.close()
 
     ##
@@ -41,21 +44,8 @@ class DataBaseDriver(object):
     ## Returns: Return the MySql connector
     ##
     def getConn(self):
+        self.logger.info("IN - DataBaseDriver getConn")
         return self.conn
-
-
-    ##
-    ## Name: getCursorDict
-    ## Description: Getter function that returns the MySql cursor
-    ## with values in a dictionary format
-    ##
-    ## Parameters: conn
-    ##
-    ## Returns: Return the MySql cursor in a dict format
-    ##
-    def getCursorDict(self):
-        return self.cursorDict
-
 
     ##
     ## Name: getCursor
@@ -66,6 +56,7 @@ class DataBaseDriver(object):
     ## Returns: Return the MySql cursor
     ##
     def getCursor(self):
+        self.logger.info("IN - DataBaseDriver getCursor")
         return self.cursor
 
     ##
@@ -77,6 +68,7 @@ class DataBaseDriver(object):
     ## Returns: none
     ##
     def commitConn(self):
+        self.logger.info("IN - DataBaseDriver commitConn")
         self.conn.commit()
 
     ##
@@ -90,19 +82,22 @@ class DataBaseDriver(object):
     ## returns query result in list for select query
     ##
     def executeQuery(self, query):
+        self.logger.info("IN - DataBaseDriver executeQuery")
         try:
             self.cursor.execute(query)
             self.commitConn()
+            self.logger.debug("Query executed and committed")
 
             if "SELECT" in query or "SHOW" in query:
                 db_resp = self.cursor.fetchall()
+                self.logger.debug("Query data fetched")
                 return db_resp
             else:
                 return True
 
         except Exception as e:
-            print("\n\nError in database query: " + query)
-            print("Error Status:\n" + str(e))
+            self.logger.error("\nError in database query: " + query +
+                          "\nError Status:\n" + str(e))
             return False
 
     ##
@@ -115,7 +110,9 @@ class DataBaseDriver(object):
     ## Returns: returns select query result if successful
     ##
     def prepareSelectQuery(self, table_name, fields, where_clause='1=1'):
+        self.logger.info("IN - DataBaseDriver prepareSelectQuery")
         selectQuery = "SELECT " + fields + " FROM " + table_name + " WHERE " + where_clause
+        self.logger.debug("Query: " + selectQuery)
         return self.executeQuery(selectQuery)
 
     ##
@@ -128,7 +125,9 @@ class DataBaseDriver(object):
     ## Returns: True if the query runs successfully
     ##
     def prepareInsertQuery(self, table_name, fields, values):
+        self.logger.info("IN - DataBaseDriver prepareSelectQuery")
         insertQuery = " INSERT INTO " + table_name + fields + " VALUES " + values
+        self.logger.debug("Query: " + insertQuery)
         return self.executeQuery(insertQuery)
 
     ##
@@ -141,7 +140,9 @@ class DataBaseDriver(object):
     ## Returns: True if the query runs successfully
     ##
     def prepareUpdateQuery(self, table_name, setVal, where_clause='1=1'):
+        self.logger.info("IN - DataBaseDriver prepareUpdateQuery")
         updateQuery = "UPDATE " + table_name + " SET " + setVal + " WHERE " + where_clause
+        self.logger.debug("Query: " + updateQuery)
         return self.executeQuery(updateQuery)
 
     ##
@@ -154,7 +155,9 @@ class DataBaseDriver(object):
     ## Returns: True if the query runs successfully
     ##
     def prepareDeleteQuery(self, table_name, where_clause='1=1'):
+        self.logger.info("IN - DataBaseDriver prepareDeleteQuery")
         deleteQuery = "DELETE FROM " + table_name + " WHERE " + where_clause
+        self.logger.debug("Query: " + deleteQuery)
         return self.executeQuery(deleteQuery)
 
     ##
@@ -167,7 +170,9 @@ class DataBaseDriver(object):
     ## Returns: True if the query runs successfully
     ##
     def prepareReplaceQuery(self, table_name, fields, values):
+        self.logger.info("IN - DataBaseDriver prepareReplaceQuery")
         replaceQuery = " REPLACE INTO " + table_name + fields + " VALUES " + values
+        self.logger.debug("Query: " + replaceQuery)
         return self.executeQuery(replaceQuery)
 
     ##
@@ -179,13 +184,17 @@ class DataBaseDriver(object):
     ## Returns: True if the query runs successfully
     ##
     def runUpdateQuery(self, query):
+        self.logger.info("IN - DataBaseDriver runUpdateQuery")
+        self.logger.debug("Query: " + query)
         try:
             self.cursor.execute(query)
             self.commitConn()
+            self.logger.debug("UPDATE query executed and committed")
             return True
 
         except Exception as e:
-            print ("\nError executing SQL UPDATE query: " + query + "\nError status:" + str(e))
+            self.logger.error("\nError executing SQL UPDATE query: " + query
+                          + "\nError status:" + str(e))
             return False
 
     ##
@@ -197,13 +206,17 @@ class DataBaseDriver(object):
     ## Returns: True if the query runs successfully
     ##
     def runDeleteQuery(self, query):
+        self.logger.info("IN - DataBaseDriver runDeleteQuery")
+        self.logger.debug("Query: " + query)
         try:
             self.cursor.execute(query)
             self.commitConn()
+            self.logger.debug("DELETE query executed and committed")
             return True
 
         except Exception as e:
-            print ("\nError executing SQL DELETE query: " + query + "\nError status:" + str(e))
+            self.logger.error("\nError executing SQL DELETE query: " + query
+                          + "\nError status:" + str(e))
             return False
 
     ##
@@ -216,14 +229,18 @@ class DataBaseDriver(object):
     ## Returns: dataframe with select query result
     ##
     def runSelectDfQuery(self, query):
-
+        self.logger.info("IN - DataBaseDriver runSelectDfQuery")
+        self.logger.debug("Query: " + query)
         try:
             df = pd.read_sql(query, con=self.conn)
+            self.logger.debug("SELECT df query executed and dataframe fetched")
+            self.logger.debug("Returned dataframe size" + str(len(df.index)))
             return df
 
         except Exception as e:
             df = pd.DataFrame()
-            print ("\nError executing SQL SELECT query: " + query + "\nError status:" + str(e))
+            self.logger.error("\nError executing SQL SELECT DF query: " + query
+                          + "\nError status:" + str(e))
             return df
 
     ##
@@ -235,13 +252,18 @@ class DataBaseDriver(object):
     ## Returns: select query result
     ##
     def runSelectQuery(self, query):
+        self.logger.info("IN - DataBaseDriver runSelectQuery")
+        self.logger.debug("Query: " + query)
         try:
             self.cursor.execute(query)
             result = self.cursor.fetchall()
+            self.logger.debug("SELECT query executed and data fetched")
+            self.logger.debug("Returned result size" + str(len(result)))
             return result
 
         except Exception as e:
-            print ("\nError executing SQL SELECT query: " + query + "\nError status:" + str(e))
+            self.logger.error("\nError executing SQL SELECT query: " + query
+                          + "\nError status:" + str(e))
             return False
 
     ##
@@ -253,13 +275,17 @@ class DataBaseDriver(object):
     ## Returns: returns True if successful
     ##
     def runInsertQuery(self,query, params):
+        self.logger.info("IN - DataBaseDriver prepareSelectQuery")
+        self.logger.debug("Query: " + query)
         try:
             self.cursor.execute(query, params)
             self.commitConn()
+            self.logger.debug("INSERT query executed and committed")
             return True
 
         except Exception as e:
-            print ("\nError executing SQL INSERT query: " + query + "\nError status:" + str(e))
+            self.logger.error("\nError executing SQL INSERT query: " + query
+                          + "\nError status:" + str(e))
             return False
 
 
@@ -272,13 +298,17 @@ class DataBaseDriver(object):
     ## Returns: returns True if successful
     ##
     def runReplaceQuery(self,query, params):
+        self.logger.info("IN - DataBaseDriver runReplaceQuery")
+        self.logger.debug("Query: " + query)
         try:
             self.cursor.execute(query, params)
             self.commitConn()
+            self.logger.debug("REPLACE query executed and committed")
             return True
 
         except Exception as e:
-            print ("\nError executing SQL REPLACE query: " + query + "\nError status:" + str(e))
+            self.logger.error("\nError executing SQL REPLACE query: " + query
+                          + "\nError status:" + str(e))
             return False
 
     ##
@@ -291,14 +321,18 @@ class DataBaseDriver(object):
     ## Returns: returns True if successful
     ##
     def runTruncateTableQuery(self, table_name):
+        self.logger.info("IN - DataBaseDriver runTruncateTableQuery")
         query = "TRUNCATE TABLE " + table_name
+        self.logger.debug("Query: " + query)
         try:
             self.cursor.execute(query)
             self.commitConn()
+            self.logger.debug("TRUNCATE query executed and committed")
             return True
 
         except Exception as e:
-            print ("\nError executing SQL REPLACE query: " + query + "\nError status:" + str(e))
+            self.logger.error("\nError executing SQL TRUNCATE query: " + query
+                          + "\nError status:" + str(e))
             return False
 
 

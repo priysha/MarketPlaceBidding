@@ -33,4 +33,4 @@ BID_DATA = '/Users/Priysha/Documents/personal_git/MarketPlaceBidding/test/bids.c
 PROJECT_DATA = '/Users/Priysha/Documents/personal_git/MarketPlaceBidding/test/projects.csv'
 BUYER_DATA = '/Users/Priysha/Documents/personal_git/MarketPlaceBidding/test/buyers.csv'
 SELLER_DATA = '/Users/Priysha/Documents/personal_git/MarketPlaceBidding/test/sellers.csv'
-LOG_CONFIG = ''
+LOGGING_CONF = '/Users/Priysha/Documents/personal_git/MarketPlaceBidding/log/logging.conf'

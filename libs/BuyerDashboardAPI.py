@@ -13,6 +13,9 @@ from ProjectAPI import ProjectAPI
 from BidAPI import BidAPI
 from BuyerAPI import BuyerAPI
 from datetime import datetime
+from constants import *
+import logging.config
+logging.config.fileConfig(LOGGING_CONF)
 
 ##
 ## Class: BuyerDashboardAPI
@@ -21,6 +24,8 @@ from datetime import datetime
 class BuyerDashboardAPI:
 
     def __init__(self, buyerId):
+        self.logger = logging.getLogger('Market_Place')
+        self.logger.info("IN - BuyerDashboardAPI constructor")
         self.Project = ProjectAPI()
         self.Bid = BidAPI()
         self.Buyer = BuyerAPI()
@@ -36,6 +41,7 @@ class BuyerDashboardAPI:
     ## Returns: returns dataframe with buyer's info
     ##
     def getBuyerInfo(self):
+        self.logger.info("IN - BuyerDashboardAPI getBuyerInfo method")
         buyer_info = self.Buyer.getBuyerInfo(self.buyerId)
         return buyer_info
 
@@ -49,6 +55,7 @@ class BuyerDashboardAPI:
     ## Returns: returns dataframe with buyer's bids
     ##
     def getAllBidsForBuyer(self):
+        self.logger.info("IN - BuyerDashboardAPI getAllBidsForBuyer method")
         buyer_bids = self.Bid.getBidsForBuyer(self.buyerId)
         return buyer_bids
 
@@ -62,8 +69,8 @@ class BuyerDashboardAPI:
     ## Returns: returns dataframe with buyer's listed projects
     ##
     def getAllProjectsUnderBuyer(self):
+        self.logger.info("IN - BuyerDashboardAPI getAllProjectsUnderBuyer method")
         buyer_projects = self.Project.getAllProjectsForBuyers(self.buyerId)
-
         return buyer_projects
 
     ##
@@ -77,11 +84,13 @@ class BuyerDashboardAPI:
     ## Returns: returns True if bid is created else False
     ##
     def createANewBid(self, project_id, bid_amount, bid_type='fixed', bid_hours=0):
+        self.logger.info("IN - BuyerDashboardAPI createANewBid method")
         project_bid_endtime = self.Project.getBidEndTimeForProject(project_id)
-
+        self.logger.debug("Project" + str(project_id) + " bidding ends at: " + str(project_bid_endtime)
+                          +"\nCurrent time: " + str(datetime.now()))
         if str(datetime.now()) <= str(project_bid_endtime):
             bid = {'project_id': project_id , 'buyer_id' : self.buyerId, 'bid_amount' : bid_amount, 'bid_type' : bid_type, 'bid_hours' : bid_hours}
             return self.Bid.createBid(bid)
         else:
-            print("Time exceeded for the bid to be added for project: " + str(project_id))
+            self.logger.debug("Time exceeded for the bid to be added for project: " + str(project_id))
             return False

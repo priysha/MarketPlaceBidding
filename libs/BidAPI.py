@@ -12,6 +12,8 @@
 import DataBaseDriver
 from datetime import datetime
 from constants import *
+import logging.config
+logging.config.fileConfig(LOGGING_CONF)
 
 ##
 ## Class: BidAPI
@@ -20,8 +22,9 @@ from constants import *
 class BidAPI(DataBaseDriver.DataBaseDriver):
     BID_TABLENAME = BID_TABLE
     def __init__(self):
+        self.logger = logging.getLogger('Market_Place')
+        self.logger.info("IN - BidAPI constructor")
         DataBaseDriver.DataBaseDriver.__init__(self)
-        self.curr_date = datetime.now()
 
     ##
     ## Name: createBuyer
@@ -32,8 +35,12 @@ class BidAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: returns True if buyer is created
     ##
     def createBid(self, bid_info):
+        self.logger.info("IN - BidAPI createBid method")
         query = "INSERT INTO " + BidAPI.BID_TABLENAME + " (project_id, buyer_id, bid_amount, bid_type, bid_hours) VALUES (%s, %s, %s, %s, %s)"
         params = (bid_info['project_id'], bid_info['buyer_id'], bid_info['bid_amount'], bid_info['bid_type'], bid_info['bid_hours'])
+        self.logger.debug("Query: " + query)
+        self.logger.debug("Params: %s, %s, %s, %s, %s",
+                          bid_info['project_id'], bid_info['buyer_id'], bid_info['bid_amount'], bid_info['bid_type'], bid_info['bid_hours'])
         return self.runInsertQuery(query, params)
 
     ##
@@ -46,7 +53,9 @@ class BidAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: Returns dataframe with all the bids
     ##
     def getAllBids(self):
+        self.logger.info("IN - BidAPI getAllBids method")
         query = "SELECT bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours, creation_time FROM " + BidAPI.BID_TABLENAME
+        self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query)
 
     ##
@@ -59,7 +68,10 @@ class BidAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: Returns dataframe with bid's info
     ##
     def getBidInfo(self, bid_id):
-        query = "SELECT bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours, creation_time FROM " + BidAPI.BID_TABLENAME + " WHERE bid_id = " + str(bid_id)
+        self.logger.info("IN - BidAPI getBidInfo method")
+        query = "SELECT bid_id, project_id, buyer_id, bid_amount, bid_type," \
+                " bid_hours, creation_time FROM " + BidAPI.BID_TABLENAME + " WHERE bid_id = " + str(bid_id)
+        self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query)
 
     ##
@@ -71,7 +83,9 @@ class BidAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: Returns True if updated successfully
     ##
     def setAmountForBid(self, bid_amount, bid_id):
+        self.logger.info("IN - BidAPI setAmountForBid method")
         query = "UPDATE " + BidAPI.BID_TABLENAME + " SET bid_amount = " + str(bid_amount) + " WHERE bid_id = " + str(bid_id)
+        self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
 
     ##
@@ -84,7 +98,10 @@ class BidAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: Returns dataframe with bids for a project_id
     ##
     def getBidsForProject(self, project_id):
-        query = "SELECT bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours, creation_time FROM " + BidAPI.BID_TABLENAME + " WHERE project_id = " + str(project_id)
+        self.logger.info("IN - BidAPI getBidsForProject method")
+        query = "SELECT bid_id, project_id, buyer_id, bid_amount, bid_type, " \
+                "bid_hours, creation_time FROM " + BidAPI.BID_TABLENAME + " WHERE project_id = " + str(project_id)
+        self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query)
 
     ##
@@ -97,7 +114,10 @@ class BidAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: Returns dataframe with bids for a buyer_id
     ##
     def getBidsForBuyer(self, buyer_id):
-        query = "SELECT bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours, creation_time FROM " + BidAPI.BID_TABLENAME + " WHERE buyer_id = '" + buyer_id + "'"
+        self.logger.info("IN - BidAPI getBidsForBuyer method")
+        query = "SELECT bid_id, project_id, buyer_id, bid_amount, bid_type, " \
+                "bid_hours, creation_time FROM " + BidAPI.BID_TABLENAME + " WHERE buyer_id = '" + buyer_id + "'"
+        self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query)
 
     ##
@@ -111,13 +131,19 @@ class BidAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: Returns bid's amount (float) else False
     ##
     def getBidAmount(self, bid_id):
+        self.logger.info("IN - BidAPI getBidAmount method")
         bid_info = self.getBidInfo(bid_id)
         if bid_info.bid_type[0] == "hourly":
+            self.logger.debug("Bid type of 'hourly'")
             bid_amount = float(bid_info.bid_amount[0] * bid_info.bid_hours[0])
+            self.logger.debug("Bid amount: " + str(bid_amount))
         elif bid_info.bid_type[0] == "fixed":
+            self.logger.debug("Bid type of 'fixed'")
             bid_amount = float(bid_info.bid_amount[0])
+            self.logger.debug("Bid amount: " + str(bid_amount))
         else:
             bid_amount = False
+            self.logger.error("Wrong bid_amount is asked, no bid_type")
         return bid_amount
 
 
@@ -131,11 +157,13 @@ class BidAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: True if all rows inserted else false
     ##
     def load(self, df):
+        self.logger.info("IN - BidAPI load method")
         check = True
         for index, row in df.iterrows():
-
             bid_dict = {'project_id' : row['project_id'], 'buyer_id' : row['buyer_id'],
                     'bid_amount': row['bid_amount'], 'bid_type': row['bid_type'], 'bid_hours' : row['bid_hours']}
             if not self.createBid(bid_dict):
+                self.logger.error("Could not load data in Bid table: " + row)
                 check = False
+            self.logger.debug("Loaded data in Bid table: " + row)
         return check

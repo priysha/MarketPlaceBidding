@@ -12,6 +12,9 @@
 from ProjectAPI import ProjectAPI
 from BidAPI import BidAPI
 from SellerAPI import SellerAPI
+from constants import *
+import logging.config
+logging.config.fileConfig(LOGGING_CONF)
 
 ##
 ## Class: SellerDashboardAPI
@@ -19,6 +22,8 @@ from SellerAPI import SellerAPI
 ##
 class SellerDashboardAPI:
     def __init__(self, sellerId):
+        self.logger = logging.getLogger('Market_Place')
+        self.logger.info("IN - SellerDashboardAPI constructor")
         self.Project = ProjectAPI()
         self.Bid = BidAPI()
         self.Seller = SellerAPI()
@@ -34,6 +39,7 @@ class SellerDashboardAPI:
     ## Returns: returns dataframe with seller's info
     ##
     def getSellerInfo(self):
+        self.logger.info("IN - SellerDashboardAPI getSellerInfo method")
         buyer_info = self.Seller.getSellerInfo(self.sellerId)
         return buyer_info
 
@@ -47,6 +53,7 @@ class SellerDashboardAPI:
     ## Returns: returns dataframe with seller's projects
     ##
     def getAllProjectsUnderSeller(self):
+        self.logger.info("IN - SellerDashboardAPI getAllProjectsUnderSeller method")
         seller_projects = self.Project.getAllProjectsForSellers(self.sellerId)
         return seller_projects
 
@@ -60,8 +67,9 @@ class SellerDashboardAPI:
     ## Returns: returns True if project created
     ##
     def addANewProject(self, project_name, location, bid_end_time, description):
-
-        project = {'project_name' : project_name, 'location' : location, 'seller_id' : self.sellerId, 'bid_end_time' : bid_end_time, 'description' : description}
+        self.logger.info("IN - SellerDashboardAPI addANewProject method")
+        project = {'project_name' : project_name, 'location' : location,
+                   'seller_id' : self.sellerId, 'bid_end_time' : bid_end_time, 'description' : description}
 
         return self.Project.createProject(project)
 
