@@ -20,7 +20,6 @@ class ProjectAPITest(unittest.TestCase):
     ##
     ## Name: setUp
     ## Description: Fixture that runs prior to the execution of any test.
-    ## In the setUp, we are adding some fake testing data in the db
     ##
     ## Parameters:
     ## None
@@ -29,23 +28,6 @@ class ProjectAPITest(unittest.TestCase):
     ##
     def setUp(self):
         self.Project = ProjectAPI()
-
-        df = pd.read_csv("./test/projects.csv")
-        self.Project.load(df)
-
-    ##
-    ## Name: tearDown
-    ## Description: Fixture that runs after the execution of all tests.
-    ## This will remove the db entries made in the setUp
-    ##
-    ## Parameters:
-    ## None
-    ##
-    ## Returns: None
-    ##
-    def tearDown(self):
-        # delete all the data
-        self.Project.runTruncateTableQuery('seller')
 
     ##
     ## Name: testGetAllProjects
@@ -57,7 +39,6 @@ class ProjectAPITest(unittest.TestCase):
     ## Returns: None
     ##
     def testGetAllProjects(self):
-
         self.assertEquals(False, self.Project.getAllProjects().empty)
         self.assertEquals(True, 'bkusick3' in self.Project.getAllProjects().seller_id.values)
 
@@ -117,7 +98,7 @@ class ProjectAPITest(unittest.TestCase):
     ##
     def testGetBidEndTimeForProject(self):
         seller_id = 'priysha'
-        project_name = 'Redhold'
+        project_name = 'Bigtax'
 
         project_id = self.Project.getProjectId(project_name,seller_id)
         self.assertIsNotNone(self.Project.getBidEndTimeForProject(project_id))

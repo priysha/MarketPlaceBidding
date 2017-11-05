@@ -20,7 +20,6 @@ class BidAPITest(unittest.TestCase):
     ##
     ## Name: setUp
     ## Description: Fixture that runs prior to the execution of any test.
-    ## In the setUp, we are adding some fake testing data in the db
     ##
     ## Parameters:
     ## None
@@ -29,23 +28,6 @@ class BidAPITest(unittest.TestCase):
     ##
     def setUp(self):
         self.Bid = BidAPI()
-
-        df = pd.read_csv("./test/bids.csv")
-        self.Bid.load(df)
-
-    ##
-    ## Name: tearDown
-    ## Description: Fixture that runs after the execution of all tests.
-    ## This will remove the db entries made in the setUp
-    ##
-    ## Parameters:
-    ## None
-    ##
-    ## Returns: None
-    ##
-    def tearDown(self):
-        # delete all the data
-        self.Bid.runTruncateTableQuery('bid')
 
     ##
     ## Name: testGetAllBids

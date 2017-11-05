@@ -20,7 +20,6 @@ class SellerAPITest(unittest.TestCase):
     ##
     ## Name: setUp
     ## Description: Fixture that runs prior to the execution of any test.
-    ## In the setUp, we are adding some fake testing data in the db
     ##
     ## Parameters:
     ## None
@@ -29,24 +28,6 @@ class SellerAPITest(unittest.TestCase):
     ##
     def setUp(self):
         self.Seller = SellerAPI()
-
-        df = pd.read_csv("./test/sellers.csv")
-        self.Seller.load(df)
-
-    ##
-    ## Name: tearDown
-    ## Description: Fixture that runs after the execution of all tests.
-    ## This will remove the db entries made in the setUp
-    ##
-    ## Parameters:
-    ## None
-    ##
-    ## Returns: None
-    ##
-    def tearDown(self):
-        self.Seller.runTruncateTableQuery('seller')
-        #delete all the data
-
 
     ##
     ## Name: testCreateSeller

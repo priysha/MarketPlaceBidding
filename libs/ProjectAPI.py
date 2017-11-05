@@ -160,6 +160,19 @@ class ProjectAPI(DataBaseDriver.DataBaseDriver):
         return self.runUpdateQuery(query)
 
     ##
+    ## Name: getBuyerForProject
+    ## Description: This function returns the buyer_id
+    ## for a project in the db
+    ##
+    ## Parameters: project_id
+    ##
+    ## Returns: returns the buyer_id for the project
+    ##
+    def getBuyerForProject(self, project_id):
+        query = "SELECT buyer_id FROM " + ProjectAPI.PROJECT_TABLENAME + " WHERE project_id = " + str(project_id)
+        return self.runSelectDfQuery(query).buyer_id[0]
+
+    ##
     ## Name: getBidEndTimeForProject
     ## Description: This function returns project bid_end_time
     ## from the db

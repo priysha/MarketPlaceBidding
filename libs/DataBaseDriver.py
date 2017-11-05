@@ -101,7 +101,7 @@ class DataBaseDriver(object):
             else:
                 return True
 
-        except (MySQLdb.Error, MySQLdb.Warning) as e:
+        except Exception as e:
             print("\n\nError in database query: " + query)
             print("Error Status:\n" + str(e))
             return False
@@ -185,7 +185,7 @@ class DataBaseDriver(object):
             self.commitConn()
             return True
 
-        except (MySQLdb.Error, MySQLdb.Warning) as e:
+        except Exception as e:
             print ("\nError executing SQL UPDATE query: " + query + "\nError status:" + str(e))
             return False
 
@@ -203,7 +203,7 @@ class DataBaseDriver(object):
             self.commitConn()
             return True
 
-        except (MySQLdb.Error, MySQLdb.Warning) as e:
+        except Exception as e:
             print ("\nError executing SQL DELETE query: " + query + "\nError status:" + str(e))
             return False
 
@@ -222,7 +222,7 @@ class DataBaseDriver(object):
             df = pd.read_sql(query, con=self.conn)
             return df
 
-        except (MySQLdb.Error, MySQLdb.Warning) as e:
+        except Exception as e:
             df = pd.DataFrame()
             print ("\nError executing SQL SELECT query: " + query + "\nError status:" + str(e))
             return df
@@ -241,7 +241,7 @@ class DataBaseDriver(object):
             result = self.cursor.fetchall()
             return result
 
-        except (MySQLdb.Error, MySQLdb.Warning) as e:
+        except Exception as e:
             print ("\nError executing SQL SELECT query: " + query + "\nError status:" + str(e))
             return False
 
@@ -259,7 +259,7 @@ class DataBaseDriver(object):
             self.commitConn()
             return True
 
-        except (MySQLdb.Error, MySQLdb.Warning) as e:
+        except Exception as e:
             print ("\nError executing SQL INSERT query: " + query + "\nError status:" + str(e))
             return False
 
@@ -278,7 +278,7 @@ class DataBaseDriver(object):
             self.commitConn()
             return True
 
-        except (MySQLdb.Error, MySQLdb.Warning) as e:
+        except Exception as e:
             print ("\nError executing SQL REPLACE query: " + query + "\nError status:" + str(e))
             return False
 
@@ -298,7 +298,7 @@ class DataBaseDriver(object):
             self.commitConn()
             return True
 
-        except (MySQLdb.Error, MySQLdb.Warning) as e:
+        except Exception as e:
             print ("\nError executing SQL REPLACE query: " + query + "\nError status:" + str(e))
             return False
 

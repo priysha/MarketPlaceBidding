@@ -28,10 +28,8 @@ class BiddingProcessAPI:
     ##
     def getAllEligibleBids(self, project_id):
         project_bid_endtime = self.Project.getBidEndTimeForProject(project_id)
-
         project_bids = self.Bid.getBidsForProject(project_id)
         project_elgible_bids = project_bids[project_bids.creation_time <= project_bid_endtime]
-
         return project_elgible_bids
 
     ##
@@ -47,27 +45,17 @@ class BiddingProcessAPI:
     def getMinimumBidForProject(self, project_id):
 
         all_bids = self.getAllEligibleBids(project_id)
-        all_bids = all_bids.sort(['bid_amount'], ascending=[True])
+        min_bid = all_bids.bid_id[0]
+        min_amount = float('inf')
+        for index,row in all_bids.iterrows():
+            bid_amount = self.Bid.getBidAmount(row['bid_id'])
+            if bid_amount < min_amount:
+                min_amount = bid_amount
+                min_bid = row['bid_id']
 
-        return all_bids.iloc[0]
+        min_bid_info = self.Bid.getBidInfo(min_bid)
 
-    ##
-    ## Name: getTopNMinimumBidsForProject
-    ## Description: This function is called to retrieve
-    ## top n minimum bids for a project
-    ##
-    ## Parameters: project_id, n
-    ##
-    ## Returns: returns dataframe with top n minimum bids
-    ## for a project
-    ##
-    def getTopNMinimumBidsForProject(self, project_id, n):
-
-        project_bids = self.getAllEligibleBids(project_id)
-
-        top_n_min_bids = project_bids.sort(['bid_amount'], ascending=[True]).head(n)
-
-        return top_n_min_bids
+        return min_bid_info
 
     ##
     ## Name: getMostRecentNProjects
@@ -82,12 +70,12 @@ class BiddingProcessAPI:
     def getMostRecentNProjects(self, n):
         all_projects = self.Project.getAllProjects()
 
-        top_n_projects = all_projects.sort(['creation_time'], ascending=[False]).head(n)
+        top_n_projects = all_projects.sort_values(['creation_time'], ascending=[False]).head(n)
 
         return top_n_projects
 
     ##
-    ## Name: getAllBuyersBiddinngForAProject
+    ## Name: getAllBuyerIDBiddinngForAProject
     ## Description: This function is called to retrieve all
     ## the buyer IDs bidding for a project
     ##

@@ -26,8 +26,8 @@ class BidAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: returns True if buyer is created
     ##
     def createBid(self, bid_info):
-        query = "INSERT INTO " + BidAPI.BID_TABLENAME + " (project_id, buyer_id, bid_amount) VALUES (%s, %s, %s)"
-        params = (bid_info['project_id'], bid_info['buyer_id'], bid_info['bid_amount'])
+        query = "INSERT INTO " + BidAPI.BID_TABLENAME + " (project_id, buyer_id, bid_amount, bid_type, bid_hours) VALUES (%s, %s, %s, %s, %s)"
+        params = (bid_info['project_id'], bid_info['buyer_id'], bid_info['bid_amount'], bid_info['bid_type'], bid_info['bid_hours'])
         return self.runInsertQuery(query, params)
 
     ##
@@ -40,7 +40,7 @@ class BidAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: Returns dataframe with all the bids
     ##
     def getAllBids(self):
-        query = "SELECT bid_id, project_id, buyer_id, bid_amount, creation_time FROM " + BidAPI.BID_TABLENAME
+        query = "SELECT bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours, creation_time FROM " + BidAPI.BID_TABLENAME
         return self.runSelectDfQuery(query)
 
     ##
@@ -53,7 +53,7 @@ class BidAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: Returns dataframe with bid's info
     ##
     def getBidInfo(self, bid_id):
-        query = "SELECT bid_id, project_id, buyer_id, bid_amount, creation_time FROM " + BidAPI.BID_TABLENAME + " WHERE bid_id = " + str(bid_id)
+        query = "SELECT bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours, creation_time FROM " + BidAPI.BID_TABLENAME + " WHERE bid_id = " + str(bid_id)
         return self.runSelectDfQuery(query)
 
     ##
@@ -78,7 +78,7 @@ class BidAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: Returns dataframe with bids for a project_id
     ##
     def getBidsForProject(self, project_id):
-        query = "SELECT bid_id, project_id, buyer_id, bid_amount, creation_time FROM " + BidAPI.BID_TABLENAME + " WHERE project_id = " + str(project_id)
+        query = "SELECT bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours, creation_time FROM " + BidAPI.BID_TABLENAME + " WHERE project_id = " + str(project_id)
         return self.runSelectDfQuery(query)
 
     ##
@@ -91,8 +91,29 @@ class BidAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: Returns dataframe with bids for a buyer_id
     ##
     def getBidsForBuyer(self, buyer_id):
-        query = "SELECT bid_id, project_id, buyer_id, bid_amount, creation_time FROM " + BidAPI.BID_TABLENAME + " WHERE buyer_id = '" + buyer_id + "'"
+        query = "SELECT bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours, creation_time FROM " + BidAPI.BID_TABLENAME + " WHERE buyer_id = '" + buyer_id + "'"
         return self.runSelectDfQuery(query)
+
+    ##
+    ## Name: getBidAmount
+    ## Description: This function gets bid's amount
+    ## from the db on the basis if the bid made is fixed
+    ## or hourly
+    ##
+    ## Parameters: bid_id
+    ##
+    ## Returns: Returns bid's amount (float) else False
+    ##
+    def getBidAmount(self, bid_id):
+        bid_info = self.getBidInfo(bid_id)
+        if bid_info.bid_type[0] == "hourly":
+            bid_amount = float(bid_info.bid_amount[0] * bid_info.bid_hours[0])
+        elif bid_info.bid_type[0] == "fixed":
+            bid_amount = float(bid_info.bid_amount[0])
+        else:
+            bid_amount = False
+        return bid_amount
+
 
     ##
     ## Name: load
@@ -108,7 +129,7 @@ class BidAPI(DataBaseDriver.DataBaseDriver):
         for index, row in df.iterrows():
 
             bid_dict = {'project_id' : row['project_id'], 'buyer_id' : row['buyer_id'],
-                    'bid_amount': row['bid_amount']}
+                    'bid_amount': row['bid_amount'], 'bid_type': row['bid_type'], 'bid_hours' : row['bid_hours']}
             if not self.createBid(bid_dict):
                 check = False
         return check
