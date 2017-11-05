@@ -1,6 +1,6 @@
 ##########################################################
 ##
-## File: Project.py
+## File: ProjectAPI.py
 ## Author: Priysha Pradhan
 ## Description: This is a database access class for project
 ## table and its dependent project_detail table. This class
@@ -11,7 +11,7 @@
 
 import DataBaseDriver
 
-class Project(DataBaseDriver.DataBaseDriver):
+class ProjectAPI(DataBaseDriver.DataBaseDriver):
     PROJECT_TABLENAME = 'project'
     PROJECT_DETAIL_TABLENAME = 'project_detail'
     def __init__(self):
@@ -27,11 +27,11 @@ class Project(DataBaseDriver.DataBaseDriver):
     ##
     def createProject(self, project):
 
-        query = "INSERT INTO " + Project.PROJECT_TABLENAME + \
-                " (project_name, location, bid_end_time, seller_id) " \
+        query = "INSERT INTO " + ProjectAPI.PROJECT_TABLENAME + \
+                " (project_name, location, bid_end_time, seller_id, description) " \
                 "VALUES (%s, %s, %s, %s, %s) "
         params = (project['project_name'], project['location'], project['bid_end_time'],
-                  project['seller_id'])
+                  project['seller_id'], project['description'])
         return self.runInsertQuery(query, params)
 
     ##
@@ -44,41 +44,10 @@ class Project(DataBaseDriver.DataBaseDriver):
     ## Returns: returns project id
     ##
     def getProjectId(self, project_name, seller_id):
-        query = "SELECT project_id from " + Project.PROJECT_TABLENAME + \
-                " WHERE project_name = '" + project_name + "' AND seller_id = " + seller_id
+        query = "SELECT project_id from " + ProjectAPI.PROJECT_TABLENAME + \
+                " WHERE project_name = '" + project_name + "' AND seller_id = '" + seller_id + "'"
 
-        return self.runSelectDfQuery(query).project_id[0]
-
-    ##
-    ## Name: createProjectDetail
-    ## Description: This function adds project detail
-    ## for a new project created
-    ##
-    ## Parameters: buyer dict with required values
-    ##
-    ## Returns: returns True if project detail is added
-    ##
-    def createProjectDetail(self, project_detail):
-        query = "INSERT INTO " + Project.PROJECT_DETAIL_TABLENAME + \
-                " (project_id, description, skills, start_date, due_date, head_count ) " \
-                "VALUES (%s, %s, %s, %s, %s) "
-        params = (project_detail['project_id'], project_detail['description'], project_detail['skills'],
-                  project_detail['start_date'], project_detail['due_date'], project_detail['head_count'])
-        return self.runInsertQuery(query, params)
-
-    ##
-    ## Name: getProjectDetail
-    ## Description: This function returns project detail
-    ## for a given project
-    ##
-    ## Parameters: project_id
-    ##
-    ## Returns: returns dataframe containing project detail
-    ##
-    def getProjectDetail(self, project_id):
-        query = "SELECT project_id, description, skills, start_date, due_date, head_count from " + Project.PROJECT_DETAIL_TABLENAME + \
-                " WHERE project_id = " + project_id
-        return self.runSelectDfQuery(query)
+        return int(self.runSelectDfQuery(query).project_id[0])
 
     ##
     ## Name: getAllProjects
@@ -92,7 +61,37 @@ class Project(DataBaseDriver.DataBaseDriver):
     ##
     def getAllProjects(self):
         query = "SELECT project_id, project_name, location, bid_end_time, " \
-                "seller_id, buyer_id, description, creation_time FROM " + Project.PROJECT_TABLENAME
+                "seller_id, buyer_id, description, creation_time FROM " + ProjectAPI.PROJECT_TABLENAME
+        return self.runSelectDfQuery(query)
+
+    ##
+    ## Name: getAllProjectsForBuyers
+    ## Description: This function returns info for
+    ## all the projects in the db for buyer_id
+    ##
+    ## Parameters: buyer_id
+    ##
+    ## Returns: returns dataframe containing info for
+    ## all the projects
+    ##
+    def getAllProjectsForBuyers(self,buyer_id):
+        query = "SELECT project_id, project_name, location, bid_end_time, " \
+                "seller_id, buyer_id, description, creation_time FROM " + ProjectAPI.PROJECT_TABLENAME + " WHERE buyer_id = '" + buyer_id + "'"
+        return self.runSelectDfQuery(query)
+
+    ##
+    ## Name: getAllProjectsForSellers
+    ## Description: This function returns info for
+    ## all the projects in the db for seller
+    ##
+    ## Parameters: seller_id
+    ##
+    ## Returns: returns dataframe containing info for
+    ## all the projects
+    ##
+    def getAllProjectsForSellers(self, seller_id):
+        query = "SELECT project_id, project_name, location, bid_end_time, " \
+                "seller_id, buyer_id, description, creation_time FROM " + ProjectAPI.PROJECT_TABLENAME + " WHERE seller_id = '" + seller_id + "'"
         return self.runSelectDfQuery(query)
 
     ##
@@ -105,7 +104,7 @@ class Project(DataBaseDriver.DataBaseDriver):
     ## Returns: returns project name
     ##
     def getProjectNameForProject(self, project_id):
-        query = "SELECT project_name FROM " + Project.PROJECT_TABLENAME + " WHERE project_id = " + project_id
+        query = "SELECT project_name FROM " + ProjectAPI.PROJECT_TABLENAME + " WHERE project_id = " + str(project_id)
         return self.runSelectDfQuery(query).project_name[0]
 
     ##
@@ -118,7 +117,7 @@ class Project(DataBaseDriver.DataBaseDriver):
     ## Returns: returns True if updated else False
     ##
     def setProjectNameForProject(self, project_id, project_name):
-        query = "UPDATE " + Project.PROJECT_TABLENAME + " SET project_name = '" + project_name +  "' WHERE project_id = " + project_id
+        query = "UPDATE " + ProjectAPI.PROJECT_TABLENAME + " SET project_name = '" + project_name +  "' WHERE project_id = " + str(project_id)
         return self.runUpdateQuery(query)
 
     ##
@@ -131,7 +130,7 @@ class Project(DataBaseDriver.DataBaseDriver):
     ## Returns: returns project location
     ##
     def getLocationForProject(self, project_id):
-        query = "SELECT location FROM " + Project.PROJECT_TABLENAME + " WHERE project_id = " + project_id
+        query = "SELECT location FROM " + ProjectAPI.PROJECT_TABLENAME + " WHERE project_id = " + str(project_id)
         return self.runSelectDfQuery(query).location[0]
 
     ##
@@ -144,7 +143,7 @@ class Project(DataBaseDriver.DataBaseDriver):
     ## Returns: returns True if updated else False
     ##
     def setLocationForProject(self, project_id, location):
-        query = "UPDATE " + Project.PROJECT_TABLENAME + " SET location = '" + location +  "' WHERE project_id = " + project_id
+        query = "UPDATE " + ProjectAPI.PROJECT_TABLENAME + " SET location = '" + location +  "' WHERE project_id = " + str(project_id)
         return self.runUpdateQuery(query)
 
     ##
@@ -157,7 +156,7 @@ class Project(DataBaseDriver.DataBaseDriver):
     ## Returns: returns True if updated else False
     ##
     def setBuyerForProject(self, project_id, buyer_id):
-        query = "UPDATE " + Project.PROJECT_TABLENAME + " SET buyer_id = '" + buyer_id + "' WHERE project_id = " + project_id
+        query = "UPDATE " + ProjectAPI.PROJECT_TABLENAME + " SET buyer_id = '" + buyer_id + "' WHERE project_id = " + str(project_id)
         return self.runUpdateQuery(query)
 
     ##
@@ -170,7 +169,7 @@ class Project(DataBaseDriver.DataBaseDriver):
     ## Returns: returns bid_end_time
     ##
     def getBidEndTimeForProject(self, project_id):
-        query = "SELECT bid_end_time FROM " + Project.PROJECT_TABLENAME + " WHERE project_id = " + project_id
+        query = "SELECT bid_end_time FROM " + ProjectAPI.PROJECT_TABLENAME + " WHERE project_id = " + str(project_id)
         return self.runSelectDfQuery(query).bid_end_time[0]
 
     ##
@@ -186,7 +185,7 @@ class Project(DataBaseDriver.DataBaseDriver):
         check = False
         for index, row in df.iterrows():
             project_dict = {'project_name' : row['project_name'], 'bid_end_time' : row['bid_end_time'], 'location': row['location'],
-                         'seller_id' : row['seller_id']}
+                         'seller_id' : row['seller_id'], 'description': row['description']}
             if not self.createProject(project_dict):
                 check = False
         return check

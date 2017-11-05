@@ -11,6 +11,7 @@
 import pymysql
 import pandas as pd
 from constants import *
+import MySQLdb
 
 ##
 ## Class: DataBaseDriver
@@ -80,26 +81,13 @@ class DataBaseDriver(object):
         self.conn.commit()
 
     ##
-    ## Name: closeConn
-    ## Description: This function closes the db connection
-    ##
-    ## Parameters: conn
-    ##
-    ## Returns: none
-    ##
-    def closeConn(self):
-        self.cursor.close()
-        self.cursorDict.close()
-        self.conn.close()
-
-    ##
     ## Name: executeQuery
     ## Description: This function runs given query
     ## and returns value if SELECT query is run
     ##
     ## Parameters: query
     ##
-    ## Returns: True if the query runs successfully, else False
+    ## Returns: True if the query runs successfully
     ## returns query result in list for select query
     ##
     def executeQuery(self, query):
@@ -112,9 +100,10 @@ class DataBaseDriver(object):
                 return db_resp
             else:
                 return True
-        except Exception as err:
+
+        except (MySQLdb.Error, MySQLdb.Warning) as e:
             print("\n\nError in database query: " + query)
-            print("Error Status:\n" + str(err))
+            print("Error Status:\n" + str(e))
             return False
 
     ##
@@ -124,7 +113,7 @@ class DataBaseDriver(object):
     ##
     ## Parameters: table_name, fields, where_clause
     ##
-    ## Returns: returns select query result else False
+    ## Returns: returns select query result if successful
     ##
     def prepareSelectQuery(self, table_name, fields, where_clause='1=1'):
         selectQuery = "SELECT " + fields + " FROM " + table_name + " WHERE " + where_clause
@@ -137,7 +126,7 @@ class DataBaseDriver(object):
     ##
     ## Parameters: table_name, fields, values
     ##
-    ## Returns: True if the query runs successfully, else False
+    ## Returns: True if the query runs successfully
     ##
     def prepareInsertQuery(self, table_name, fields, values):
         insertQuery = " INSERT INTO " + table_name + fields + " VALUES " + values
@@ -150,7 +139,7 @@ class DataBaseDriver(object):
     ##
     ## Parameters: table_name, setVal, where_clause
     ##
-    ## Returns: True if the query runs successfully, else False
+    ## Returns: True if the query runs successfully
     ##
     def prepareUpdateQuery(self, table_name, setVal, where_clause='1=1'):
         updateQuery = "UPDATE " + table_name + " SET " + setVal + " WHERE " + where_clause
@@ -163,7 +152,7 @@ class DataBaseDriver(object):
     ##
     ## Parameters: table_name, where_clause
     ##
-    ## Returns: True if the query runs successfully, else False
+    ## Returns: True if the query runs successfully
     ##
     def prepareDeleteQuery(self, table_name, where_clause='1=1'):
         deleteQuery = "DELETE FROM " + table_name + " WHERE " + where_clause
@@ -176,7 +165,7 @@ class DataBaseDriver(object):
     ##
     ## Parameters: table_name, fields, values
     ##
-    ## Returns: True if the query runs successfully, else False
+    ## Returns: True if the query runs successfully
     ##
     def prepareReplaceQuery(self, table_name, fields, values):
         replaceQuery = " REPLACE INTO " + table_name + fields + " VALUES " + values
@@ -188,7 +177,7 @@ class DataBaseDriver(object):
     ##
     ## Parameters: query, type
     ##
-    ## Returns: True if the query runs successfully, else False
+    ## Returns: True if the query runs successfully
     ##
     def runUpdateQuery(self, query):
         try:
@@ -196,7 +185,7 @@ class DataBaseDriver(object):
             self.commitConn()
             return True
 
-        except Exception, e:
+        except (MySQLdb.Error, MySQLdb.Warning) as e:
             print ("\nError executing SQL UPDATE query: " + query + "\nError status:" + str(e))
             return False
 
@@ -206,7 +195,7 @@ class DataBaseDriver(object):
     ##
     ## Parameters: query, type
     ##
-    ## Returns: True if the query runs successfully, else False
+    ## Returns: True if the query runs successfully
     ##
     def runDeleteQuery(self, query):
         try:
@@ -214,7 +203,7 @@ class DataBaseDriver(object):
             self.commitConn()
             return True
 
-        except Exception, e:
+        except (MySQLdb.Error, MySQLdb.Warning) as e:
             print ("\nError executing SQL DELETE query: " + query + "\nError status:" + str(e))
             return False
 
@@ -232,7 +221,8 @@ class DataBaseDriver(object):
         try:
             df = pd.read_sql(query, con=self.conn)
             return df
-        except Exception, e:
+
+        except (MySQLdb.Error, MySQLdb.Warning) as e:
             df = pd.DataFrame()
             print ("\nError executing SQL SELECT query: " + query + "\nError status:" + str(e))
             return df
@@ -251,7 +241,7 @@ class DataBaseDriver(object):
             result = self.cursor.fetchall()
             return result
 
-        except Exception, e:
+        except (MySQLdb.Error, MySQLdb.Warning) as e:
             print ("\nError executing SQL SELECT query: " + query + "\nError status:" + str(e))
             return False
 
@@ -261,7 +251,7 @@ class DataBaseDriver(object):
     ##
     ## Parameters: query, params
     ##
-    ## Returns: returns True if successful else false
+    ## Returns: returns True if successful
     ##
     def runInsertQuery(self,query, params):
         try:
@@ -269,7 +259,7 @@ class DataBaseDriver(object):
             self.commitConn()
             return True
 
-        except Exception, e:
+        except (MySQLdb.Error, MySQLdb.Warning) as e:
             print ("\nError executing SQL INSERT query: " + query + "\nError status:" + str(e))
             return False
 
@@ -280,7 +270,7 @@ class DataBaseDriver(object):
     ##
     ## Parameters: query, params
     ##
-    ## Returns: returns True if successful else false
+    ## Returns: returns True if successful
     ##
     def runReplaceQuery(self,query, params):
         try:
@@ -288,7 +278,7 @@ class DataBaseDriver(object):
             self.commitConn()
             return True
 
-        except Exception, e:
+        except (MySQLdb.Error, MySQLdb.Warning) as e:
             print ("\nError executing SQL REPLACE query: " + query + "\nError status:" + str(e))
             return False
 
@@ -299,7 +289,7 @@ class DataBaseDriver(object):
     ##
     ## Parameters: table_name
     ##
-    ## Returns: returns True if successful else false
+    ## Returns: returns True if successful
     ##
     def runTruncateTableQuery(self, table_name):
         query = "TRUNCATE TABLE " + table_name
@@ -308,7 +298,7 @@ class DataBaseDriver(object):
             self.commitConn()
             return True
 
-        except Exception, e:
+        except (MySQLdb.Error, MySQLdb.Warning) as e:
             print ("\nError executing SQL REPLACE query: " + query + "\nError status:" + str(e))
             return False
 

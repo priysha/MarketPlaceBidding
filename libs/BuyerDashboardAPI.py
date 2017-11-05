@@ -1,6 +1,6 @@
 ##########################################################
 ##
-## File: BuyerDashboard.py
+## File: BuyerDashboardAPI.py
 ## Author: Priysha Pradhan
 ## Description: This class works for Buyer's
 ## dashboard, all the requirements for buyer can be retrived
@@ -8,16 +8,17 @@
 ##
 ##########################################################
 
-from Project import Project
-from Bid import Bid
-from Buyer import Buyer
+from ProjectAPI import ProjectAPI
+from BidAPI import BidAPI
+from BuyerAPI import BuyerAPI
+from datetime import datetime
 
-class BuyerDashboard:
+class BuyerDashboardAPI:
 
     def __init__(self, buyerId):
-        self.Project = Project()
-        self.Bid = Bid()
-        self.Buyer = Buyer()
+        self.Project = ProjectAPI()
+        self.Bid = BidAPI()
+        self.Buyer = BuyerAPI()
         self.buyerId = buyerId
 
     ##
@@ -43,9 +44,8 @@ class BuyerDashboard:
     ## Returns: returns dataframe with buyer's bids
     ##
     def getAllBidsForBuyer(self):
-        all_bids = self.Bid.getAllBids()
-        all_bids = all_bids[all_bids.buyer_id == self.buyerId]
-        return all_bids
+        buyer_bids = self.Bid.getBidsForBuyer(self.buyerId)
+        return buyer_bids
 
     ##
     ## Name: getAllProjectsUnderBuyer
@@ -57,8 +57,7 @@ class BuyerDashboard:
     ## Returns: returns dataframe with buyer's listed projects
     ##
     def getAllProjectsUnderBuyer(self):
-        all_projects = self.Project.getAllProjects()
-        buyer_projects = all_projects[all_projects.buyer_id == self.buyerId]
+        buyer_projects = self.Project.getAllProjectsForBuyers(self.buyerId)
 
         return buyer_projects
 
@@ -71,6 +70,11 @@ class BuyerDashboard:
     ##
     ## Returns: returns True if bid is created else False
     ##
-    def createANewBid(self, project_id, buyer_id, bid_amount):
-        bid = {'project_id': project_id , 'buyer_id' : buyer_id, 'bid_amount' : bid_amount}
-        return self.Bid.createBid(bid)
+    def createANewBid(self, project_id, bid_amount):
+        project_bid_endtime = self.Project.getBidEndTimeForProject(project_id)
+        if datetime.now() > project_bid_endtime:
+            bid = {'project_id': project_id , 'buyer_id' : self.buyerId, 'bid_amount' : bid_amount}
+            return self.Bid.createBid(bid)
+        else:
+            print("Time exceeded for the bid to be added for project: " + project_id)
+            return False

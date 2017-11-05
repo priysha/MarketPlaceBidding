@@ -1,26 +1,26 @@
 ##########################################################
 ##
-## File: SellerTest.py
+## File: SellerAPITest.py
 ## Author: Priysha Pradhan
-## Description: This file contains tests for Seller class
+## Description: This file contains tests for SellerAPI class
 ## These test cases check if the Seller class is interacting
 ## with the db correctly and returning data in correct format
 ##
 ##########################################################
 
 import unittest
-from Seller import Seller
+from SellerAPI import SellerAPI
 import pandas as pd
 
 ##
-## Class: SellerTest
-## Description: This class is the unittest driver for Seller class
+## Class: SellerAPITest
+## Description: This class is the unittest driver for SellerAPI class
 ##
-class SellerTest(unittest.TestCase):
+class SellerAPITest(unittest.TestCase):
     ##
     ## Name: setUp
-    ## Description: Fixture that runs prior to the execution of any test. We are
-    ## setting the database properties to point to the dev database.
+    ## Description: Fixture that runs prior to the execution of any test.
+    ## In the setUp, we are adding some fake testing data in the db
     ##
     ## Parameters:
     ## None
@@ -28,15 +28,15 @@ class SellerTest(unittest.TestCase):
     ## Returns: None
     ##
     def setUp(self):
-        self.Seller = Seller()
+        self.Seller = SellerAPI()
 
         df = pd.read_csv("./test/sellers.csv")
         self.Seller.load(df)
 
     ##
     ## Name: tearDown
-    ## Description: Fixture that runs after the execution of all tests. We are
-    ## setting the database properties to point to the prod database.
+    ## Description: Fixture that runs after the execution of all tests.
+    ## This will remove the db entries made in the setUp
     ##
     ## Parameters:
     ## None
@@ -51,7 +51,7 @@ class SellerTest(unittest.TestCase):
     ##
     ## Name: testCreateSeller
     ## Description: This method tests createSeller()
-    ## method for Seller class
+    ## method for SellerAPI class
     ##
     ## Parameters: None
     ##
@@ -64,15 +64,13 @@ class SellerTest(unittest.TestCase):
 
         #should pass
         self.assertEquals(True, self.Seller.createSeller(seller_dict))
-        #should fail on trying to create duplicate seller
-        self.assertEquals(False, self.Seller.createSeller(seller_dict))
 
         self.assertEquals(True, 'Priysha' in self.Seller.getAllSellers().first_name.values)
 
     ##
     ## Name: testCreateSeller
     ## Description: This method tests getSellerInfo()
-    ## method for Seller class
+    ## method for SellerAPI class
     ##
     ## Parameters: None
     ##
@@ -86,7 +84,7 @@ class SellerTest(unittest.TestCase):
     ##
     ## Name: testGetAllSellers
     ## Description: This method tests getAllSellers()
-    ## method for Seller class
+    ## method for SellerAPI class
     ##
     ## Parameters: None
     ##

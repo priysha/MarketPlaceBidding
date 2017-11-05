@@ -1,6 +1,6 @@
 ##########################################################
 ##
-## File: Buyer.py
+## File: BuyerAPI.py
 ## Author: Priysha Pradhan
 ## Description: This is a database access class for buyer
 ## table. This class handles all the SQL queries executed
@@ -10,7 +10,7 @@
 
 import DataBaseDriver
 
-class Buyer(DataBaseDriver.DataBaseDriver):
+class BuyerAPI(DataBaseDriver.DataBaseDriver):
     BUYER_TABLENAME = 'buyer'
     def __init__(self):
         DataBaseDriver.DataBaseDriver.__init__(self)
@@ -25,7 +25,7 @@ class Buyer(DataBaseDriver.DataBaseDriver):
     ##
     def createBuyer(self, buyer):
 
-        query = "INSERT INTO " + Buyer.BUYER_TABLENAME + " (buyer_id, first_name, last_name, location, skills) VALUES (%s, %s, %s, %s, %s) "
+        query = "INSERT INTO " + BuyerAPI.BUYER_TABLENAME + " (buyer_id, first_name, last_name, location, skills) VALUES (%s, %s, %s, %s, %s) "
         params = (buyer['buyer_id'], buyer['first_name'],buyer['last_name'] , buyer['location'], buyer['skills'])
         return self.runInsertQuery(query, params)
 
@@ -41,7 +41,7 @@ class Buyer(DataBaseDriver.DataBaseDriver):
     def getBuyerInfo(self, buyer_id):
 
         query = "SELECT buyer_id, first_name, last_name, location, skills, creation_time FROM "\
-                + Buyer.BUYER_TABLENAME + " WHERE buyer_id = " + buyer_id
+                + BuyerAPI.BUYER_TABLENAME + " WHERE buyer_id = '" + buyer_id + "'"
         return self.runSelectDfQuery(query)
 
     ##
@@ -55,7 +55,7 @@ class Buyer(DataBaseDriver.DataBaseDriver):
     ##
     def getAllBuyers(self):
         query = "SELECT buyer_id, first_name, last_name, location, skills, creation_time FROM " \
-                + Buyer.BUYER_TABLENAME
+                + BuyerAPI.BUYER_TABLENAME
         return self.runSelectDfQuery(query)
 
     ##
@@ -69,7 +69,7 @@ class Buyer(DataBaseDriver.DataBaseDriver):
     ##
     def setBuyerFirstName(self, buyer_id, first_name):
 
-        query = "UPDATE " + Buyer.BUYER_TABLENAME + "SET first_name = ' " + first_name + "' WHERE buyer_id = '" + buyer_id + "'"
+        query = "UPDATE " + BuyerAPI.BUYER_TABLENAME + "SET first_name = ' " + first_name + "' WHERE buyer_id = '" + buyer_id + "'"
         return self.runUpdateQuery(query)
 
     ##
@@ -83,7 +83,7 @@ class Buyer(DataBaseDriver.DataBaseDriver):
     ##
     def setBuyerLastName(self, buyer_id, last_name):
 
-        query = "UPDATE " + Buyer.BUYER_TABLENAME + "SET last_name = ' " + last_name + "' WHERE buyer_id = '" + buyer_id + "'"
+        query = "UPDATE " + BuyerAPI.BUYER_TABLENAME + "SET last_name = ' " + last_name + "' WHERE buyer_id = '" + buyer_id + "'"
         return self.runUpdateQuery(query)
 
     ##
@@ -97,7 +97,7 @@ class Buyer(DataBaseDriver.DataBaseDriver):
     ##
     def setBuyerLocation(self, buyer_id, location):
 
-        query = "UPDATE " + Buyer.BUYER_TABLENAME + "SET location = ' " + location + "' WHERE buyer_id = '" + buyer_id + "'"
+        query = "UPDATE " + BuyerAPI.BUYER_TABLENAME + "SET location = ' " + location + "' WHERE buyer_id = '" + buyer_id + "'"
         return self.runUpdateQuery(query)
 
     ##
@@ -111,7 +111,7 @@ class Buyer(DataBaseDriver.DataBaseDriver):
     ##
     def setBuyerSkills(self, buyer_id, skills):
 
-        query = "UPDATE " + Buyer.BUYER_TABLENAME + "SET skills = ' " + skills + "' WHERE buyer_id = '" + buyer_id + "'"
+        query = "UPDATE " + BuyerAPI.BUYER_TABLENAME + "SET skills = ' " + skills + "' WHERE buyer_id = '" + buyer_id + "'"
         return self.runUpdateQuery(query)
 
     ##

@@ -1,20 +1,20 @@
 ##########################################################
 ##
-## File: BiddingProcess.py
+## File: BiddingProcessAPI.py
 ## Author: Priysha Pradhan
 ## Description: This is the main class where Bidding process
 ## is handled.
 ##
 ##########################################################
 
-from Project import Project
-from Bid import Bid
+from ProjectAPI import ProjectAPI
+from BidAPI import BidAPI
 
-class BiddingProcess:
+class BiddingProcessAPI:
 
     def __init__(self):
-        self.Bid = Bid()
-        self.Project = Project()
+        self.Bid = BidAPI()
+        self.Project = ProjectAPI()
 
     ##
     ## Name: getAllEligibleBids
@@ -29,10 +29,10 @@ class BiddingProcess:
     def getAllEligibleBids(self, project_id):
         project_bid_endtime = self.Project.getBidEndTimeForProject(project_id)
 
-        all_bids = self.Bid.getAllBids()
-        project_bids = all_bids[(all_bids.project_id == project_id) & (all_bids.creation_time <= project_bid_endtime)]
+        project_bids = self.Bid.getBidsForProject(project_id)
+        project_elgible_bids = project_bids[project_bids.creation_time <= project_bid_endtime]
 
-        return project_bids
+        return project_elgible_bids
 
     ##
     ## Name: getMinimumBidForProject

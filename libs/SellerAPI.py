@@ -1,6 +1,6 @@
 ##########################################################
 ##
-## File: Seller.py
+## File: SellerAPI.py
 ## Author: Priysha Pradhan
 ## Description: This is a database access class for seller
 ## table. This class handles all the SQL queries executed
@@ -10,7 +10,7 @@
 
 import DataBaseDriver
 
-class Seller(DataBaseDriver.DataBaseDriver):
+class SellerAPI(DataBaseDriver.DataBaseDriver):
     SELLER_TABLENAME = 'seller'
     def __init__(self):
         DataBaseDriver.DataBaseDriver.__init__(self)
@@ -25,7 +25,7 @@ class Seller(DataBaseDriver.DataBaseDriver):
     ##
     def createSeller(self, seller):
 
-        query = "INSERT INTO " + Seller.SELLER_TABLENAME + " (seller_id, first_name, last_name, location, job_title, company) VALUES (%s, %s, %s, %s, %s, %s) "
+        query = "INSERT INTO " + SellerAPI.SELLER_TABLENAME + " (seller_id, first_name, last_name, location, job_title, company) VALUES (%s, %s, %s, %s, %s, %s) "
         params = (seller['seller_id'], seller['first_name'],seller['last_name'] , seller['location'], seller['job_title'],seller['company'])
         return self.runInsertQuery(query, params)
 
@@ -41,7 +41,7 @@ class Seller(DataBaseDriver.DataBaseDriver):
     def getSellerInfo(self, seller_id):
 
         query = "SELECT seller_id, first_name, last_name, location,job_title, company, creation_time FROM "\
-                + Seller.SELLER_TABLENAME + " WHERE seller_id = '" + seller_id + "'"
+                + SellerAPI.SELLER_TABLENAME + " WHERE seller_id = '" + seller_id + "'"
         return self.runSelectDfQuery(query)
 
     ##
@@ -55,7 +55,7 @@ class Seller(DataBaseDriver.DataBaseDriver):
     ##
     def getAllSellers(self):
         query = "SELECT seller_id, first_name, last_name, location,job_title, company, creation_time FROM " \
-                + Seller.SELLER_TABLENAME
+                + SellerAPI.SELLER_TABLENAME
         return self.runSelectDfQuery(query)
 
     ##
@@ -69,7 +69,7 @@ class Seller(DataBaseDriver.DataBaseDriver):
     ##
     def setSellerFirstName(self, seller_id, first_name):
 
-        query = "UPDATE " + Seller.SELLER_TABLENAME + "SET first_name = ' " + first_name + "' WHERE seller_id = '" + seller_id + "'"
+        query = "UPDATE " + SellerAPI.SELLER_TABLENAME + "SET first_name = ' " + first_name + "' WHERE seller_id = '" + seller_id + "'"
         return self.runUpdateQuery(query)
 
     ##
@@ -83,7 +83,7 @@ class Seller(DataBaseDriver.DataBaseDriver):
     ##
     def setSellerLastName(self, seller_id, last_name):
 
-        query = "UPDATE " + Seller.SELLER_TABLENAME + "SET last_name = ' " + last_name + "' WHERE seller_id = '" + seller_id + "'"
+        query = "UPDATE " + SellerAPI.SELLER_TABLENAME + "SET last_name = ' " + last_name + "' WHERE seller_id = '" + seller_id + "'"
         return self.runUpdateQuery(query)
 
     ##
@@ -97,7 +97,7 @@ class Seller(DataBaseDriver.DataBaseDriver):
     ##
     def setSellerLocation(self, seller_id, location):
 
-        query = "UPDATE " + Seller.SELLER_TABLENAME + "SET location = ' " + location + "' WHERE seller_id = '" + seller_id + "'"
+        query = "UPDATE " + SellerAPI.SELLER_TABLENAME + "SET location = ' " + location + "' WHERE seller_id = '" + seller_id + "'"
         return self.runUpdateQuery(query)
 
     ##
@@ -111,7 +111,7 @@ class Seller(DataBaseDriver.DataBaseDriver):
     ##
     def setSellerJobTitle(self, seller_id, job_title):
 
-        query = "UPDATE " + Seller.SELLER_TABLENAME + "SET job_title = ' " + job_title + "' WHERE seller_id = '" + seller_id + "'"
+        query = "UPDATE " + SellerAPI.SELLER_TABLENAME + "SET job_title = ' " + job_title + "' WHERE seller_id = '" + seller_id + "'"
         return self.runUpdateQuery(query)
 
     ##
@@ -125,7 +125,7 @@ class Seller(DataBaseDriver.DataBaseDriver):
     ##
     def setSellerCompany(self, seller_id, company):
 
-        query = "UPDATE " + Seller.SELLER_TABLENAME + "SET company = ' " + company + "' WHERE seller_id = '" + seller_id + "'"
+        query = "UPDATE " + SellerAPI.SELLER_TABLENAME + "SET company = ' " + company + "' WHERE seller_id = '" + seller_id + "'"
         return self.runUpdateQuery(query)
 
     ##
