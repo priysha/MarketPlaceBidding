@@ -1,19 +1,19 @@
-##########################################################
+###############################################################
 ##
 ## File: ProjectAPITest.py
 ## Author: Priysha Pradhan
 ## Description: This file contains tests for ProjectAPI class
-## These test cases check if the Seller class is interacting
+## These test cases check if the ProjectAPI class is interacting
 ## with the db correctly and returning data in correct format
 ##
-##########################################################
+###############################################################
 
 import unittest
 from ProjectAPI import ProjectAPI
 import pandas as pd
 
 ##
-## Class: SellerAPITest
+## Class: ProjectAPITest
 ## Description: This class is the unittest driver for ProjectAPI class
 ##
 class ProjectAPITest(unittest.TestCase):

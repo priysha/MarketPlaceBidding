@@ -1,13 +1,13 @@
-##########################################################
+###############################################################
 ##
 ## File: BiddingProcessAPITest.py
 ## Author: Priysha Pradhan
 ## Description: This file contains tests for BiddingProcessAPI
-##  class. These test cases check if the Buyer class is
-## interacting with the db correctly and returning data
+##  class. These test cases check if the BiddingProcessAPI class
+## is interacting with the db correctly and returning data
 ## in correct format.
 ##
-##########################################################
+###############################################################
 
 import unittest
 from BiddingProcessAPI import BiddingProcessAPI
@@ -22,7 +22,6 @@ class BiddingProcessAPITest(unittest.TestCase):
     ##
     ## Name: setUp
     ## Description: Fixture that runs prior to the execution of any test.
-    ## In the setUp, we are adding some fake testing data in the db
     ##
     ## Parameters:
     ## None

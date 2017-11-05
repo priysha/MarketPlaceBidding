@@ -49,6 +49,21 @@ class ProjectAPI(DataBaseDriver.DataBaseDriver):
 
         return int(self.runSelectDfQuery(query).project_id[0])
 
+
+    ##
+    ## Name: getProjectId
+    ## Description: This function returns project info
+    ## for a given project_id
+    ##
+    ## Parameters: project_id
+    ##
+    ## Returns: returns dataframe containing info for project
+    ##
+    def getProjectInfo(self, project_id):
+        query = "SELECT project_id, project_name, location, bid_end_time, " \
+                "seller_id, buyer_id, description, creation_time FROM " + ProjectAPI.PROJECT_TABLENAME + " WHERE project_id = " + str(project_id)
+        return self.runSelectDfQuery(query)
+
     ##
     ## Name: getAllProjects
     ## Description: This function returns info for

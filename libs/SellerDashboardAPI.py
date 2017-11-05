@@ -1,6 +1,6 @@
 ##########################################################
 ##
-## File: SellerDashboard.py
+## File: SellerDashboardAPI.py
 ## Author: Priysha Pradhan
 ## Description: This class works for Seller's
 ## dashboard, all the requirements for seller can be retrived
@@ -13,7 +13,7 @@ from BidAPI import BidAPI
 from SellerAPI import SellerAPI
 
 
-class SellerDashboard:
+class SellerDashboardAPI:
     def __init__(self, sellerId):
         self.Project = ProjectAPI()
         self.Bid = BidAPI()
@@ -51,11 +51,11 @@ class SellerDashboard:
     ## Description: This function is called to let
     ## seller add a new project with details
     ##
-    ## Parameters: project_name, location, bid_end_time, start_date, due_date, description, skills, head_count
+    ## Parameters: project_name, location, bid_end_time, description
     ##
     ## Returns: returns True if project created
     ##
-    def addANewProject(self, project_name, location, bid_end_time, start_date, due_date, description, skills, head_count):
+    def addANewProject(self, project_name, location, bid_end_time, description):
 
         project = {'project_name' : project_name, 'location' : location, 'seller_id' : self.sellerId, 'bid_end_time' : bid_end_time, 'description' : description}
 

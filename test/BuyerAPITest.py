@@ -1,19 +1,19 @@
-##########################################################
+##############################################################
 ##
 ## File: BuyerAPITest.py
 ## Author: Priysha Pradhan
 ## Description: This file contains tests for BuyerAPI class
-## These test cases check if the Buyer class is interacting
+## These test cases check if the BuyerAPI class is interacting
 ## with the db correctly and returning data in correct format
 ##
-##########################################################
+###############################################################
 
 import unittest
 from BuyerAPI import BuyerAPI
 import pandas as pd
 
 ##
-## Class: BuyerTest
+## Class: BuyerAPITest
 ## Description: This class is the unittest driver for BuyerAPI class
 ##
 class BuyerAPITest(unittest.TestCase):

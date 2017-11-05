@@ -3,7 +3,7 @@
 ## File: BidAPITest.py
 ## Author: Priysha Pradhan
 ## Description: This file contains tests for BidAPI class
-## These test cases check if the Seller class is interacting
+## These test cases check if the BidAPI class is interacting
 ## with the db correctly and returning data in correct format
 ##
 ##########################################################
@@ -13,7 +13,7 @@ from BidAPI import BidAPI
 import pandas as pd
 
 ##
-## Class: SellerAPITest
+## Class: BidAPITest
 ## Description: This class is the unittest driver for BidAPI class
 ##
 class BidAPITest(unittest.TestCase):
@@ -52,11 +52,14 @@ class BidAPITest(unittest.TestCase):
     ## Returns: None
     ##
     def testCreateBid(self):
-        bid_dict = {'project_id' : '3' , 'buyer_id' : 'smarr9', 'bid_amount' : '200'}
-        #should pass
-        self.assertEquals(True, self.Bid.createBid(bid_dict))
-
+        bid_dict_hourly = {'project_id' : '3' , 'buyer_id' : 'smarr9', 'bid_amount' : '20', 'bid_type' : 'hourly', 'bid_hours' : 1000}
+        self.assertEquals(True, self.Bid.createBid(bid_dict_hourly))
         self.assertEquals(True, 'smarr9' in self.Bid.getAllBids().buyer_id.values)
+
+        bid_dict_fixed = {'project_id': '10', 'buyer_id': 'rstonehamj', 'bid_amount': '2000', 'bid_type': 'fixed',
+                           'bid_hours': 0}
+        self.assertEquals(True, self.Bid.createBid(bid_dict_fixed))
+        self.assertEquals(True, 'rstonehamj' in self.Bid.getAllBids().buyer_id.values)
 
     ##
     ## Name: testGetBidInfo

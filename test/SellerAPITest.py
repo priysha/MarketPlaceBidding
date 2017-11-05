@@ -3,7 +3,7 @@
 ## File: SellerAPITest.py
 ## Author: Priysha Pradhan
 ## Description: This file contains tests for SellerAPI class
-## These test cases check if the Seller class is interacting
+## These test cases check if the SellerAPI class is interacting
 ## with the db correctly and returning data in correct format
 ##
 ##########################################################
