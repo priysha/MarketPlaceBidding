@@ -8,11 +8,15 @@
 ##
 ##########################################################
 
+# Module Import #
 from ProjectAPI import ProjectAPI
 from BidAPI import BidAPI
 from SellerAPI import SellerAPI
 
-
+##
+## Class: SellerDashboardAPI
+## Description: This class is the driver for Seller dashboard
+##
 class SellerDashboardAPI:
     def __init__(self, sellerId):
         self.Project = ProjectAPI()

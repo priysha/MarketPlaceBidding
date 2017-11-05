@@ -8,9 +8,9 @@
 ##
 ##########################################################
 
+# Module Import #
 import unittest
 from SellerAPI import SellerAPI
-import pandas as pd
 
 ##
 ## Class: SellerAPITest

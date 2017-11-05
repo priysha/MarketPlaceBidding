@@ -8,10 +8,16 @@
 ##
 ##########################################################
 
+# Module Import #
 import DataBaseDriver
+from constants import *
 
+##
+## Class: BuyerAPI
+## Description: This class is the database driver for Buyer
+##
 class BuyerAPI(DataBaseDriver.DataBaseDriver):
-    BUYER_TABLENAME = 'buyer'
+    BUYER_TABLENAME = BUYER_TABLE
     def __init__(self):
         DataBaseDriver.DataBaseDriver.__init__(self)
 

@@ -8,10 +8,16 @@
 ##
 ##########################################################
 
+# Module Import #
 import DataBaseDriver
+from constants import *
 
+##
+## Class: SellerAPI
+## Description: This class is the database driver for Seller
+##
 class SellerAPI(DataBaseDriver.DataBaseDriver):
-    SELLER_TABLENAME = 'seller'
+    SELLER_TABLENAME = SELLER_TABLE
     def __init__(self):
         DataBaseDriver.DataBaseDriver.__init__(self)
 

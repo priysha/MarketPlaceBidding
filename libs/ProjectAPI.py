@@ -9,11 +9,16 @@
 ##
 ##########################################################
 
+# Module Import #
 import DataBaseDriver
+from constants import *
 
+##
+## Class: ProjectAPI
+## Description: This class is the database driver for Project
+##
 class ProjectAPI(DataBaseDriver.DataBaseDriver):
-    PROJECT_TABLENAME = 'project'
-    PROJECT_DETAIL_TABLENAME = 'project_detail'
+    PROJECT_TABLENAME = PROJECT_TABLE
     def __init__(self):
         DataBaseDriver.DataBaseDriver.__init__(self)
 

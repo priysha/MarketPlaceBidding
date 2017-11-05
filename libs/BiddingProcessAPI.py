@@ -7,9 +7,14 @@
 ##
 ##########################################################
 
+# Module Import #
 from ProjectAPI import ProjectAPI
 from BidAPI import BidAPI
 
+##
+## Class: BiddingProcessAPI
+## Description: This class is the driver for Bidding process
+##
 class BiddingProcessAPI:
 
     def __init__(self):

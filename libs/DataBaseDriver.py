@@ -11,7 +11,6 @@
 import pymysql
 import pandas as pd
 from constants import *
-import MySQLdb
 
 ##
 ## Class: DataBaseDriver

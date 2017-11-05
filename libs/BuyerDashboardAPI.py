@@ -8,11 +8,16 @@
 ##
 ##########################################################
 
+# Module Import #
 from ProjectAPI import ProjectAPI
 from BidAPI import BidAPI
 from BuyerAPI import BuyerAPI
 from datetime import datetime
 
+##
+## Class: BuyerDashboardAPI
+## Description: This class is the driver for Buyer dashboard
+##
 class BuyerDashboardAPI:
 
     def __init__(self, buyerId):

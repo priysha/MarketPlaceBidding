@@ -8,11 +8,17 @@
 ##
 ##########################################################
 
+# Module Import #
 import DataBaseDriver
 from datetime import datetime
+from constants import *
 
+##
+## Class: BidAPI
+## Description: This class is the database driver for Bid
+##
 class BidAPI(DataBaseDriver.DataBaseDriver):
-    BID_TABLENAME = 'bid'
+    BID_TABLENAME = BID_TABLE
     def __init__(self):
         DataBaseDriver.DataBaseDriver.__init__(self)
         self.curr_date = datetime.now()
