@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e8e7bb73-54d1-4341-bb1b-4ad74ff7a6c2" name="Default" comment="">
+    <list default="true" id="e8e7bb73-54d1-4341-bb1b-4ad74ff7a6c2" name="Default" comment="market place app : minor changes">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/log/logging.conf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/BidAPI.py" afterPath="$PROJECT_DIR$/libs/BidAPI.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/BiddingProcessAPI.py" afterPath="$PROJECT_DIR$/libs/BiddingProcessAPI.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/BuyerAPI.py" afterPath="$PROJECT_DIR$/libs/BuyerAPI.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/BuyerDashboardAPI.py" afterPath="$PROJECT_DIR$/libs/BuyerDashboardAPI.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/DataBaseDriver.py" afterPath="$PROJECT_DIR$/libs/DataBaseDriver.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/ProjectAPI.py" afterPath="$PROJECT_DIR$/libs/ProjectAPI.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/SellerAPI.py" afterPath="$PROJECT_DIR$/libs/SellerAPI.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/SellerDashboardAPI.py" afterPath="$PROJECT_DIR$/libs/SellerDashboardAPI.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/constants.py" afterPath="$PROJECT_DIR$/libs/constants.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/BiddingProcessAPITest.py" afterPath="$PROJECT_DIR$/test/BiddingProcessAPITest.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -123,7 +115,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/user_admin/urls.py" />
         <option value="$PROJECT_DIR$/MarketPlaceBidding/settings.py" />
         <option value="$PROJECT_DIR$/MarketPlaceBidding/urls.py" />
         <option value="$PROJECT_DIR$/libs/Users.py" />
@@ -174,6 +165,7 @@
         <option value="$PROJECT_DIR$/libs/SellerDashboardAPI.py" />
         <option value="$PROJECT_DIR$/libs/ProjectAPI.py" />
         <option value="$PROJECT_DIR$/libs/SellerAPI.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -272,7 +264,7 @@
       <recent name="$PROJECT_DIR$/MarketPlaceBidding/tests" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in SellerDashboardAPITest">
+  <component name="RunManager" selected="Python tests.Unittests in BuyerAPITest">
     <configuration default="false" name="Unittests in BuyerDashboardAPITest" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -284,28 +276,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="MarketPlaceBidding" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/BuyerDashboardAPITest.py" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Unittests in BidsAPITest" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MarketPlaceBidding" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/BidsAPITest.py" />
       <option name="CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
       <option name="FOLDER_NAME" value="" />
@@ -372,6 +342,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="MarketPlaceBidding" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/SellerDashboardAPITest.py" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in BuyerAPITest" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MarketPlaceBidding" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/BuyerAPITest.py" />
       <option name="CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
       <option name="FOLDER_NAME" value="" />
@@ -542,18 +534,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in BuyerDashboardAPITest" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in BidsAPITest" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in BiddingProcessAPITest" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in ProjectAPITest" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in SellerDashboardAPITest" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in BiddingProcessAPITest" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in ProjectAPITest" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in SellerDashboardAPITest" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in BuyerAPITest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in SellerDashboardAPITest" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in ProjectAPITest" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in BuyerDashboardAPITest" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in BidsAPITest" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in BiddingProcessAPITest" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in BuyerAPITest" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in BiddingProcessAPITest" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in SellerDashboardAPITest" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in ProjectAPITest" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in BuyerDashboardAPITest" />
       </list>
     </recent_temporary>
   </component>
@@ -610,18 +602,22 @@
       <option name="project" value="LOCAL" />
       <updated>1509904126134</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="market place app : minor changes">
+      <created>1509909626606</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1509909626606</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TestHistory">
     <history-entry file="Unittests_in_BiddingProcessAPITest - 2017.11.05 at 14h 19m 41s.xml">
       <configuration name="Unittests in BiddingProcessAPITest" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_BidsAPITest - 2017.11.05 at 13h 42m 53s.xml">
-      <configuration name="Unittests in BidsAPITest" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_BidsAPITest - 2017.11.05 at 13h 43m 12s.xml">
-      <configuration name="Unittests in BidsAPITest" configurationId="tests" />
+    <history-entry file="Unittests_in_BiddingProcessAPITest - 2017.11.05 at 14h 21m 07s.xml">
+      <configuration name="Unittests in BiddingProcessAPITest" configurationId="tests" />
     </history-entry>
     <history-entry file="Unittests_in_BidsAPITest - 2017.11.05 at 13h 43m 42s.xml">
       <configuration name="Unittests in BidsAPITest" configurationId="tests" />
@@ -634,6 +630,9 @@
     </history-entry>
     <history-entry file="Unittests_in_BidsAPITest - 2017.11.05 at 14h 19m 45s.xml">
       <configuration name="Unittests in BidsAPITest" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_BuyerAPITest - 2017.11.05 at 14h 21m 10s.xml">
+      <configuration name="Unittests in BuyerAPITest" configurationId="tests" />
     </history-entry>
     <history-entry file="Unittests_in_BuyerDashboardAPITest - 2017.11.05 at 14h 19m 49s.xml">
       <configuration name="Unittests in BuyerDashboardAPITest" configurationId="tests" />
@@ -658,7 +657,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="FAQ Robot" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25518927" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25518927" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Project Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Job Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="MaxCompute Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -692,14 +691,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/bids.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="30" lean-forward="false" selection-start-line="0" selection-start-column="30" selection-end-line="0" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/buyers.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -978,6 +969,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
           <folding />
         </state>
       </provider>
