@@ -17,6 +17,7 @@ import pandas as pd
 ## Class: BidAPITest
 ## Description: This class is the unittest driver for BidAPI class
 ##
+##TODO: Add more test cases
 class BidAPITest(unittest.TestCase):
     ##
     ## Name: setUp
@@ -78,7 +79,7 @@ class BidAPITest(unittest.TestCase):
 
     ##
     ## Name: testSetAmountForBid
-    ## Description: This method tests setAmountForBid()
+    ## Description: This method tests setBidAmount()
     ## method for BidAPI class
     ##
     ## Parameters: None
@@ -88,7 +89,7 @@ class BidAPITest(unittest.TestCase):
     def testSetAmountForBid(self):
         bid_id = int(self.Bid.getAllBids().bid_id[0])
         bid_amount = 500
-        self.assertEquals(True, self.Bid.setAmountForBid(bid_amount,bid_id))
+        self.assertEquals(True, self.Bid.setBidAmount(bid_amount,bid_id))
         self.assertEquals(bid_amount,self.Bid.getBidInfo(bid_id).bid_amount[0])
 
     ##

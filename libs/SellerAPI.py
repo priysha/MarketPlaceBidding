@@ -78,6 +78,21 @@ class SellerAPI(DataBaseDriver.DataBaseDriver):
 
     ##
     ## Name: setSellerFirstName
+    ## Description: This function returns first_name
+    ## of the seller from the db
+    ##
+    ## Parameters: seller_id
+    ##
+    ## Returns: returns first_name of the seller
+    ##
+    def getSellerFirstName(self, seller_id):
+        self.logger.info("IN - SellerAPI getSellerFirstName method")
+        query = "SELECT first_name FROM " + SellerAPI.sellerTablename + " WHERE seller_id = '" + seller_id + "'"
+        self.logger.debug("Query: " + query)
+        return self.runSelectDfQuery(query).first_name[0]
+
+    ##
+    ## Name: setSellerFirstName
     ## Description: This function updates first_name
     ## of the seller in the db
     ##
@@ -90,6 +105,21 @@ class SellerAPI(DataBaseDriver.DataBaseDriver):
         query = "UPDATE " + SellerAPI.sellerTablename + "SET first_name = ' " + first_name + "' WHERE seller_id = '" + seller_id + "'"
         self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
+
+    ##
+    ## Name: getSellerLastName
+    ## Description: This function returns last_name
+    ## of the seller from the db
+    ##
+    ## Parameters: seller_id
+    ##
+    ## Returns: returns last_name of the seller
+    ##
+    def getSellerLastName(self, seller_id):
+        self.logger.info("IN - SellerAPI getSellerLastName method")
+        query = "SELECT last_name FROM " + SellerAPI.sellerTablename + " WHERE seller_id = '" + seller_id + "'"
+        self.logger.debug("Query: " + query)
+        return self.runSelectDfQuery(query).last_name[0]
 
     ##
     ## Name: setSellerLastName
@@ -107,6 +137,21 @@ class SellerAPI(DataBaseDriver.DataBaseDriver):
         return self.runUpdateQuery(query)
 
     ##
+    ## Name: getSellerLocation
+    ## Description: This function returns location
+    ## of the seller from the db
+    ##
+    ## Parameters: seller_id
+    ##
+    ## Returns: returns location of the selle
+    ##
+    def getSellerLocation(self, seller_id):
+        self.logger.info("IN - SellerAPI getSellerLocation method")
+        query = "SELECT location FROM " + SellerAPI.sellerTablename + " WHERE seller_id = '" + seller_id + "'"
+        self.logger.debug("Query: " + query)
+        return self.runSelectDfQuery(query).location[0]
+
+    ##
     ## Name: setBuyerSkills
     ## Description: This function updates location
     ## of the seller in the db
@@ -122,6 +167,21 @@ class SellerAPI(DataBaseDriver.DataBaseDriver):
         return self.runUpdateQuery(query)
 
     ##
+    ## Name: getSellerJobTitle
+    ## Description: This function returns job_title
+    ## of the seller from the db
+    ##
+    ## Parameters: seller_id
+    ##
+    ## Returns: returns job_title of the selle
+    ##
+    def getSellerJobTitle(self, seller_id):
+        self.logger.info("IN - SellerAPI getSellerJobTitle method")
+        query = "SELECT job_title FROM " + SellerAPI.sellerTablename + " WHERE seller_id = '" + seller_id + "'"
+        self.logger.debug("Query: " + query)
+        return self.runSelectDfQuery(query).job_title[0]
+
+    ##
     ## Name: setSellerJobTitle
     ## Description: This function updates job_title
     ## of the seller in the db
@@ -135,6 +195,21 @@ class SellerAPI(DataBaseDriver.DataBaseDriver):
         query = "UPDATE " + SellerAPI.sellerTablename + "SET job_title = ' " + job_title + "' WHERE seller_id = '" + seller_id + "'"
         self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
+
+    ##
+    ## Name: getSellerCompany
+    ## Description: This function returns company
+    ## of the seller from the db
+    ##
+    ## Parameters: seller_id
+    ##
+    ## Returns: returns company of the selle
+    ##
+    def getSellerCompany(self, seller_id):
+        self.logger.info("IN - SellerAPI getSellerCompany method")
+        query = "SELECT company FROM " + SellerAPI.sellerTablename + " WHERE seller_id = '" + seller_id + "'"
+        self.logger.debug("Query: " + query)
+        return self.runSelectDfQuery(query).company[0]
 
     ##
     ## Name: setSellerCompany

@@ -75,15 +75,15 @@ class BidAPI(DataBaseDriver.DataBaseDriver):
         return self.runSelectDfQuery(query)
 
     ##
-    ## Name: setAmountForBid
+    ## Name: setBidAmount
     ## Description: This function sets the bid amount
     ## for a bid in db
     ## Parameters: bid_amount, bid_id
     ##
     ## Returns: Returns True if updated successfully
     ##
-    def setAmountForBid(self, bid_amount, bid_id):
-        self.logger.info("IN - BidAPI setAmountForBid method")
+    def setBidAmount(self, bid_amount, bid_id):
+        self.logger.info("IN - BidAPI setBidAmount method")
         query = "UPDATE " + BidAPI.bidTablename + " SET bid_amount = " + str(bid_amount) + " WHERE bid_id = " + str(bid_id)
         self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)

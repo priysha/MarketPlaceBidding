@@ -39,5 +39,5 @@ CREATE TABLE `project` (
   `buyer_id` varchar(45) DEFAULT NULL COMMENT 'User ID of the buyer who finally got the project.',
   `description` varchar(255) DEFAULT NULL COMMENT 'Description of the project',
   `creation_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT 'Date when the project is first posted',
-  PRIMARY KEY (`project_id`,`seller_id`)
+  PRIMARY KEY (`project_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;

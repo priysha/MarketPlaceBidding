@@ -75,6 +75,21 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
         return self.runSelectDfQuery(query)
 
     ##
+    ## Name: getBuyerFirstName
+    ## Description: This function returns first_name
+    ## of the buyer from the db
+    ##
+    ## Parameters: buyer_id
+    ##
+    ## Returns: returns buyer's first_name
+    ##
+    def getBuyerFirstName(self, buyer_id):
+        self.logger.info("IN - BuyerAPI getBuyerFirstName method")
+        query = "SELECT first_name FROM " + BuyerAPI.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
+        self.logger.debug("Query: " + query)
+        return self.runSelectDfQuery(query)
+
+    ##
     ## Name: setBuyerFirstName
     ## Description: This function updates first name
     ## of the buyer in the db
@@ -88,6 +103,21 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
         query = "UPDATE " + BuyerAPI.buyerTablename + "SET first_name = ' " + first_name + "' WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
+
+    ##
+    ## Name: getBuyerLastName
+    ## Description: This function returns last_name
+    ## of the buyer from the db
+    ##
+    ## Parameters: buyer_id
+    ##
+    ## Returns: returns buyer's last_name
+    ##
+    def getBuyerLastName(self, buyer_id):
+        self.logger.info("IN - BuyerAPI getBuyerLastName method")
+        query = "SELECT last_name FROM " + BuyerAPI.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
+        self.logger.debug("Query: " + query)
+        return self.runSelectDfQuery(query)
 
     ##
     ## Name: setBuyerLastName
@@ -105,6 +135,21 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
         return self.runUpdateQuery(query)
 
     ##
+    ## Name: getBuyerLocation
+    ## Description: This function returns location
+    ## of the buyer from the db
+    ##
+    ## Parameters: buyer_id
+    ##
+    ## Returns: returns buyer's location
+    ##
+    def getBuyerLocation(self, buyer_id):
+        self.logger.info("IN - BuyerAPI getBuyerLocation method")
+        query = "SELECT location FROM " + BuyerAPI.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
+        self.logger.debug("Query: " + query)
+        return self.runSelectDfQuery(query)
+
+    ##
     ## Name: setBuyerLocation
     ## Description: This function updates location
     ## of the buyer in the db
@@ -118,6 +163,21 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
         query = "UPDATE " + BuyerAPI.buyerTablename + "SET location = ' " + location + "' WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
+
+    ##
+    ## Name: getBuyerSkills
+    ## Description: This function returns skills
+    ## of the buyer from the db
+    ##
+    ## Parameters: buyer_id
+    ##
+    ## Returns: returns buyer's skills
+    ##
+    def getBuyerSkills(self, buyer_id):
+        self.logger.info("IN - BuyerAPI getBuyerSkills method")
+        query = "SELECT skills FROM " + BuyerAPI.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
+        self.logger.debug("Query: " + query)
+        return self.runSelectDfQuery(query)
 
     ##
     ## Name: setBuyerSkills

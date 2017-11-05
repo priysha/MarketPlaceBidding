@@ -65,7 +65,7 @@ class ProjectAPI(DataBaseDriver.DataBaseDriver):
 
 
     ##
-    ## Name: getProjectId
+    ## Name: getProjectInfo
     ## Description: This function returns project info
     ## for a given project_id
     ##
@@ -235,6 +235,55 @@ class ProjectAPI(DataBaseDriver.DataBaseDriver):
         query = "SELECT bid_end_time FROM " + ProjectAPI.projectTablename + " WHERE project_id = " + str(project_id)
         self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query).bid_end_time[0]
+
+    ##
+    ## Name: setBidEndTimeForProject
+    ## Description: This function updates project's bid_end_time
+    ## in the db
+    ##
+    ## Parameters: project_id, bid_end_time
+    ##
+    ## Returns: returns True if updated else False
+    ##
+    def setBidEndTimeForProject(self, project_id, bid_end_time):
+        self.logger.info("IN - ProjectAPI setBidEndTimeForProject method")
+        query = "UPDATE " + ProjectAPI.projectTablename + " SET bid_end_time = '" + bid_end_time + "' WHERE project_id = " + str(
+            project_id)
+        self.logger.debug("Query: " + query)
+        return self.runUpdateQuery(query)
+
+        ##
+        ## Name: getDescriptionForProject
+        ## Description: This function returns project description
+        ## from the db
+        ##
+        ## Parameters: project_id
+        ##
+        ## Returns: returns project description
+        ##
+
+    def getDescriptionForProject(self, project_id):
+        self.logger.info("IN - ProjectAPI getDescriptionForProject method")
+        query = "SELECT description FROM " + ProjectAPI.projectTablename + " WHERE project_id = " + str(project_id)
+        self.logger.debug("Query: " + query)
+        return self.runSelectDfQuery(query).description[0]
+
+        ##
+        ## Name: setDescriptionForProject
+        ## Description: This function updates project's description
+        ## in the db
+        ##
+        ## Parameters: project_id, description
+        ##
+        ## Returns: returns True if updated else False
+        ##
+
+    def setDescriptionForProject(self, project_id, description):
+        self.logger.info("IN - ProjectAPI setDescriptionForProject method")
+        query = "UPDATE " + ProjectAPI.projectTablename + " SET description = '" + description + "' WHERE project_id = " + str(
+            project_id)
+        self.logger.debug("Query: " + query)
+        return self.runUpdateQuery(query)
 
     ##
     ## Name: load
