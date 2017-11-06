@@ -74,8 +74,8 @@ class BuyerDashboardAPI:
         return buyer_projects
 
     ##
-    ## Name: createANewBid
-    ## Description: This function lets buyer create a new bid
+    ## Name: addNewBid
+    ## Description: This function lets buyer add a new bid
     ## for listed projects, bid is not created if time to
     ## create bid has exceeded the project_bid_endtime
     ##
@@ -83,8 +83,8 @@ class BuyerDashboardAPI:
     ##
     ## Returns: returns True if bid is created else False
     ##
-    def createANewBid(self, project_id, bid_amount, bid_type='fixed', bid_hours=0):
-        self.logger.info("IN - BuyerDashboardAPI createANewBid method")
+    def addNewBid(self, project_id, bid_amount, bid_type='fixed', bid_hours=0):
+        self.logger.info("IN - BuyerDashboardAPI addNewBid method")
         project_bid_endtime = self.Project.getBidEndTimeForProject(project_id)
         self.logger.debug("Project" + str(project_id) + " bidding ends at: " + str(project_bid_endtime)
                           +"\nCurrent time: " + str(datetime.now()))

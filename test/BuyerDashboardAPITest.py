@@ -75,7 +75,7 @@ class BuyerDashboardAPITest(unittest.TestCase):
 
     ##
     ## Name: testCreateANewBidFixed
-    ## Description: This method tests createANewBid()
+    ## Description: This method tests addNewBid()
     ## method for BuyerDashboardAPI class, this test is
     ## for creating a bid of fixed type
     ##
@@ -91,12 +91,12 @@ class BuyerDashboardAPITest(unittest.TestCase):
         bid_hours = 0
         BuyerDashboard = BuyerDashboardAPI(buyer_id)
         Bid = BidAPI()
-        self.assertEquals(True, BuyerDashboard.createANewBid(project_id, bid_amount, bid_type, bid_hours))
+        self.assertEquals(True, BuyerDashboard.addNewBid(project_id, bid_amount, bid_type, bid_hours))
         self.assertEquals(True, project_id in Bid.getBidsForBuyer(buyer_id).project_id.values)
 
     ##
     ## Name: testCreateANewBidFixed
-    ## Description: This method tests createANewBid()
+    ## Description: This method tests addNewBid()
     ## method for BuyerDashboardAPI class, this test is
     ## for creating a bid of hourly type
     ##
@@ -112,12 +112,12 @@ class BuyerDashboardAPITest(unittest.TestCase):
         bid_hours = 10000
         BuyerDashboard = BuyerDashboardAPI(buyer_id)
         Bid = BidAPI()
-        self.assertEquals(True, BuyerDashboard.createANewBid(project_id, bid_amount,bid_type,bid_hours))
+        self.assertEquals(True, BuyerDashboard.addNewBid(project_id, bid_amount,bid_type,bid_hours))
         self.assertEquals(True, project_id in Bid.getBidsForBuyer(buyer_id).project_id.values)
 
     ##
     ## Name: testCreateANewBidFixed
-    ## Description: This method tests createANewBid()
+    ## Description: This method tests addNewBid()
     ## method for BuyerDashboardAPI class, this test is
     ## for creating a bid which has exceeded the project bid_end_time
     ##
@@ -130,4 +130,4 @@ class BuyerDashboardAPITest(unittest.TestCase):
         buyer_id = 'pbris4'
         bid_amount = 370
         BuyerDashboard = BuyerDashboardAPI(buyer_id)
-        self.assertEquals(False, BuyerDashboard.createANewBid(project_id,bid_amount))
+        self.assertEquals(False, BuyerDashboard.addNewBid(project_id,bid_amount))
