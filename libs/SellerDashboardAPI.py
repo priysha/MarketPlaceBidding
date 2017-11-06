@@ -38,8 +38,8 @@ class SellerDashboardAPI:
     ##
     def getSellerInfo(self):
         self.logger.info("IN - SellerDashboardAPI getSellerInfo method")
-        buyer_info = self.Seller.getSellerInfo(self.sellerId)
-        return buyer_info
+        seller_info = self.Seller.getSellerInfo(self.sellerId)
+        return seller_info
 
     ##
     ## Name: getAllProjectsUnderSeller
@@ -53,7 +53,10 @@ class SellerDashboardAPI:
     def getAllProjectsUnderSeller(self):
         self.logger.info("IN - SellerDashboardAPI getAllProjectsUnderSeller method")
         seller_projects = self.Project.getAllProjectsForSellers(self.sellerId)
-        return seller_projects
+        if not seller_projects.empty:
+            return seller_projects
+        else:
+            return False
 
     ##
     ## Name: addANewProject

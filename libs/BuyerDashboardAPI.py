@@ -57,7 +57,10 @@ class BuyerDashboardAPI:
     def getAllBidsForBuyer(self):
         self.logger.info("IN - BuyerDashboardAPI getAllBidsForBuyer method")
         buyer_bids = self.Bid.getBidsForBuyer(self.buyerId)
-        return buyer_bids
+        if not buyer_bids.empty:
+            return buyer_bids
+        else:
+            return False
 
     ##
     ## Name: getAllProjectsUnderBuyer
@@ -71,7 +74,10 @@ class BuyerDashboardAPI:
     def getAllProjectsUnderBuyer(self):
         self.logger.info("IN - BuyerDashboardAPI getAllProjectsUnderBuyer method")
         buyer_projects = self.Project.getAllProjectsForBuyers(self.buyerId)
-        return buyer_projects
+        if not buyer_projects.empty:
+            return buyer_projects
+        else:
+            return False
 
     ##
     ## Name: addNewBid

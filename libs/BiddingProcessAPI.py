@@ -12,6 +12,7 @@ from ProjectAPI import ProjectAPI
 from BidAPI import BidAPI
 from constants import *
 import logging.config
+import pandas as pd
 logging.config.fileConfig(LOGGING_CONF)
 
 ##
@@ -35,13 +36,18 @@ class BiddingProcessAPI:
     ## Parameters: project_id
     ##
     ## Returns: returns dataframe with all eligible bid info
+    ## if exists else returns empty dataframe
     ##
     def getAllEligibleBids(self, project_id):
         self.logger.info("IN - BiddingProcessAPI getAllEligibleBids method")
         project_bid_endtime = self.Project.getBidEndTimeForProject(project_id)
         project_bids = self.Bid.getBidsForProject(project_id)
-        project_elgible_bids = project_bids[project_bids.creation_time <= project_bid_endtime]
-        return project_elgible_bids
+        if not project_bids.empty:
+            project_elgible_bids = project_bids[project_bids.creation_time <= project_bid_endtime]
+            if not project_elgible_bids.empty:
+                return project_elgible_bids
+        self.logger.info("No eligible bids")
+        return pd.DataFrame()
 
     ##
     ## Name: getMinimumBidForProject
@@ -51,22 +57,26 @@ class BiddingProcessAPI:
     ##
     ## Parameters: project_id
     ##
-    ## Returns: returns dataframe with minimum bid info
+    ## Returns: returns dataframe with minimum bid info if bids exist
+    ## else returns empty dataframe
     ##
     def getMinimumBidForProject(self, project_id):
         self.logger.info("IN - BiddingProcessAPI getAllEligibleBids method")
         all_bids = self.getAllEligibleBids(project_id)
-        min_bid = all_bids.bid_id[0]
-        min_amount = float('inf')
-        for index,row in all_bids.iterrows():
-            bid_amount = self.Bid.getBidAmount(row['bid_id'])
-            if bid_amount < min_amount:
-                min_amount = bid_amount
-                min_bid = row['bid_id']
+        if len(all_bids.index)>0:
+            min_bid = all_bids.bid_id[0]
+            min_amount = float('inf')
+            for index,row in all_bids.iterrows():
+                bid_amount = self.Bid.getBidAmount(row['bid_id'])
+                if bid_amount < min_amount:
+                    min_amount = bid_amount
+                    min_bid = row['bid_id']
 
-        min_bid_info = self.Bid.getBidInfo(min_bid)
+            min_bid_info = self.Bid.getBidInfo(min_bid)
 
-        return min_bid_info
+            return min_bid_info
+        self.logger.info("No eligible minimum bid")
+        return pd.DataFrame()
 
     ##
     ## Name: getMostRecentNProjects
@@ -76,15 +86,16 @@ class BiddingProcessAPI:
     ## Parameters: n
     ##
     ## Returns: returns dataframe with top n most recent
-    ## projects' info
+    ## projects' info if exists else returns empty dataframe
     ##
     def getMostRecentNProjects(self, n):
         self.logger.info("IN - BiddingProcessAPI getMostRecentNProjects method")
         all_projects = self.Project.getAllProjects()
-
-        top_n_projects = all_projects.sort_values(['creation_time'], ascending=[False]).head(n)
-
-        return top_n_projects
+        if len(all_projects.index)>0:
+            top_n_projects = all_projects.sort_values(['creation_time'], ascending=[False]).head(n)
+            return top_n_projects
+        self.logger.info("No projects to display")
+        return pd.DataFrame()
 
     ##
     ## Name: getAllBuyerIDBiddingForAProject
@@ -95,12 +106,15 @@ class BiddingProcessAPI:
     ##
     ## Returns: returns list of all buyer IDs for a project
     ##
+    ##
     def getAllBuyerIDBiddingForAProject(self, project_id):
         self.logger.info("IN - BiddingProcessAPI getAllBuyerIDBiddingForAProject method")
         all_bids = self.Bid.getBidsForProject(project_id)
-        buyer_ids = list(all_bids.buyer_id)
-        return buyer_ids
-
+        if len(all_bids.index)>0:
+            buyer_ids = list(all_bids.buyer_id)
+            return buyer_ids
+        self.logger.info("No buyers")
+        return []
     ##
     ## Name: setBuyerForProject
     ## Description: This function sets the buyer for a
