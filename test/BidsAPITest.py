@@ -17,7 +17,6 @@ import pandas as pd
 ## Class: BidAPITest
 ## Description: This class is the unittest driver for BidAPI class
 ##
-##TODO: Add more test cases
 class BidAPITest(unittest.TestCase):
     ##
     ## Name: setUp
