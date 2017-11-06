@@ -52,6 +52,20 @@ class SellerDashboardAPITest(unittest.TestCase):
         self.assertEquals(True, 'Veribet'in SellerDashboard.getAllProjectsUnderSeller().project_name.values)
 
     ##
+    ## Name: testGetAllProjectsUnderSellerNone
+    ## Description: This method tests getAllProjectsUnderSeller()
+    ## method for SellerDashboardAPI class when seller has no projects
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testGetAllProjectsUnderSellerNone(self):
+        seller_id = 'hwillfordi'
+        SellerDashboard = SellerDashboardAPI(seller_id)
+        self.assertEquals(True, SellerDashboard.getAllProjectsUnderSeller().empty)
+
+    ##
     ## Name: testAddANewProject
     ## Description: This method tests addANewProject()
     ## method for SellerDashboardAPI class

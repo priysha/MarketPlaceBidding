@@ -54,6 +54,21 @@ class BuyerDashboardAPITest(unittest.TestCase):
         self.assertEquals(True, '22.85' in str(BuyerDashboard.getAllBidsForBuyer().bid_amount.values))
 
     ##
+    ## Name: testGetAllBidsForBuyerNone
+    ## Description: This method tests getAllBidsForBuyer()
+    ## method for BuyerDashboardAPI class when no bids exist under
+    ## that buyer
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testGetAllBidsForBuyerNone(self):
+        buyer_id = 'abc'
+        BuyerDashboard = BuyerDashboardAPI(buyer_id)
+        self.assertEquals(True, BuyerDashboard.getAllBidsForBuyer().empty)
+
+    ##
     ## Name: testGetAllProjectsUnderBuyer
     ## Description: This method tests getAllProjectsUnderBuyer()
     ## method for BuyerDashboardAPI class
@@ -72,6 +87,21 @@ class BuyerDashboardAPITest(unittest.TestCase):
         BuyerDashboard = BuyerDashboardAPI(buyer_id)
         self.assertEquals(False, BuyerDashboard.getAllProjectsUnderBuyer().empty)
         self.assertEquals('pbris4', Project.getProjectInfo(project_id).buyer_id[0])
+
+    ##
+    ## Name: testGetAllProjectsUnderBuyerNone
+    ## Description: This method tests getAllProjectsUnderBuyer()
+    ## method for BuyerDashboardAPI class when no projects exist under
+    ## that buyer
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testGetAllProjectsUnderBuyerNone(self):
+        buyer_id = 'rmuzzim'
+        BuyerDashboard = BuyerDashboardAPI(buyer_id)
+        self.assertEquals(True, BuyerDashboard.getAllProjectsUnderBuyer().empty)
 
     ##
     ## Name: testCreateANewBidFixed

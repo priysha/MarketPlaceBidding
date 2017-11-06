@@ -78,7 +78,7 @@ class BidAPITest(unittest.TestCase):
 
 
     ##
-    ## Name: testSetAmountForBid
+    ## Name: testSetBidAmount
     ## Description: This method tests setBidAmount()
     ## method for BidAPI class
     ##
@@ -86,11 +86,26 @@ class BidAPITest(unittest.TestCase):
     ##
     ## Returns: None
     ##
-    def testSetAmountForBid(self):
+    def testSetBidAmount(self):
         bid_id = int(self.Bid.getAllBids().bid_id[0])
         bid_amount = 500
         self.assertEquals(True, self.Bid.setBidAmount(bid_amount,bid_id))
         self.assertEquals(bid_amount,self.Bid.getBidInfo(bid_id).bid_amount[0])
+
+    ##
+    ## Name: testGetBidAmount
+    ## Description: This method tests getBidAmount()
+    ## method for BidAPI class
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testGetBidAmount(self):
+        bid_id = int(self.Bid.getAllBids().bid_id[1])
+        #bid amount = 913.44
+        self.assertEquals(913.44, self.Bid.getBidAmount(bid_id))
+
 
     ##
     ## Name: testGetBidsForBuyer

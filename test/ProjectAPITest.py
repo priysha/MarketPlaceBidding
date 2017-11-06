@@ -74,6 +74,48 @@ class ProjectAPITest(unittest.TestCase):
         self.assertEquals(False, self.Project.getAllProjectsForSellers(seller_id).empty)
 
     ##
+    ## Name: testGetAllProjectsForSellersEmpty
+    ## Description: This method tests getAllProjectsForSellers()
+    ## method for ProjectAPI class where no project exists for
+    ## that seller
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testGetAllProjectsForSellersEmpty(self):
+        seller_id = 'bedlingtont'
+        self.assertEquals(True, self.Project.getAllProjectsForSellers(seller_id).empty)
+
+    ##
+    ## Name: testGetAllProjectsForBuyers
+    ## Description: This method tests getAllProjectsForBuyers()
+    ## method for ProjectAPI class
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testGetAllProjectsForBuyers(self):
+        buyer_id = 'priysha'
+        self.assertEquals(True, self.Project.setBuyerForProject(2,buyer_id))
+        self.assertEquals(False, self.Project.getAllProjectsForBuyers(buyer_id).empty)
+
+    ##
+    ## Name: testGetAllProjectsForBuyersEmpty
+    ## Description: This method tests getAllProjectsForBuyers()
+    ## method for ProjectAPI class where no project exists
+    ## for that buyer
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testGetAllProjectsForBuyersEmpty(self):
+        buyer_id = 'pkillought'
+        self.assertEquals(True, self.Project.getAllProjectsForSellers(buyer_id).empty)
+
+    ##
     ## Name: testGetAllProjectsForSellers
     ## Description: This method tests getAllProjectsForSellers()
     ## method for ProjectAPI class
@@ -88,6 +130,7 @@ class ProjectAPITest(unittest.TestCase):
         # should pass
         self.assertEquals(True, self.Project.createProject(project_dict))
         self.assertIsNotNone(self.Project.getProjectId(project_dict['project_name'],project_dict['seller_id']))
+
     ##
     ## Name: testGetBidEndTimeForProject
     ## Description: This method tests getBidEndTimeForProject()
@@ -104,3 +147,35 @@ class ProjectAPITest(unittest.TestCase):
         project_id = self.Project.getProjectId(project_name,seller_id)
         self.assertIsNotNone(self.Project.getBidEndTimeForProject(project_id))
 
+
+    ##
+    ## Name: testGetProjectInfoForExistingProject
+    ## Description: This method tests getProjectInfo()
+    ## method for ProjectAPI class for existing project
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testGetProjectInfoForExistingProject(self):
+        project_id = 10
+        project_name = 'It'
+
+        result_1 = self.Project.getProjectInfo(project_id)
+        self.assertEquals(False, result_1.empty)
+        self.assertEquals(project_name, result_1.project_name[0])
+
+    ##
+    ## Name: testGetProjectInfoForNonExistingProject
+    ## Description: This method tests getProjectInfo()
+    ## method for ProjectAPI class for non-existing project
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testGetProjectInfoForNonExistingProject(self):
+        project_id = 400
+
+        result_1 = self.Project.getProjectInfo(project_id)
+        self.assertEquals(True, result_1.empty)

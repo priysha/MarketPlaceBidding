@@ -46,6 +46,19 @@ class BiddingProcessAPITest(unittest.TestCase):
         self.assertEquals(False, self.BidProcess.getAllEligibleBids(project_id).empty)
 
     ##
+    ## Name: testGetAllEligibleBidsNone
+    ## Description: This method tests getAllEligibleBids()
+    ## method for BiddingProcessAPI class when no eligible bid exists
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testGetAllEligibleBidsNone(self):
+        project_id = 27
+        self.assertEquals(True, self.BidProcess.getAllEligibleBids(project_id).empty)
+
+    ##
     ## Name: testGetMinimumBidForProject
     ## Description: This method tests getMinimumBidForProject()
     ## method for BiddingProcessAPI class
@@ -59,6 +72,21 @@ class BiddingProcessAPITest(unittest.TestCase):
         result_1 = self.BidProcess.getMinimumBidForProject(project_id)
         self.assertEquals(False,result_1.empty)
         self.assertEquals('nkingman7', result_1.buyer_id[0])
+
+    ##
+    ## Name: testGetMinimumBidForProjectNone
+    ## Description: This method tests getMinimumBidForProject()
+    ## method for BiddingProcessAPI class when no eligible bid exists
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testGetMinimumBidForProjectNone(self):
+        project_id = 27
+
+        self.assertEquals(True,self.BidProcess.getMinimumBidForProject(project_id).empty)
+
 
     ##
     ## Name: testGetMostRecentNProjects
@@ -76,6 +104,8 @@ class BiddingProcessAPITest(unittest.TestCase):
         n = 100
         result_2 = self.BidProcess.getMostRecentNProjects(n)
         self.assertEquals(False, result_2.empty)
+
+
 
     ##
     ## Name: testGetAllBuyerIDBiddingForAProject

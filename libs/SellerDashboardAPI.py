@@ -13,6 +13,7 @@ from ProjectAPI import ProjectAPI
 from SellerAPI import SellerAPI
 from constants import *
 import logging.config
+import pandas as pd
 logging.config.fileConfig(LOGGING_CONF)
 
 ##
@@ -56,7 +57,7 @@ class SellerDashboardAPI:
         if not seller_projects.empty:
             return seller_projects
         else:
-            return False
+            return pd.DataFrame()
 
     ##
     ## Name: addANewProject

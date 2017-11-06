@@ -15,6 +15,7 @@ from BuyerAPI import BuyerAPI
 from datetime import datetime
 from constants import *
 import logging.config
+import pandas as pd
 logging.config.fileConfig(LOGGING_CONF)
 
 ##
@@ -60,7 +61,7 @@ class BuyerDashboardAPI:
         if not buyer_bids.empty:
             return buyer_bids
         else:
-            return False
+            return pd.DataFrame()
 
     ##
     ## Name: getAllProjectsUnderBuyer
@@ -77,7 +78,7 @@ class BuyerDashboardAPI:
         if not buyer_projects.empty:
             return buyer_projects
         else:
-            return False
+            return pd.DataFrame()
 
     ##
     ## Name: addNewBid
