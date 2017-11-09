@@ -13,8 +13,8 @@
 import unittest
 from BuyerDashboardAPI import BuyerDashboardAPI
 from BiddingProcessAPI import BiddingProcessAPI
-from ProjectAPI import ProjectAPI
-from BidAPI import BidAPI
+from ProjectDB import ProjectDB
+from BidDB import BidDB
 
 ##
 ## Class: BuyerDashboardAPITest
@@ -79,7 +79,7 @@ class BuyerDashboardAPITest(unittest.TestCase):
     ##
     def testGetAllProjectsUnderBuyer(self):
         BidProcess = BiddingProcessAPI()
-        Project = ProjectAPI()
+        Project = ProjectDB()
         project_id = 9
         result_1 = BidProcess.setBuyerForProject(project_id)
         self.assertEquals(True, result_1)
@@ -120,7 +120,7 @@ class BuyerDashboardAPITest(unittest.TestCase):
         bid_type = 'fixed'
         bid_hours = 0
         BuyerDashboard = BuyerDashboardAPI(buyer_id)
-        Bid = BidAPI()
+        Bid = BidDB()
         self.assertEquals(True, BuyerDashboard.addNewBid(project_id, bid_amount, bid_type, bid_hours))
         self.assertEquals(True, project_id in Bid.getBidsForBuyer(buyer_id).project_id.values)
 
@@ -141,7 +141,7 @@ class BuyerDashboardAPITest(unittest.TestCase):
         bid_type = 'hourly'
         bid_hours = 10000
         BuyerDashboard = BuyerDashboardAPI(buyer_id)
-        Bid = BidAPI()
+        Bid = BidDB()
         self.assertEquals(True, BuyerDashboard.addNewBid(project_id, bid_amount,bid_type,bid_hours))
         self.assertEquals(True, project_id in Bid.getBidsForBuyer(buyer_id).project_id.values)
 

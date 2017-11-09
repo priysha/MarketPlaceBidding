@@ -1,22 +1,22 @@
 ###############################################################
 ##
-## File: ProjectAPITest.py
+## File: ProjectDBTest.py
 ## Author: Priysha Pradhan
-## Description: This file contains tests for ProjectAPI class
-## These test cases check if the ProjectAPI class is interacting
+## Description: This file contains tests for ProjectDB class
+## These test cases check if the ProjectDB class is interacting
 ## with the db correctly and returning data in correct format
 ##
 ###############################################################
 
 # Module Import #
 import unittest
-from ProjectAPI import ProjectAPI
+from ProjectDB import ProjectDB
 
 ##
-## Class: ProjectAPITest
-## Description: This class is the unittest driver for ProjectAPI class
+## Class: ProjectDBTest
+## Description: This class is the unittest driver for ProjectDB class
 ##
-class ProjectAPITest(unittest.TestCase):
+class ProjectDBTest(unittest.TestCase):
     ##
     ## Name: setUp
     ## Description: Fixture that runs prior to the execution of any test.
@@ -27,12 +27,12 @@ class ProjectAPITest(unittest.TestCase):
     ## Returns: None
     ##
     def setUp(self):
-        self.Project = ProjectAPI()
+        self.Project = ProjectDB()
 
     ##
     ## Name: testGetAllProjects
     ## Description: This method tests getAllProjects()
-    ## method for ProjectAPI class
+    ## method for ProjectDB class
     ##
     ## Parameters: None
     ##
@@ -45,7 +45,7 @@ class ProjectAPITest(unittest.TestCase):
     ##
     ## Name: testCreateProject
     ## Description: This method tests createProject()
-    ## method for ProjectAPI class
+    ## method for ProjectDB class
     ##
     ## Parameters: None
     ##
@@ -62,7 +62,7 @@ class ProjectAPITest(unittest.TestCase):
     ##
     ## Name: testGetAllProjectsForSellers
     ## Description: This method tests getAllProjectsForSellers()
-    ## method for ProjectAPI class
+    ## method for ProjectDB class
     ##
     ## Parameters: None
     ##
@@ -75,7 +75,7 @@ class ProjectAPITest(unittest.TestCase):
     ##
     ## Name: testGetAllProjectsForSellersEmpty
     ## Description: This method tests getAllProjectsForSellers()
-    ## method for ProjectAPI class where no project exists for
+    ## method for ProjectDB class where no project exists for
     ## that seller
     ##
     ## Parameters: None
@@ -89,7 +89,7 @@ class ProjectAPITest(unittest.TestCase):
     ##
     ## Name: testGetAllProjectsForBuyers
     ## Description: This method tests getAllProjectsForBuyers()
-    ## method for ProjectAPI class
+    ## method for ProjectDB class
     ##
     ## Parameters: None
     ##
@@ -103,7 +103,7 @@ class ProjectAPITest(unittest.TestCase):
     ##
     ## Name: testGetAllProjectsForBuyersEmpty
     ## Description: This method tests getAllProjectsForBuyers()
-    ## method for ProjectAPI class where no project exists
+    ## method for ProjectDB class where no project exists
     ## for that buyer
     ##
     ## Parameters: None
@@ -117,7 +117,7 @@ class ProjectAPITest(unittest.TestCase):
     ##
     ## Name: testGetAllProjectsForSellers
     ## Description: This method tests getAllProjectsForSellers()
-    ## method for ProjectAPI class
+    ## method for ProjectDB class
     ##
     ## Parameters: None
     ##
@@ -133,7 +133,7 @@ class ProjectAPITest(unittest.TestCase):
     ##
     ## Name: testGetBidEndTimeForProject
     ## Description: This method tests getBidEndTimeForProject()
-    ## method for ProjectAPI class
+    ## method for ProjectDB class
     ##
     ## Parameters: None
     ##
@@ -150,7 +150,7 @@ class ProjectAPITest(unittest.TestCase):
     ##
     ## Name: testGetProjectInfoForExistingProject
     ## Description: This method tests getProjectInfo()
-    ## method for ProjectAPI class for existing project
+    ## method for ProjectDB class for existing project
     ##
     ## Parameters: None
     ##
@@ -167,7 +167,7 @@ class ProjectAPITest(unittest.TestCase):
     ##
     ## Name: testGetProjectInfoForNonExistingProject
     ## Description: This method tests getProjectInfo()
-    ## method for ProjectAPI class for non-existing project
+    ## method for ProjectDB class for non-existing project
     ##
     ## Parameters: None
     ##

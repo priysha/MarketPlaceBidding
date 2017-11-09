@@ -1,22 +1,22 @@
 ##########################################################
 ##
-## File: SellerAPITest.py
+## File: SellerDBTest.py
 ## Author: Priysha Pradhan
-## Description: This file contains tests for SellerAPI class
-## These test cases check if the SellerAPI class is interacting
+## Description: This file contains tests for SellerDB class
+## These test cases check if the SellerDB class is interacting
 ## with the db correctly and returning data in correct format
 ##
 ##########################################################
 
 # Module Import #
 import unittest
-from SellerAPI import SellerAPI
+from SellerDB import SellerDB
 
 ##
-## Class: SellerAPITest
-## Description: This class is the unittest driver for SellerAPI class
+## Class: SellerDBTest
+## Description: This class is the unittest driver for SellerDB class
 ##
-class SellerAPITest(unittest.TestCase):
+class SellerDBTest(unittest.TestCase):
     ##
     ## Name: setUp
     ## Description: Fixture that runs prior to the execution of any test.
@@ -27,12 +27,12 @@ class SellerAPITest(unittest.TestCase):
     ## Returns: None
     ##
     def setUp(self):
-        self.Seller = SellerAPI()
+        self.Seller = SellerDB()
 
     ##
     ## Name: testCreateSeller
     ## Description: This method tests createSeller()
-    ## method for SellerAPI class
+    ## method for SellerDB class
     ##
     ## Parameters: None
     ##
@@ -51,7 +51,7 @@ class SellerAPITest(unittest.TestCase):
     ##
     ## Name: testCreateExistingSeller
     ## Description: This method tests createSeller()
-    ## method for SellerAPI class for existing seller
+    ## method for SellerDB class for existing seller
     ##
     ## Parameters: None
     ##
@@ -68,7 +68,7 @@ class SellerAPITest(unittest.TestCase):
     ##
     ## Name: testGetSellerInfo
     ## Description: This method tests getSellerInfo()
-    ## method for SellerAPI class
+    ## method for SellerDB class
     ##
     ## Parameters: None
     ##
@@ -82,7 +82,7 @@ class SellerAPITest(unittest.TestCase):
     ##
     ## Name: testGetNonExistingSellerInfo
     ## Description: This method tests getSellerInfo()
-    ## method for SellerAPI class when seller doesnt exist
+    ## method for SellerDB class when seller doesnt exist
     ##
     ## Parameters: None
     ##
@@ -96,7 +96,7 @@ class SellerAPITest(unittest.TestCase):
     ##
     ## Name: testGetAllSellers
     ## Description: This method tests getAllSellers()
-    ## method for SellerAPI class
+    ## method for SellerDB class
     ##
     ## Parameters: None
     ##
@@ -112,7 +112,7 @@ class SellerAPITest(unittest.TestCase):
     ##
     ## Name: testGetSellerFirstName
     ## Description: This method tests getSellerFirstName()
-    ## method for SellerAPI class for non-existing buyer
+    ## method for SellerDB class for non-existing buyer
     ##
     ## Parameters: None
     ##
@@ -125,7 +125,7 @@ class SellerAPITest(unittest.TestCase):
     ##
     ## Name: testSetSellerFirstName
     ## Description: This method tests setSellerFirstName()
-    ## method for SellerAPI class for non-existing buyer
+    ## method for SellerDB class for non-existing buyer
     ##
     ## Parameters: None
     ##
@@ -140,7 +140,7 @@ class SellerAPITest(unittest.TestCase):
     ##
     ## Name: testGetSellerLastName
     ## Description: This method tests getSellerLastName()
-    ## method for SellerAPI class for non-existing buyer
+    ## method for SellerDB class for non-existing buyer
     ##
     ## Parameters: None
     ##
@@ -153,7 +153,7 @@ class SellerAPITest(unittest.TestCase):
     ##
     ## Name: testSetSellerLastName
     ## Description: This method tests setSellerLastName()
-    ## method for SellerAPI class for non-existing buyer
+    ## method for SellerDB class for non-existing buyer
     ##
     ## Parameters: None
     ##

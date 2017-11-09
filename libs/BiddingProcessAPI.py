@@ -8,8 +8,8 @@
 ##########################################################
 
 # Module Import #
-from ProjectAPI import ProjectAPI
-from BidAPI import BidAPI
+from ProjectDB import ProjectDB
+from BidDB import BidDB
 from constants import *
 import logging.config
 import pandas as pd
@@ -24,8 +24,8 @@ class BiddingProcessAPI:
     def __init__(self):
         self.logger = logging.getLogger('Market_Place')
         self.logger.info("IN - BiddingProcessAPI constructor")
-        self.Bid = BidAPI()
-        self.Project = ProjectAPI()
+        self.Bid = BidDB()
+        self.Project = ProjectDB()
 
     ##
     ## Name: getAllEligibleBids

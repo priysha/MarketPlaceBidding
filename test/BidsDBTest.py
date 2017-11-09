@@ -1,23 +1,23 @@
 ##########################################################
 ##
-## File: BidAPITest.py
+## File: BidDBTest.py
 ## Author: Priysha Pradhan
-## Description: This file contains tests for BidAPI class
-## These test cases check if the BidAPI class is interacting
+## Description: This file contains tests for BidDB class
+## These test cases check if the BidDB class is interacting
 ## with the db correctly and returning data in correct format
 ##
 ##########################################################
 
 # Module Import #
 import unittest
-from BidAPI import BidAPI
+from BidDB import BidDB
 import pandas as pd
 
 ##
-## Class: BidAPITest
-## Description: This class is the unittest driver for BidAPI class
+## Class: BidDBTest
+## Description: This class is the unittest driver for BidDB class
 ##
-class BidAPITest(unittest.TestCase):
+class BidDBTest(unittest.TestCase):
     ##
     ## Name: setUp
     ## Description: Fixture that runs prior to the execution of any test.
@@ -28,12 +28,12 @@ class BidAPITest(unittest.TestCase):
     ## Returns: None
     ##
     def setUp(self):
-        self.Bid = BidAPI()
+        self.Bid = BidDB()
 
     ##
     ## Name: testGetAllBids
     ## Description: This method tests getAllBids()
-    ## method for BidAPI class
+    ## method for BidDB class
     ##
     ## Parameters: None
     ##
@@ -46,7 +46,7 @@ class BidAPITest(unittest.TestCase):
     ##
     ## Name: testCreateBid
     ## Description: This method tests createBid()
-    ## method for BidAPI class
+    ## method for BidDB class
     ##
     ## Parameters: None
     ##
@@ -65,7 +65,7 @@ class BidAPITest(unittest.TestCase):
     ##
     ## Name: testGetBidInfo
     ## Description: This method tests getBidInfo()
-    ## method for BidAPI class
+    ## method for BidDB class
     ##
     ## Parameters: None
     ##
@@ -79,7 +79,7 @@ class BidAPITest(unittest.TestCase):
     ##
     ## Name: testSetBidAmount
     ## Description: This method tests setBidAmount()
-    ## method for BidAPI class
+    ## method for BidDB class
     ##
     ## Parameters: None
     ##
@@ -94,7 +94,7 @@ class BidAPITest(unittest.TestCase):
     ##
     ## Name: testGetBidAmount
     ## Description: This method tests getBidAmount()
-    ## method for BidAPI class
+    ## method for BidDB class
     ##
     ## Parameters: None
     ##
@@ -109,7 +109,7 @@ class BidAPITest(unittest.TestCase):
     ##
     ## Name: testGetBidsForBuyer
     ## Description: This method tests getBidsForBuyer()
-    ## method for BidAPI class
+    ## method for BidDB class
     ##
     ## Parameters: None
     ##
@@ -123,7 +123,7 @@ class BidAPITest(unittest.TestCase):
     ##
     ## Name: testGetBidsForProject
     ## Description: This method tests getBidsForProject()
-    ## method for BidAPI class
+    ## method for BidDB class
     ##
     ## Parameters: None
     ##

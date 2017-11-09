@@ -12,7 +12,7 @@
 # Module Import #
 import unittest
 from BiddingProcessAPI import BiddingProcessAPI
-from ProjectAPI import ProjectAPI
+from ProjectDB import ProjectDB
 
 ##
 ## Class: BiddingProcessAPITest
@@ -132,7 +132,7 @@ class BiddingProcessAPITest(unittest.TestCase):
     ## Returns: None
     ##
     def testSetBuyerForProject(self):
-        Project = ProjectAPI()
+        Project = ProjectDB()
         project_id = 18
         buyer_id = 'nkingman7'
         result_1 = self.BidProcess.setBuyerForProject(project_id)

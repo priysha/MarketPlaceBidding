@@ -1,17 +1,17 @@
-from BidAPI import BidAPI
-from BuyerAPI import BuyerAPI
-from SellerAPI import SellerAPI
-from ProjectAPI import ProjectAPI
+from BidDB import BidDB
+from BuyerDB import BuyerDB
+from SellerDB import SellerDB
+from ProjectDB import ProjectDB
 from DataBaseDriver import DataBaseDriver
 from constants import *
 import pandas as pd
 
 #TODO Automate this script to run before all unittests
 
-Project = ProjectAPI()
-Buyer = BuyerAPI()
-Seller = SellerAPI()
-Bid = BidAPI()
+Project = ProjectDB()
+Buyer = BuyerDB()
+Seller = SellerDB()
+Bid = BidDB()
 db = DataBaseDriver()
 
 db.runTruncateTableQuery(PROJECT_TABLE)

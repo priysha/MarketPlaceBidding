@@ -12,7 +12,7 @@
 # Module Import #
 import unittest
 from SellerDashboardAPI import SellerDashboardAPI
-from ProjectAPI import ProjectAPI
+from ProjectDB import ProjectDB
 
 ##
 ## Class: SellerDashboardAPITest
@@ -81,7 +81,7 @@ class SellerDashboardAPITest(unittest.TestCase):
         description = 'abc'
         seller_id = 'priysha'
         SellerDashboard = SellerDashboardAPI(seller_id)
-        Project = ProjectAPI()
+        Project = ProjectDB()
         self.assertEquals(True, SellerDashboard.addANewProject(project_name,location,bid_end_time,description))
         result = Project.getAllProjectsForSellers(seller_id).project_name
         self.assertEquals(True, 'abc' in result.values)

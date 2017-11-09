@@ -1,6 +1,6 @@
 ##########################################################
 ##
-## File: BuyerAPI.py
+## File: BuyerDB.py
 ## Author: Priysha Pradhan
 ## Description: This is a database access class for buyer
 ## table. This class handles all the SQL queries executed
@@ -15,14 +15,14 @@ import logging.config
 logging.config.fileConfig(LOGGING_CONF)
 
 ##
-## Class: BuyerAPI
+## Class: BuyerDB
 ## Description: This class is the database driver for Buyer
 ##
-class BuyerAPI(DataBaseDriver.DataBaseDriver):
+class BuyerDB(DataBaseDriver.DataBaseDriver):
     buyerTablename = BUYER_TABLE
     def __init__(self):
         self.logger = logging.getLogger('Market_Place')
-        self.logger.info("IN - BuyerAPI constructor")
+        self.logger.info("IN - BuyerDB constructor")
         DataBaseDriver.DataBaseDriver.__init__(self)
 
     ##
@@ -34,11 +34,11 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: returns True if buyer is created
     ##
     def createBuyer(self, buyer):
-        self.logger.info("IN - BuyerAPI createBuyer method")
+        self.logger.info("IN - BuyerDB createBuyer method")
         if not self.getBuyerInfo(buyer['buyer_id']).empty:
             self.logger.info("Buyer already exists!")
             return False
-        query = "INSERT INTO " + BuyerAPI.buyerTablename + " (buyer_id, first_name, last_name, location, skills) VALUES (%s, %s, %s, %s, %s) "
+        query = "INSERT INTO " + BuyerDB.buyerTablename + " (buyer_id, first_name, last_name, location, skills) VALUES (%s, %s, %s, %s, %s) "
         params = (buyer['buyer_id'], buyer['first_name'],buyer['last_name'] , buyer['location'], buyer['skills'])
         self.logger.debug("Query: " + query)
         self.logger.debug("Params: %s, %s, %s, %s, %s",
@@ -55,9 +55,9 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: Dataframe containing buyer's info
     ##
     def getBuyerInfo(self, buyer_id):
-        self.logger.info("IN - BuyerAPI getBuyerInfo method")
+        self.logger.info("IN - BuyerDB getBuyerInfo method")
         query = "SELECT buyer_id, first_name, last_name, location, skills, creation_time FROM "\
-                + BuyerAPI.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
+                + BuyerDB.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query)
 
@@ -71,9 +71,9 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: dataframe with all the buyers' info
     ##
     def getAllBuyers(self):
-        self.logger.info("IN - BuyerAPI getAllBuyers method")
+        self.logger.info("IN - BuyerDB getAllBuyers method")
         query = "SELECT buyer_id, first_name, last_name, location, skills, creation_time FROM " \
-                + BuyerAPI.buyerTablename
+                + BuyerDB.buyerTablename
         self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query)
 
@@ -87,8 +87,8 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: returns buyer's first_name
     ##
     def getBuyerFirstName(self, buyer_id):
-        self.logger.info("IN - BuyerAPI getBuyerFirstName method")
-        query = "SELECT first_name FROM " + BuyerAPI.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
+        self.logger.info("IN - BuyerDB getBuyerFirstName method")
+        query = "SELECT first_name FROM " + BuyerDB.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query).first_name[0]
 
@@ -102,8 +102,8 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: True if updated else false
     ##
     def setBuyerFirstName(self, buyer_id, first_name):
-        self.logger.info("IN - BuyerAPI setBuyerFirstName method")
-        query = "UPDATE " + BuyerAPI.buyerTablename + " SET first_name = '" + first_name + "' WHERE buyer_id = '" + buyer_id + "'"
+        self.logger.info("IN - BuyerDB setBuyerFirstName method")
+        query = "UPDATE " + BuyerDB.buyerTablename + " SET first_name = '" + first_name + "' WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
 
@@ -117,8 +117,8 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: returns buyer's last_name
     ##
     def getBuyerLastName(self, buyer_id):
-        self.logger.info("IN - BuyerAPI getBuyerLastName method")
-        query = "SELECT last_name FROM " + BuyerAPI.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
+        self.logger.info("IN - BuyerDB getBuyerLastName method")
+        query = "SELECT last_name FROM " + BuyerDB.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query).last_name[0]
 
@@ -132,8 +132,8 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: True if updated else false
     ##
     def setBuyerLastName(self, buyer_id, last_name):
-        self.logger.info("IN - BuyerAPI setBuyerLastName method")
-        query = "UPDATE " + BuyerAPI.buyerTablename + " SET last_name = '" + last_name + "' WHERE buyer_id = '" + buyer_id + "'"
+        self.logger.info("IN - BuyerDB setBuyerLastName method")
+        query = "UPDATE " + BuyerDB.buyerTablename + " SET last_name = '" + last_name + "' WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
 
@@ -147,8 +147,8 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: returns buyer's location
     ##
     def getBuyerLocation(self, buyer_id):
-        self.logger.info("IN - BuyerAPI getBuyerLocation method")
-        query = "SELECT location FROM " + BuyerAPI.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
+        self.logger.info("IN - BuyerDB getBuyerLocation method")
+        query = "SELECT location FROM " + BuyerDB.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query).location[0]
 
@@ -162,8 +162,8 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: True if updated else false
     ##
     def setBuyerLocation(self, buyer_id, location):
-        self.logger.info("IN - BuyerAPI setBuyerLocation method")
-        query = "UPDATE " + BuyerAPI.buyerTablename + " SET location = '" + location + "' WHERE buyer_id = '" + buyer_id + "'"
+        self.logger.info("IN - BuyerDB setBuyerLocation method")
+        query = "UPDATE " + BuyerDB.buyerTablename + " SET location = '" + location + "' WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
 
@@ -177,8 +177,8 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: returns buyer's skills
     ##
     def getBuyerSkills(self, buyer_id):
-        self.logger.info("IN - BuyerAPI getBuyerSkills method")
-        query = "SELECT skills FROM " + BuyerAPI.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
+        self.logger.info("IN - BuyerDB getBuyerSkills method")
+        query = "SELECT skills FROM " + BuyerDB.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query).skills[0]
 
@@ -192,8 +192,8 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: True if updated else false
     ##
     def setBuyerSkills(self, buyer_id, skills):
-        self.logger.info("IN - BuyerAPI setBuyerSkills method")
-        query = "UPDATE " + BuyerAPI.buyerTablename + " SET skills = '" + skills + "' WHERE buyer_id = '" + buyer_id + "'"
+        self.logger.info("IN - BuyerDB setBuyerSkills method")
+        query = "UPDATE " + BuyerDB.buyerTablename + " SET skills = '" + skills + "' WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
 
@@ -207,7 +207,7 @@ class BuyerAPI(DataBaseDriver.DataBaseDriver):
     ## Returns: True if all rows inserted else false
     ##
     def load(self, df):
-        self.logger.info("IN - BuyerAPI load method")
+        self.logger.info("IN - BuyerDB load method")
         check = True
         for index, row in df.iterrows():
             buyer_dict = {'buyer_id': row['buyer_id'],'first_name' : row['first_name'], 'last_name' : row['last_name'],

@@ -9,8 +9,8 @@
 ##########################################################
 
 # Module Import #
-from ProjectAPI import ProjectAPI
-from SellerAPI import SellerAPI
+from ProjectDB import ProjectDB
+from SellerDB import SellerDB
 from constants import *
 import logging.config
 import pandas as pd
@@ -24,8 +24,8 @@ class SellerDashboardAPI:
     def __init__(self, sellerId):
         self.logger = logging.getLogger('Market_Place')
         self.logger.info("IN - SellerDashboardAPI constructor")
-        self.Project = ProjectAPI()
-        self.Seller = SellerAPI()
+        self.Project = ProjectDB()
+        self.Seller = SellerDB()
         self.sellerId = sellerId
 
     ##

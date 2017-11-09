@@ -1,22 +1,22 @@
 ##############################################################
 ##
-## File: BuyerAPITest.py
+## File: BuyerDBTest.py
 ## Author: Priysha Pradhan
-## Description: This file contains tests for BuyerAPI class
-## These test cases check if the BuyerAPI class is interacting
+## Description: This file contains tests for BuyerDB class
+## These test cases check if the BuyerDB class is interacting
 ## with the db correctly and returning data in correct format
 ##
 ###############################################################
 
 # Module Import #
 import unittest
-from BuyerAPI import BuyerAPI
+from BuyerDB import BuyerDB
 
 ##
-## Class: BuyerAPITest
-## Description: This class is the unittest driver for BuyerAPI class
+## Class: BuyerDBTest
+## Description: This class is the unittest driver for BuyerDB class
 ##
-class BuyerAPITest(unittest.TestCase):
+class BuyerDBTest(unittest.TestCase):
     ##
     ## Name: setUp
     ## Description: Fixture that runs prior to the execution of any test.
@@ -27,13 +27,13 @@ class BuyerAPITest(unittest.TestCase):
     ## Returns: None
     ##
     def setUp(self):
-        self.Buyer = BuyerAPI()
+        self.Buyer = BuyerDB()
 
 
     ##
     ## Name: testCreateBuyer
     ## Description: This method tests createBuyer()
-    ## method for BuyerAPI class
+    ## method for BuyerDB class
     ##
     ## Parameters: None
     ##
@@ -46,7 +46,7 @@ class BuyerAPITest(unittest.TestCase):
     ##
     ## Name: testCreateBuyer
     ## Description: This method tests createBuyer()
-    ## method for BuyerAPI class
+    ## method for BuyerDB class
     ##
     ## Parameters: None
     ##
@@ -66,7 +66,7 @@ class BuyerAPITest(unittest.TestCase):
     ##
     ## Name: testCreateExistingBuyer
     ## Description: This method tests createBuyer()
-    ## method for BuyerAPI class for existing buyer
+    ## method for BuyerDB class for existing buyer
     ##
     ## Parameters: None
     ##
@@ -82,7 +82,7 @@ class BuyerAPITest(unittest.TestCase):
     ##
     ## Name: testGetBuyerInfo
     ## Description: This method tests getBuyerInfo()
-    ## method for BuyerAPI class
+    ## method for BuyerDB class
     ##
     ## Parameters: None
     ##
@@ -96,7 +96,7 @@ class BuyerAPITest(unittest.TestCase):
     ##
     ## Name: testGetNonExistingBuyerInfo
     ## Description: This method tests getBuyerInfo()
-    ## method for BuyerAPI class for non-existing buyer
+    ## method for BuyerDB class for non-existing buyer
     ##
     ## Parameters: None
     ##
@@ -109,7 +109,7 @@ class BuyerAPITest(unittest.TestCase):
     ##
     ## Name: testGetBuyerFirstName
     ## Description: This method tests getBuyerFirstName()
-    ## method for BuyerAPI class for non-existing buyer
+    ## method for BuyerDB class for non-existing buyer
     ##
     ## Parameters: None
     ##
@@ -122,7 +122,7 @@ class BuyerAPITest(unittest.TestCase):
     ##
     ## Name: testGetBuyerFirstName
     ## Description: This method tests setBuyerFirstName()
-    ## method for BuyerAPI class for non-existing buyer
+    ## method for BuyerDB class for non-existing buyer
     ##
     ## Parameters: None
     ##
@@ -137,7 +137,7 @@ class BuyerAPITest(unittest.TestCase):
     ##
     ## Name: testGetBuyerLastName
     ## Description: This method tests getBuyerLastName()
-    ## method for BuyerAPI class for non-existing buyer
+    ## method for BuyerDB class for non-existing buyer
     ##
     ## Parameters: None
     ##
@@ -150,7 +150,7 @@ class BuyerAPITest(unittest.TestCase):
     ##
     ## Name: testSetBuyerLastName
     ## Description: This method tests setBuyerLastName()
-    ## method for BuyerAPI class for non-existing buyer
+    ## method for BuyerDB class for non-existing buyer
     ##
     ## Parameters: None
     ##

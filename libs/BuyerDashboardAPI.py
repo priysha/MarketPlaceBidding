@@ -9,9 +9,9 @@
 ##########################################################
 
 # Module Import #
-from ProjectAPI import ProjectAPI
-from BidAPI import BidAPI
-from BuyerAPI import BuyerAPI
+from ProjectDB import ProjectDB
+from BidDB import BidDB
+from BuyerDB import BuyerDB
 from datetime import datetime
 from constants import *
 import logging.config
@@ -27,9 +27,9 @@ class BuyerDashboardAPI:
     def __init__(self, buyerId):
         self.logger = logging.getLogger('Market_Place')
         self.logger.info("IN - BuyerDashboardAPI constructor")
-        self.Project = ProjectAPI()
-        self.Bid = BidAPI()
-        self.Buyer = BuyerAPI()
+        self.Project = ProjectDB()
+        self.Bid = BidDB()
+        self.Buyer = BuyerDB()
         self.buyerId = buyerId
 
     ##

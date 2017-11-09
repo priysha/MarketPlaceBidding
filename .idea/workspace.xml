@@ -5,15 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8e7bb73-54d1-4341-bb1b-4ad74ff7a6c2" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bin/__init__.py" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/libs/BidAPI.py" afterPath="$PROJECT_DIR$/libs/BidDB.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/libs/BuyerAPI.py" afterPath="$PROJECT_DIR$/libs/BuyerDB.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/libs/ProjectAPI.py" afterPath="$PROJECT_DIR$/libs/ProjectDB.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/libs/SellerAPI.py" afterPath="$PROJECT_DIR$/libs/SellerDB.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/test/BidsAPITest.py" afterPath="$PROJECT_DIR$/test/BidsDBTest.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/test/BuyerAPITest.py" afterPath="$PROJECT_DIR$/test/BuyerDBTest.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/test/ProjectAPITest.py" afterPath="$PROJECT_DIR$/test/ProjectDBTest.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/test/SellerAPITest.py" afterPath="$PROJECT_DIR$/test/SellerDBTest.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/BiddingProcessAPI.py" afterPath="$PROJECT_DIR$/libs/BiddingProcessAPI.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/BuyerDashboardAPI.py" afterPath="$PROJECT_DIR$/libs/BuyerDashboardAPI.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/SellerDashboardAPI.py" afterPath="$PROJECT_DIR$/libs/SellerDashboardAPI.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/BiddingProcessAPITest.py" afterPath="$PROJECT_DIR$/test/BiddingProcessAPITest.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/BidsAPITest.py" afterPath="$PROJECT_DIR$/test/BidsAPITest.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/BuyerDashboardAPITest.py" afterPath="$PROJECT_DIR$/test/BuyerDashboardAPITest.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/ProjectAPITest.py" afterPath="$PROJECT_DIR$/test/ProjectAPITest.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/SellerDashboardAPITest.py" afterPath="$PROJECT_DIR$/test/SellerDashboardAPITest.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/loadTestData.py" afterPath="$PROJECT_DIR$/test/loadTestData.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,13 +35,91 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Presentation.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/libs/Presentation.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="15" column="10" lean-forward="false" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+              <folding>
+                <element signature="e#19#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BiddingProcessAPITest.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/BiddingProcessAPITest.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="566">
+              <caret line="134" column="18" lean-forward="false" selection-start-line="134" selection-start-column="18" selection-end-line="134" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProjectDBTest.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/ProjectDBTest.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="169" column="27" lean-forward="false" selection-start-line="169" selection-start-column="18" selection-end-line="169" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="BuyerDashboardAPITest.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/BuyerDashboardAPITest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-934">
-              <caret line="66" column="23" lean-forward="false" selection-start-line="66" selection-start-column="23" selection-end-line="66" selection-end-column="23" />
+            <state relative-caret-position="198">
+              <caret line="81" column="18" lean-forward="false" selection-start-line="81" selection-start-column="18" selection-end-line="81" selection-end-column="18" />
               <folding>
                 <element signature="e#423#438#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SellerDashboardAPITest.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/SellerDashboardAPITest.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="83" column="18" lean-forward="false" selection-start-line="83" selection-start-column="18" selection-end-line="83" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SellerDashboardAPI.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/libs/SellerDashboardAPI.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="26" column="23" lean-forward="false" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+              <folding>
+                <element signature="e#333#364#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="loadTestData.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/loadTestData.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="25" column="14" lean-forward="true" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/libs/app.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="326">
+              <caret line="57" column="0" lean-forward="true" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#27#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -43,91 +128,23 @@
       <file leaf-file-name="BuyerDashboardAPI.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/libs/BuyerDashboardAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="63" column="33" lean-forward="false" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="33" />
+            <state relative-caret-position="105">
+              <caret line="8" column="39" lean-forward="false" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
               <folding>
-                <element signature="e#330#363#0" expanded="true" />
+                <element signature="e#330#361#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="projects.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/projects.csv">
+      <file leaf-file-name="BiddingProcessAPI.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/libs/BiddingProcessAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="68" lean-forward="false" selection-start-line="25" selection-start-column="68" selection-end-line="25" selection-end-column="68" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProjectAPITest.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/ProjectAPITest.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="100" column="76" lean-forward="false" selection-start-line="100" selection-start-column="76" selection-end-line="100" selection-end-column="76" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SellerDashboardAPITest.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/SellerDashboardAPITest.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="26">
-              <caret line="54" column="46" lean-forward="false" selection-start-line="54" selection-start-column="46" selection-end-line="54" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sellers.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/sellers.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="10" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bids.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/bids.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="8" lean-forward="false" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="buyers.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/buyers.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="9" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BidAPI.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/libs/BidAPI.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="806">
-              <caret line="132" column="20" lean-forward="false" selection-start-line="132" selection-start-column="8" selection-end-line="132" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BidsAPITest.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test/BidsAPITest.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1545">
-              <caret line="105" column="28" lean-forward="false" selection-start-line="105" selection-start-column="28" selection-end-line="105" selection-end-column="28" />
-              <folding />
+            <state relative-caret-position="393">
+              <caret line="40" column="26" lean-forward="false" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="26" />
+              <folding>
+                <element signature="e#276#307#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -139,15 +156,13 @@
       <list>
         <option value="HTML File" />
         <option value="SQL Script" />
-        <option value="Python Script" />
         <option value="Jupyter Notebook" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>user</find>
-      <find>SELLER</find>
       <find>Buyer.BUYER_TABLENAME</find>
       <find>Bid.BID_TABLENAME</find>
       <find>foo</find>
@@ -173,6 +188,11 @@
       <find>abc</find>
       <find>lautonp</find>
       <find>hwillfordi</find>
+      <find>&quot;SET</find>
+      <find>BidAPI</find>
+      <find>BuyerAPI</find>
+      <find>SellerAPI</find>
+      <find>ProjectAPI</find>
     </findStrings>
     <replaceStrings>
       <replace>Seller</replace>
@@ -190,6 +210,10 @@
       <replace>projectTablename</replace>
       <replace>sellerTablename</replace>
       <replace>setBidAmount</replace>
+      <replace>BidDB</replace>
+      <replace>BuyerDB</replace>
+      <replace>SellerDB</replace>
+      <replace>ProjectDB</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -198,13 +222,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/libs/ProjectDetail.py" />
-        <option value="$PROJECT_DIR$/libs/User.py" />
-        <option value="$PROJECT_DIR$/libs/Project.py" />
-        <option value="$PROJECT_DIR$/test/users.csv" />
-        <option value="$PROJECT_DIR$/test/BidTest.py" />
-        <option value="$PROJECT_DIR$/test/ProjectTest.py" />
-        <option value="$PROJECT_DIR$/test/BuyerDashboardTest.py" />
         <option value="$PROJECT_DIR$/libs/Seller.py" />
         <option value="$PROJECT_DIR$/libs/BuyerDashboard.py" />
         <option value="$PROJECT_DIR$/libs/SellerDashboard.py" />
@@ -212,23 +229,17 @@
         <option value="$PROJECT_DIR$/test/SellerTest.py" />
         <option value="$PROJECT_DIR$/libs/BiddingProcess.py" />
         <option value="$PROJECT_DIR$/libs/Bid.py" />
-        <option value="$PROJECT_DIR$/libs/Buyer.py" />
         <option value="$PROJECT_DIR$/test/sellers.csv" />
         <option value="$PROJECT_DIR$/test/buyers.csv" />
         <option value="$PROJECT_DIR$/libs/test.py" />
-        <option value="$PROJECT_DIR$/test/loadTestData.py" />
         <option value="$PROJECT_DIR$/log/log_config" />
         <option value="$PROJECT_DIR$/log/logging.conf" />
         <option value="$PROJECT_DIR$/libs/constants.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/libs/DataBaseDriver.py" />
         <option value="$PROJECT_DIR$/db/create_db.sql" />
-        <option value="$PROJECT_DIR$/libs/SellerAPI.py" />
         <option value="$PROJECT_DIR$/libs/BidAPI.py" />
-        <option value="$PROJECT_DIR$/libs/BuyerAPI.py" />
         <option value="$PROJECT_DIR$/libs/ProjectAPI.py" />
-        <option value="$PROJECT_DIR$/test/BuyerAPITest.py" />
-        <option value="$PROJECT_DIR$/test/SellerAPITest.py" />
         <option value="$PROJECT_DIR$/presentation.ipynb" />
         <option value="$PROJECT_DIR$/bin/testing.ipynb" />
         <option value="$PROJECT_DIR$/bin/presentation.py" />
@@ -236,19 +247,32 @@
         <option value="$PROJECT_DIR$/bin/ppt.ipynb" />
         <option value="$PROJECT_DIR$/bin/Test.ipynb" />
         <option value="$PROJECT_DIR$/test/bids.csv" />
-        <option value="$PROJECT_DIR$/libs/BiddingProcessAPI.py" />
         <option value="$PROJECT_DIR$/test/projects.csv" />
         <option value="$PROJECT_DIR$/bin/Presentation.py" />
         <option value="$PROJECT_DIR$/bin/test.py" />
         <option value="$PROJECT_DIR$/bin/test.ipynb" />
-        <option value="$PROJECT_DIR$/libs/Presentation.py" />
-        <option value="$PROJECT_DIR$/test/ProjectAPITest.py" />
-        <option value="$PROJECT_DIR$/test/BiddingProcessAPITest.py" />
-        <option value="$PROJECT_DIR$/libs/SellerDashboardAPI.py" />
-        <option value="$PROJECT_DIR$/test/BuyerDashboardAPITest.py" />
-        <option value="$PROJECT_DIR$/libs/BuyerDashboardAPI.py" />
-        <option value="$PROJECT_DIR$/test/SellerDashboardAPITest.py" />
+        <option value="$PROJECT_DIR$/libs/SellerAPI.py" />
+        <option value="$PROJECT_DIR$/libs/BuyerAPI.py" />
         <option value="$PROJECT_DIR$/test/BidsAPITest.py" />
+        <option value="$PROJECT_DIR$/test/ProjectAPITest.py" />
+        <option value="$PROJECT_DIR$/libs/Buyer.py" />
+        <option value="$PROJECT_DIR$/test/BuyerAPITest.py" />
+        <option value="$PROJECT_DIR$/libs/SellerDB.py" />
+        <option value="$PROJECT_DIR$/test/SellerAPITest.py" />
+        <option value="$PROJECT_DIR$/libs/BidDB.py" />
+        <option value="$PROJECT_DIR$/test/BidsDBTest.py" />
+        <option value="$PROJECT_DIR$/libs/ProjectDB.py" />
+        <option value="$PROJECT_DIR$/libs/BuyerDB.py" />
+        <option value="$PROJECT_DIR$/test/ProjectDBTest.py" />
+        <option value="$PROJECT_DIR$/libs/BiddingProcessAPI.py" />
+        <option value="$PROJECT_DIR$/libs/BuyerDashboardAPI.py" />
+        <option value="$PROJECT_DIR$/libs/Presentation.py" />
+        <option value="$PROJECT_DIR$/libs/SellerDashboardAPI.py" />
+        <option value="$PROJECT_DIR$/test/BiddingProcessAPITest.py" />
+        <option value="$PROJECT_DIR$/test/BuyerDashboardAPITest.py" />
+        <option value="$PROJECT_DIR$/test/SellerDashboardAPITest.py" />
+        <option value="$PROJECT_DIR$/test/loadTestData.py" />
+        <option value="$PROJECT_DIR$/libs/app.py" />
       </list>
     </option>
   </component>
@@ -272,6 +296,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -357,7 +382,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -376,13 +400,13 @@
       <recent name="$PROJECT_DIR$/test" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in BidsAPITest">
+  <component name="RunManager" selected="Python.loadTestData">
     <configuration default="false" name="loadTestData" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
-        <env name="PYTHONPATH" value="/Users/Priysha/Documents/personal_git/MarketPlaceBidding" />
         <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="PYTHONPATH" value="/Users/Priysha/Documents/personal_git/MarketPlaceBidding" />
       </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -393,50 +417,6 @@
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/loadTestData.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Unittests in BiddingProcessAPITest" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MarketPlaceBidding" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/BiddingProcessAPITest.py" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Unittests in ProjectAPITest" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="MarketPlaceBidding" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/ProjectAPITest.py" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
     <configuration default="false" name="Unittests in BuyerDashboardAPITest" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
@@ -461,7 +441,7 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="Unittests in BidsAPITest" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="Unittests in BidsDBTest" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -471,7 +451,51 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="MarketPlaceBidding" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/BidsAPITest.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/BidsDBTest.py" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in SellerDBTest" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MarketPlaceBidding" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/SellerDBTest.py" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in BuyerDBTest" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="MarketPlaceBidding" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/BuyerDBTest.py" />
       <option name="CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
       <option name="FOLDER_NAME" value="" />
@@ -642,18 +666,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.loadTestData" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in BiddingProcessAPITest" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in ProjectAPITest" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in BuyerDashboardAPITest" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in BidsAPITest" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in BuyerDashboardAPITest" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in BidsDBTest" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in SellerDBTest" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in BuyerDBTest" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in BidsAPITest" />
-        <item index="1" class="java.lang.String" itemvalue="Python.loadTestData" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in BuyerDashboardAPITest" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in BiddingProcessAPITest" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in ProjectAPITest" />
+        <item index="0" class="java.lang.String" itemvalue="Python.loadTestData" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in SellerDBTest" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in BuyerDBTest" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in BidsDBTest" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in BuyerDashboardAPITest" />
       </list>
     </recent_temporary>
   </component>
@@ -752,69 +776,83 @@
       <option name="project" value="LOCAL" />
       <updated>1509938498901</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="adding more test cases">
+      <created>1510002949798</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1510002949798</updated>
+    </task>
+    <task id="LOCAL-00014" summary="adding more test cases">
+      <created>1510004834973</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1510004834973</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_BidsAPITest - 2017.11.06 at 16h 13m 22s.xml">
-      <configuration name="Unittests in BidsAPITest" configurationId="tests" />
+    <history-entry file="Unittests_in_BuyerAPITest - 2017.11.06 at 16h 31m 54s.xml">
+      <configuration name="Unittests in BuyerAPITest" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_BidsAPITest - 2017.11.06 at 16h 13m 25s.xml">
-      <configuration name="Unittests in BidsAPITest" configurationId="tests" />
+    <history-entry file="Unittests_in_BuyerAPITest - 2017.11.06 at 16h 32m 44s.xml">
+      <configuration name="Unittests in BuyerAPITest" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_BidsAPITest - 2017.11.06 at 16h 13m 35s.xml">
-      <configuration name="Unittests in BidsAPITest" configurationId="tests" />
+    <history-entry file="Unittests_in_BuyerAPITest - 2017.11.06 at 16h 33m 03s.xml">
+      <configuration name="Unittests in BuyerAPITest" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_BidsAPITest - 2017.11.06 at 16h 13m 46s.xml">
-      <configuration name="Unittests in BidsAPITest" configurationId="tests" />
+    <history-entry file="Unittests_in_BuyerAPITest - 2017.11.06 at 16h 33m 13s.xml">
+      <configuration name="Unittests in BuyerAPITest" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_BidsAPITest - 2017.11.06 at 16h 13m 50s.xml">
-      <configuration name="Unittests in BidsAPITest" configurationId="tests" />
+    <history-entry file="Unittests_in_BuyerAPITest - 2017.11.06 at 16h 33m 57s.xml">
+      <configuration name="Unittests in BuyerAPITest" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_BidsAPITest - 2017.11.06 at 16h 14m 17s.xml">
-      <configuration name="Unittests in BidsAPITest" configurationId="tests" />
+    <history-entry file="Unittests_in_BuyerAPITest - 2017.11.06 at 16h 37m 10s.xml">
+      <configuration name="Unittests in BuyerAPITest" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_BidsAPITest - 2017.11.06 at 16h 14m 27s.xml">
-      <configuration name="Unittests in BidsAPITest" configurationId="tests" />
+    <history-entry file="Unittests_in_BuyerAPITest - 2017.11.06 at 16h 37m 22s.xml">
+      <configuration name="Unittests in BuyerAPITest" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_BidsAPITest - 2017.11.06 at 16h 14m 36s.xml">
-      <configuration name="Unittests in BidsAPITest" configurationId="tests" />
+    <history-entry file="Unittests_in_BuyerAPITest - 2017.11.06 at 16h 39m 22s.xml">
+      <configuration name="Unittests in BuyerAPITest" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_BidsAPITest - 2017.11.06 at 16h 14m 39s.xml">
-      <configuration name="Unittests in BidsAPITest" configurationId="tests" />
+    <history-entry file="Unittests_in_BuyerAPITest - 2017.11.06 at 16h 41m 27s.xml">
+      <configuration name="Unittests in BuyerAPITest" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_BidsAPITest - 2017.11.06 at 16h 15m 13s.xml">
-      <configuration name="Unittests in BidsAPITest" configurationId="tests" />
+    <history-entry file="Unittests_in_SellerAPITest - 2017.11.06 at 16h 46m 08s.xml">
+      <configuration name="Unittests in SellerAPITest" configurationId="tests" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="1023" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="DB Browser" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="FAQ Robot" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26739928" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2735043" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Project Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Job Explorer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="MaxCompute Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="MaxCompute Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24969475" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -831,18 +869,16 @@
     <MESSAGE value="market place app : adding TODOs" />
     <MESSAGE value="market place app : change in method name" />
     <MESSAGE value="market place app : changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="market place app : changes" />
+    <MESSAGE value="adding more test cases" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding more test cases" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="3" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/MarketPlaceBidding/wsgi.py" />
-    <entry file="file://$PROJECT_DIR$/MarketPlaceBidding/urls.py" />
-    <entry file="file://$PROJECT_DIR$/MarketPlaceBidding/settings.py" />
     <entry file="file://$PROJECT_DIR$/libs/ProjectPostsAPI.py" />
     <entry file="file://$PROJECT_DIR$/libs/ProjectDetail.py" />
     <entry file="file://$PROJECT_DIR$/libs/User.py" />
@@ -871,13 +907,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/libs/constants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="12" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/create_db.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="615">
@@ -885,56 +914,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/libs/SellerAPI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1575">
-          <caret line="107" column="0" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/BuyerAPI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="19" column="2" lean-forward="false" selection-start-line="19" selection-start-column="2" selection-end-line="19" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/BuyerAPITest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="18" column="27" lean-forward="false" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/SellerAPITest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="18" column="27" lean-forward="false" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/presentation.ipynb" />
-    <entry file="file://$PROJECT_DIR$/test/loadTestData.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bin/@test_72653_tmp" />
     <entry file="file://$PROJECT_DIR$/bin/testing.ipynb" />
     <entry file="file://$PROJECT_DIR$/bin/TestPresentation.py" />
     <entry file="file://$PROJECT_DIR$/bin/ppt.ipynb" />
-    <entry file="file://$PROJECT_DIR$/libs/BiddingProcessAPI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1725">
-          <caret line="115" column="35" lean-forward="false" selection-start-line="115" selection-start-column="35" selection-end-line="115" selection-end-column="35" />
-          <folding>
-            <element signature="e#276#309#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bin/test.py" />
     <entry file="file://$PROJECT_DIR$/bin/@test_87203_tmp" />
     <entry file="file://$PROJECT_DIR$/log/20171105.log" />
@@ -945,106 +929,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/libs/Presentation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="55" column="20" lean-forward="false" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="20" />
-          <folding>
-            <element signature="e#19#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/ProjectAPI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1099">
-          <caret line="202" column="26" lean-forward="false" selection-start-line="202" selection-start-column="8" selection-end-line="202" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/BiddingProcessAPITest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="107" column="0" lean-forward="false" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/DataBaseDriver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="240" column="31" lean-forward="true" selection-start-line="240" selection-start-column="17" selection-end-line="240" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/SellerDashboardAPI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="19" lean-forward="false" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
-          <folding>
-            <element signature="e#333#366#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/ProjectAPITest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="100" column="76" lean-forward="false" selection-start-line="100" selection-start-column="76" selection-end-line="100" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/buyers.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="9" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libs/BuyerDashboardAPI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="63" column="33" lean-forward="false" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="33" />
-          <folding>
-            <element signature="e#330#363#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/BuyerDashboardAPITest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-934">
-          <caret line="66" column="23" lean-forward="false" selection-start-line="66" selection-start-column="23" selection-end-line="66" selection-end-column="23" />
-          <folding>
-            <element signature="e#423#438#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/sellers.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="10" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/projects.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="25" column="68" lean-forward="false" selection-start-line="25" selection-start-column="68" selection-end-line="25" selection-end-column="68" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/SellerDashboardAPITest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="54" column="46" lean-forward="false" selection-start-line="54" selection-start-column="46" selection-end-line="54" selection-end-column="46" />
           <folding />
         </state>
       </provider>
@@ -1057,19 +945,200 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/libs/BidAPI.py">
+    <entry file="file://$PROJECT_DIR$/log/20171106.log">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="806">
-          <caret line="132" column="20" lean-forward="false" selection-start-line="132" selection-start-column="8" selection-end-line="132" selection-end-column="20" />
+        <state relative-caret-position="-35464">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/BidsAPITest.py">
+    <entry file="file://$PROJECT_DIR$/test/buyers.csv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1545">
-          <caret line="105" column="28" lean-forward="false" selection-start-line="105" selection-start-column="28" selection-end-line="105" selection-end-column="28" />
+        <state relative-caret-position="300">
+          <caret line="20" column="26" lean-forward="false" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="26" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/sellers.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="8" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" column="12" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/DataBaseDriver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="28" column="47" lean-forward="false" selection-start-line="25" selection-start-column="41" selection-end-line="28" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/Buyer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="33" column="20" lean-forward="false" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/BuyerDBTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="25" column="6" lean-forward="false" selection-start-line="25" selection-start-column="6" selection-end-line="25" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/SellerDB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="90" column="6" lean-forward="true" selection-start-line="90" selection-start-column="6" selection-end-line="90" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/SellerDBTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="16" column="62" lean-forward="false" selection-start-line="16" selection-start-column="62" selection-end-line="16" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/BidDB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="118" column="59" lean-forward="false" selection-start-line="118" selection-start-column="59" selection-end-line="118" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/BidsDBTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="257">
+          <caret line="125" column="23" lean-forward="false" selection-start-line="125" selection-start-column="23" selection-end-line="125" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/ProjectDB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="18" lean-forward="false" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/BuyerDB.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="9" lean-forward="false" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/ProjectDBTest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="169" column="27" lean-forward="false" selection-start-line="169" selection-start-column="18" selection-end-line="169" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/Presentation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="15" column="10" lean-forward="false" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+          <folding>
+            <element signature="e#19#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/SellerDashboardAPI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="26" column="23" lean-forward="false" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+          <folding>
+            <element signature="e#333#364#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/BiddingProcessAPITest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="566">
+          <caret line="134" column="18" lean-forward="false" selection-start-line="134" selection-start-column="18" selection-end-line="134" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/BuyerDashboardAPITest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="81" column="18" lean-forward="false" selection-start-line="81" selection-start-column="18" selection-end-line="81" selection-end-column="18" />
+          <folding>
+            <element signature="e#423#438#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/SellerDashboardAPITest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="83" column="18" lean-forward="false" selection-start-line="83" selection-start-column="18" selection-end-line="83" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/loadTestData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="14" lean-forward="true" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/BiddingProcessAPI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="40" column="26" lean-forward="false" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="26" />
+          <folding>
+            <element signature="e#276#307#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/BuyerDashboardAPI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="8" column="39" lean-forward="false" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+          <folding>
+            <element signature="e#330#361#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/libs/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="57" column="0" lean-forward="true" selection-start-line="57" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
