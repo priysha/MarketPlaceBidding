@@ -11,6 +11,7 @@
 # Module Import #
 import unittest
 from BidDB import BidDB
+import json
 import pandas as pd
 
 ##
@@ -119,6 +120,53 @@ class BidDBTest(unittest.TestCase):
         self.assertEquals(True, self.Bid.removeBid(bid_id))
         self.assertEquals(True, self.Bid.getBidInfo(bid_id).empty)
 
+    ##
+    ## Name: testjsonEncoderForOneBid
+    ## Description: This method tests jsonEncoder()
+    ## method for BidDB class to return correct json
+    ## for one bid in the data
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testjsonEncoderForOneBid(self):
+        bid_id = 12
+        bid_data = self.Bid.getBidInfo(bid_id)
+        output_json = bid_data.to_json(orient='records')
+        self.assertEquals(output_json, self.Bid.jsonEncoder(bid_data))
+
+    ##
+    ## Name: testjsonEncoderForAllBids
+    ## Description: This method tests jsonEncoder()
+    ## method for BidDB class to return correct json
+    ## for all bids in the data
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testjsonEncoderForAllBids(self):
+        bid_data = self.Bid.getAllBids()
+        output_json = bid_data.to_json(orient='records')
+        self.assertEquals(output_json, self.Bid.jsonEncoder(bid_data))
+
+
+    ##
+    ## Name: testjsonDecoder
+    ## Description: This method tests jsonDecoder()
+    ## method for BidDB class
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testjsonDecoder(self):
+        test_data = self.Bid.jsonEncoder(self.Bid.getBidInfo(10))
+
+        actual_result = self.Bid.jsonDecoder(test_data)
+        expected_result = json.loads(test_data)[0]
+        self.assertEquals(sorted(actual_result),sorted(expected_result))
 
 
 

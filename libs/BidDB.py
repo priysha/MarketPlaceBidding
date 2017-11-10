@@ -199,10 +199,10 @@ class BidDB(DataBaseDriver.DataBaseDriver):
     def jsonDecoder(self, input_json):
         try:
             output_dict = json.loads(input_json)[0]
-        # the dict should have bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours
-            if not output_dict['bid_id'] or not output_dict['project_id'] \
-                or not output_dict['buyer_id']or not output_dict['bid_amount'] \
-                    or not output_dict['bid_type'] or not output_dict['bid_hours'] :
+            # the dict should have bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours, creation_time
+            key = output_dict.keys()
+            if 'bid_id' not in key or 'project_id' not in key or 'buyer_id' not in key \
+                    or 'bid_amount' not in key or 'bid_type' not in key or 'bid_hours' not in key or 'creation_time' not in key:
                 return None
             else:
                 return output_dict

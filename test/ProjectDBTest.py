@@ -195,18 +195,53 @@ class ProjectDBTest(unittest.TestCase):
         self.assertEquals(True, self.Project.getProjectInfo(project_id).empty)
 
     ##
-    ## Name: testjsonEncoder
-    ## Description: This method tests removeProject()
+    ## Name: testjsonEncoderForOneProject
+    ## Description: This method tests jsonEncoder()
+    ## method for ProjectDB class to return correct json
+    ## for one project in the data
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testjsonEncoderForOneProject(self):
+        project_id = 22
+        project_data = self.Project.getProjectInfo(project_id)
+        output_json = project_data.to_json(orient='records')
+        self.assertEquals(output_json, self.Project.jsonEncoder(project_data))
+
+    ##
+    ## Name: testjsonEncoderForAllProjects
+    ## Description: This method tests jsonEncoder()
+    ## method for ProjectDB class to return correct json
+    ## for all projects in the data
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testjsonEncoderForAllProjects(self):
+        project_data = self.Project.getAllProjects()
+        output_json = project_data.to_json(orient='records')
+        self.assertEquals(output_json, self.Project.jsonEncoder(project_data))
+
+
+    ##
+    ## Name: testjsonDecoder
+    ## Description: This method tests jsonDecoder()
     ## method for ProjectDB class
     ##
     ## Parameters: None
     ##
     ## Returns: None
     ##
-    def testjsonEncoder(self):
-        project_id = 3
-        project_data = self.Project.getProjectInfo(project_id)
-        self.assertIsNotNone(self.Project.jsonEncoder(project_data))
+    def testjsonDecoder(self):
+        test_data = self.Project.jsonEncoder(self.Project.getProjectInfo(5))
+
+        actual_result = self.Project.jsonDecoder(test_data)
+        expected_result = json.loads(test_data)[0]
+        self.assertEquals(sorted(actual_result),sorted(expected_result))
+
 
 
 

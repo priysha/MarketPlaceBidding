@@ -161,10 +161,10 @@ class SellerDB(DataBaseDriver.DataBaseDriver):
     def jsonDecoder(self, input_json):
         try:
             output_dict = json.loads(input_json)[0]
-            # the dict should have seller_id, first_name, last_name, location, skills
-            if not output_dict['seller_id'] or not output_dict['first_name'] \
-                or not output_dict['last_name']or not output_dict['location'] \
-                    or not output_dict['job_title'] or not output_dict['company']:
+            # the dict should have seller_id, first_name, last_name, job_title, location, company, creation_time
+            key = output_dict.keys()
+            if 'seller_id' not in key or 'first_name' not in key or 'last_name' not in key \
+                    or 'job_title' not in key or 'location' not in key or 'creation_time' not in key or 'company' not in key:
                 return None
             else:
                 return output_dict

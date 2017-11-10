@@ -11,6 +11,7 @@
 # Module Import #
 import unittest
 from BuyerDB import BuyerDB
+import json
 
 ##
 ## Class: BuyerDBTest
@@ -119,4 +120,52 @@ class BuyerDBTest(unittest.TestCase):
         buyer_id = 'cshilstonek'
         self.assertEquals(True, self.Buyer.removeBuyer(buyer_id))
         self.assertEquals(True, self.Buyer.getBuyerInfo(buyer_id).empty)
+
+    ##
+    ## Name: testjsonEncoderForOneBuyer
+    ## Description: This method tests jsonEncoder()
+    ## method for ProjectDB class to return correct json
+    ## for one project in the data
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testjsonEncoderForOneBuyer(self):
+        buyer_data = self.Buyer.getBuyerInfo('cstiegarf')
+        output_json = buyer_data.to_json(orient='records')
+        self.assertEquals(output_json, self.Buyer.jsonEncoder(buyer_data))
+
+    ##
+    ## Name: testjsonEncoderForAllBuyers
+    ## Description: This method tests jsonEncoder()
+    ## method for BuyerDB class to return correct json
+    ## for all buyers in the data
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testjsonEncoderForAllBuyers(self):
+        buyer_data = self.Buyer.getAllBuyers()
+        output_json = buyer_data.to_json(orient='records')
+        self.assertEquals(output_json, self.Buyer.jsonEncoder(buyer_data))
+
+
+    ##
+    ## Name: testjsonDecoder
+    ## Description: This method tests jsonDecoder()
+    ## method for BuyerDB class
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testjsonDecoder(self):
+        test_data = self.Buyer.jsonEncoder(self.Buyer.getBuyerInfo('odargann'))
+
+        actual_result = self.Buyer.jsonDecoder(test_data)
+        expected_result = json.loads(test_data)[0]
+        self.assertEquals(sorted(actual_result),sorted(expected_result))
+
 

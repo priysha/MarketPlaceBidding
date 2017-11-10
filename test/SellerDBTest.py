@@ -11,6 +11,7 @@
 # Module Import #
 import unittest
 from SellerDB import SellerDB
+import json
 
 ##
 ## Class: SellerDBTest
@@ -40,7 +41,7 @@ class SellerDBTest(unittest.TestCase):
     ##
     def testCreateSeller(self):
 
-        seller_dict = {'seller_id': 'foo', 'first_name': 'foo', 'last_name': 'bar',
+        seller_dict = {'seller_id': 'foo1', 'first_name': 'foo', 'last_name': 'bar',
                        'location': '', 'job_title': '', 'company': ''}
 
         #should pass
@@ -121,3 +122,52 @@ class SellerDBTest(unittest.TestCase):
         seller_id = 'bwetherbyb'
         self.assertEquals(True, self.Seller.removeSeller(seller_id))
         self.assertEquals(True, self.Seller.getSellerInfo(seller_id).empty)
+
+    ##
+    ## Name: testjsonEncoderForOneSeller
+    ## Description: This method tests jsonEncoder()
+    ## method for SellerDB class to return correct json
+    ## for one seller in the data
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testjsonEncoderForOneSeller(self):
+        seller_data = self.Seller.getSellerInfo('dwiltonm')
+        output_json = seller_data.to_json(orient='records')
+        self.assertEquals(output_json, self.Seller.jsonEncoder(seller_data))
+
+    ##
+    ## Name: testjsonEncoderForAllSellers
+    ## Description: This method tests jsonEncoder()
+    ## method for SellerDB class to return correct json
+    ## for all sellers in the data
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testjsonEncoderForAllSellers(self):
+        seller_data = self.Seller.getAllSellers()
+        output_json = seller_data.to_json(orient='records')
+        self.assertEquals(output_json, self.Seller.jsonEncoder(seller_data))
+
+
+    ##
+    ## Name: testjsonDecoder
+    ## Description: This method tests jsonDecoder()
+    ## method for BuyerDB class
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testjsonDecoder(self):
+        test_data = self.Seller.jsonEncoder(self.Seller.getSellerInfo('slankester6'))
+
+        actual_result = self.Seller.jsonDecoder(test_data)
+        expected_result = json.loads(test_data)[0]
+        self.assertEquals(sorted(actual_result),sorted(expected_result))
+
+

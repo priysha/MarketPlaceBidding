@@ -237,21 +237,14 @@ class ProjectDB(DataBaseDriver.DataBaseDriver):
     ## Returns: returns json data
     ##
     def jsonEncoder(self,input_df):
-        column_list = input_df.columns.tolist()
-
         try:
             #project_id, project_name, location, bid_end_time, seller_id, buyer_id, description, creation_time
             column_list = input_df.columns.tolist()
-            print column_list
             if 'project_id' not in column_list or 'project_name' not in column_list \
             or 'location' not in column_list or 'bid_end_time' not in column_list \
-            or 'seller_id' not in column_list or 'buyer_id' not in column_list \
-            or 'description' not in column_list or 'creation_time' not in column_list:
-                print "here"
+            or 'seller_id' not in column_list or 'buyer_id' not in column_list or 'creation_time' not in column_list:
                 return None
-
             output_json = input_df.to_json(orient='records')
-            print output_json
             return output_json
         except TypeError, e:
             self.logger.error("Cannot convert input dataframe to json: " + str(e))
@@ -270,9 +263,11 @@ class ProjectDB(DataBaseDriver.DataBaseDriver):
     def jsonDecoder(self, input_json):
         try:
             output_dict = json.loads(input_json)[0]
-        # the dict should have project_id, project_name, bid_end_time, seller_id and description
-            if not output_dict['project_id'] or not output_dict['project_name'] or not output_dict['location']\
-                or not output_dict['bid_end_time']or not output_dict['seller_id'] or not output_dict['buyer_id'] or not output_dict['description']:
+            # the dict should have project_id, project_name, location, bid_end_time, seller_id, buyer_id, description, creation_time
+            key = output_dict.keys()
+            if 'project_id' not in key or 'project_name' not in key or 'location' not in key \
+                    or 'bid_end_time' not in key or 'seller_id' not in key or 'buyer_id' not in key or 'description' not in key \
+                    or 'creation_time' not in key:
                 return None
             else:
                 return output_dict
