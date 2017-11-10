@@ -37,19 +37,19 @@ class BuyerDB(DataBaseDriver.DataBaseDriver):
     ##
     def createBuyer(self, buyer):
         self.logger.info("IN - BuyerDB.createBuyer")
-        if not self.getBuyerInfo(buyer['buyer_id']).empty:
-            self.logger.info("Buyer already exists!")
-            return False
-        query = "INSERT INTO " + BuyerDB.buyerTablename + \
-                " (buyer_id, first_name, last_name, location, skills, creation_time) " \
-                "VALUES (%s, %s, %s, %s, %s, CURRENT_TIMESTAMP) ON DUPLICATE KEY " \
-                "UPDATE first_name = %s, last_name = %s, location = %s, skills = %s"
-        params = (buyer['buyer_id'], buyer['first_name'],buyer['last_name'] , buyer['location'], buyer['skills'],
-                  buyer['first_name'], buyer['last_name'], buyer['location'], buyer['skills'])
-        self.logger.debug("Query: " + query)
-        self.logger.debug("Params: %s, %s, %s, %s, %s",
-                          buyer['buyer_id'], buyer['first_name'], buyer['last_name'], buyer['location'], buyer['skills'])
-        return self.runInsertQuery(query, params)
+        try:
+            query = "INSERT INTO " + BuyerDB.buyerTablename + \
+                    " (buyer_id, first_name, last_name, location, skills, creation_time) " \
+                    "VALUES (%s, %s, %s, %s, %s, CURRENT_TIMESTAMP) ON DUPLICATE KEY " \
+                    "UPDATE first_name = %s, last_name = %s, location = %s, skills = %s"
+            params = (buyer['buyer_id'], buyer['first_name'],buyer['last_name'] , buyer['location'], buyer['skills'],
+                      buyer['first_name'], buyer['last_name'], buyer['location'], buyer['skills'])
+            self.logger.debug("Query: " + query)
+            self.logger.debug("Params: %s, %s, %s, %s, %s",
+                              buyer['buyer_id'], buyer['first_name'], buyer['last_name'], buyer['location'], buyer['skills'])
+            return self.runInsertQuery(query, params)
+        except TypeError, e:
+            self.logger.error("Buyer data is not correct: "+str(e))
 
     ##
     ## Name: getBuyerInfo
@@ -156,14 +156,13 @@ class BuyerDB(DataBaseDriver.DataBaseDriver):
     ##
     def jsonDecoder(self, input_json):
         try:
-            output_dict = json.loads(input_json)[0]
             # the dict should have buyer_id, first_name, last_name, location, skills, creation_time
-            key = output_dict.keys()
+            key = input_json.keys()
             if 'buyer_id' not in key or 'first_name' not in key or 'last_name' not in key \
                     or 'skills' not in key or 'location' not in key or 'creation_time' not in key:
                 return None
             else:
-                return output_dict
+                return input_json
 
         except IndexError, e:
             self.logger.error("Input data passed is not correct: " + str(e))

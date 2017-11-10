@@ -37,20 +37,20 @@ class SellerDB(DataBaseDriver.DataBaseDriver):
     ##
     def createSeller(self, seller):
         self.logger.info("IN - SellerDB.createSeller")
-        if not self.getSellerInfo(seller['seller_id']).empty:
-            self.logger.info("Seller already exists!")
-            return False
-        query = "INSERT INTO " + SellerDB.sellerTablename + \
-                " (seller_id, first_name, last_name, location, job_title, company, creation_time) " \
-                "VALUES (%s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP) ON DUPLICATE KEY " \
-                "UPDATE first_name = %s, last_name = %s, location = %s, job_title = %s, company = %s"
-        params = (seller['seller_id'], seller['first_name'],seller['last_name'] , seller['location'], seller['job_title'],seller['company'],
-                  seller['first_name'], seller['last_name'], seller['location'], seller['job_title'], seller['company'])
-        self.logger.debug("Query: " + query)
-        self.logger.debug("Params: %s, %s, %s, %s, %s, %s",
-                          seller['seller_id'], seller['first_name'], seller['last_name'], seller['location'],
-                          seller['job_title'], seller['company'])
-        return self.runInsertQuery(query, params)
+        try:
+            query = "INSERT INTO " + SellerDB.sellerTablename + \
+                    " (seller_id, first_name, last_name, location, job_title, company, creation_time) " \
+                    "VALUES (%s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP) ON DUPLICATE KEY " \
+                    "UPDATE first_name = %s, last_name = %s, location = %s, job_title = %s, company = %s"
+            params = (seller['seller_id'], seller['first_name'],seller['last_name'] , seller['location'], seller['job_title'],seller['company'],
+                      seller['first_name'], seller['last_name'], seller['location'], seller['job_title'], seller['company'])
+            self.logger.debug("Query: " + query)
+            self.logger.debug("Params: %s, %s, %s, %s, %s, %s",
+                              seller['seller_id'], seller['first_name'], seller['last_name'], seller['location'],
+                              seller['job_title'], seller['company'])
+            return self.runInsertQuery(query, params)
+        except TypeError, e:
+            self.logger.error("Seller data is not correct: "+str(e))
 
     ##
     ## Name: getSellerInfo
@@ -160,14 +160,13 @@ class SellerDB(DataBaseDriver.DataBaseDriver):
     ##
     def jsonDecoder(self, input_json):
         try:
-            output_dict = json.loads(input_json)[0]
             # the dict should have seller_id, first_name, last_name, job_title, location, company, creation_time
-            key = output_dict.keys()
+            key = input_json.keys()
             if 'seller_id' not in key or 'first_name' not in key or 'last_name' not in key \
                     or 'job_title' not in key or 'location' not in key or 'creation_time' not in key or 'company' not in key:
                 return None
             else:
-                return output_dict
+                return input_json
 
         except IndexError, e:
             self.logger.error("Input data passed is not correct: " + str(e))

@@ -38,21 +38,24 @@ class ProjectDB(DataBaseDriver.DataBaseDriver):
     ##
     def createProject(self, project):
         self.logger.info("IN - ProjectDB.createProject")
-        #project_id, project_name, location, bid_end_time, seller_id, buyer_id, description, creation_time
-        query = "INSERT INTO " + ProjectDB.projectTablename + \
-                " (project_id, project_name, location, bid_end_time, seller_id, buyer_id, description, creation_time) " \
-                "VALUES (%s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP) ON DUPLICATE KEY " \
-                "UPDATE project_name = %s, location = %s, bid_end_time = %s, " \
-                "seller_id = %s, buyer_id = %s, description = %s"
-        params = (project['project_id'], project['project_name'], project['location'], project['bid_end_time'],
-                  project['seller_id'], project['buyer_id'], project['description'],
-                  project['project_name'], project['location'], project['bid_end_time'],
-                  project['seller_id'], project['buyer_id'],project['description'])
-        self.logger.debug("Query: " + query)
-        self.logger.debug("Params: %s, %s, %s, %s, %s",
-                          project['project_name'], project['location'], project['bid_end_time'],
-                          project['seller_id'], project['description'])
-        return self.runInsertQuery(query, params)
+        try:
+            #project_id, project_name, location, bid_end_time, seller_id, buyer_id, description, creation_time
+            query = "INSERT INTO " + ProjectDB.projectTablename + \
+                    " (project_id, project_name, location, bid_end_time, seller_id, buyer_id, description, creation_time) " \
+                    "VALUES (%s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP) ON DUPLICATE KEY " \
+                    "UPDATE project_name = %s, location = %s, bid_end_time = %s, " \
+                    "seller_id = %s, buyer_id = %s, description = %s"
+            params = (project['project_id'], project['project_name'], project['location'], project['bid_end_time'],
+                      project['seller_id'], project['buyer_id'], project['description'],
+                      project['project_name'], project['location'], project['bid_end_time'],
+                      project['seller_id'], project['buyer_id'],project['description'])
+            self.logger.debug("Query: " + query)
+            self.logger.debug("Params: %s, %s, %s, %s, %s",
+                              project['project_name'], project['location'], project['bid_end_time'],
+                              project['seller_id'], project['description'])
+            return self.runInsertQuery(query, params)
+        except TypeError, e:
+            self.logger.error("Project data is not correct: "+str(e))
 
     ##
     ## Name: getProjectId
@@ -262,15 +265,14 @@ class ProjectDB(DataBaseDriver.DataBaseDriver):
     ##
     def jsonDecoder(self, input_json):
         try:
-            output_dict = json.loads(input_json)[0]
             # the dict should have project_id, project_name, location, bid_end_time, seller_id, buyer_id, description, creation_time
-            key = output_dict.keys()
+            key = input_json.keys()
             if 'project_id' not in key or 'project_name' not in key or 'location' not in key \
                     or 'bid_end_time' not in key or 'seller_id' not in key or 'buyer_id' not in key or 'description' not in key \
                     or 'creation_time' not in key:
                 return None
             else:
-                return output_dict
+                return input_json
 
         except IndexError, e:
             self.logger.error("Input data passed is not correct: " + str(e))

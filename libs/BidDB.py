@@ -38,16 +38,19 @@ class BidDB(DataBaseDriver.DataBaseDriver):
     def createBid(self, bid_info):
         self.logger.info("IN - BidDB.createBid")
         #bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours, creation_time
-        query = "INSERT INTO " + BidDB.bidTablename + \
-                " (bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours, creation_time) " \
-                "VALUES (%s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP) ON DUPLICATE KEY " \
-                "UPDATE bid_amount =%s, bid_type =%s, bid_hours =%s"
-        params = (bid_info['bid_id'], bid_info['project_id'], bid_info['buyer_id'], bid_info['bid_amount'], bid_info['bid_type'], bid_info['bid_hours'],
-                bid_info['bid_amount'], bid_info['bid_type'], bid_info['bid_hours'])
-        self.logger.debug("Query: " + query)
-        self.logger.debug("Params: %s, %s, %s, %s, %s",
-                          bid_info['project_id'], bid_info['buyer_id'], bid_info['bid_amount'], bid_info['bid_type'], bid_info['bid_hours'])
-        return self.runInsertQuery(query, params)
+        try:
+            query = "INSERT INTO " + BidDB.bidTablename + \
+                    " (bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours, creation_time) " \
+                    "VALUES (%s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP) ON DUPLICATE KEY " \
+                    "UPDATE bid_amount =%s, bid_type =%s, bid_hours =%s"
+            params = (bid_info['bid_id'], bid_info['project_id'], bid_info['buyer_id'], bid_info['bid_amount'], bid_info['bid_type'], bid_info['bid_hours'],
+                    bid_info['bid_amount'], bid_info['bid_type'], bid_info['bid_hours'])
+            self.logger.debug("Query: " + query)
+            self.logger.debug("Params: %s, %s, %s, %s, %s",
+                              bid_info['project_id'], bid_info['buyer_id'], bid_info['bid_amount'], bid_info['bid_type'], bid_info['bid_hours'])
+            return self.runInsertQuery(query, params)
+        except TypeError, e:
+            self.logger.error("Bid data is not correct: "+str(e))
 
     ##
     ## Name: getAllBids
@@ -198,14 +201,13 @@ class BidDB(DataBaseDriver.DataBaseDriver):
     ##
     def jsonDecoder(self, input_json):
         try:
-            output_dict = json.loads(input_json)[0]
             # the dict should have bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours, creation_time
-            key = output_dict.keys()
+            key = input_json.keys()
             if 'bid_id' not in key or 'project_id' not in key or 'buyer_id' not in key \
                     or 'bid_amount' not in key or 'bid_type' not in key or 'bid_hours' not in key or 'creation_time' not in key:
                 return None
             else:
-                return output_dict
+                return input_json
 
         except IndexError, e:
             self.logger.error("Input data passed is not correct: " + str(e))
