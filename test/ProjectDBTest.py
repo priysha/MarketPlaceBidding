@@ -11,6 +11,7 @@
 # Module Import #
 import unittest
 from ProjectDB import ProjectDB
+import json
 
 ##
 ## Class: ProjectDBTest
@@ -52,8 +53,8 @@ class ProjectDBTest(unittest.TestCase):
     ## Returns: None
     ##
     def testCreateProject(self):
-        project_dict = {'project_name' : 'abc' , 'location' : 'NC', 'bid_end_time' : '2017-11-05', 'seller_id' : 'priysha',
-                        'description': 'abc', 'skills':'abc'}
+        project_dict = {'project_id': '30','project_name' : 'abc' , 'location' : 'NC', 'bid_end_time' : '2017-11-05', 'seller_id' : 'priysha',
+                        'description': 'abc', 'buyer_id': None}
         #should pass
         self.assertEquals(True, self.Project.createProject(project_dict))
 
@@ -124,8 +125,8 @@ class ProjectDBTest(unittest.TestCase):
     ## Returns: None
     ##
     def testGetProjectId(self):
-        project_dict = {'project_name': 'foo', 'location': 'NC', 'bid_end_time': '2017-12-05', 'seller_id': 'priysha',
-                        'description': 'bar', 'skills': 'abc'}
+        project_dict = {'project_id':'32','project_name': 'foo', 'location': 'NC', 'bid_end_time': '2017-12-05', 'seller_id': 'priysha',
+                        'description': 'bar',  'buyer_id': None}
         # should pass
         self.assertEquals(True, self.Project.createProject(project_dict))
         self.assertIsNotNone(self.Project.getProjectId(project_dict['project_name'],project_dict['seller_id']))
@@ -178,3 +179,34 @@ class ProjectDBTest(unittest.TestCase):
 
         result_1 = self.Project.getProjectInfo(project_id)
         self.assertEquals(True, result_1.empty)
+
+    ##
+    ## Name: testRemoveProject
+    ## Description: This method tests removeProject()
+    ## method for ProjectDB class
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testRemoveProject(self):
+        project_id = 3
+        self.assertEquals(True, self.Project.removeProject(project_id))
+        self.assertEquals(True, self.Project.getProjectInfo(project_id).empty)
+
+    ##
+    ## Name: testjsonEncoder
+    ## Description: This method tests removeProject()
+    ## method for ProjectDB class
+    ##
+    ## Parameters: None
+    ##
+    ## Returns: None
+    ##
+    def testjsonEncoder(self):
+        project_id = 3
+        project_data = self.Project.getProjectInfo(project_id)
+        self.assertIsNotNone(self.Project.jsonEncoder(project_data))
+
+
+

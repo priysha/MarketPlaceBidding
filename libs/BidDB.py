@@ -10,8 +10,9 @@
 
 # Module Import #
 import DataBaseDriver
-from datetime import datetime
+import datetime
 from constants import *
+import json
 import logging.config
 logging.config.fileConfig(LOGGING_CONF)
 
@@ -35,9 +36,14 @@ class BidDB(DataBaseDriver.DataBaseDriver):
     ## Returns: returns True if buyer is created
     ##
     def createBid(self, bid_info):
-        self.logger.info("IN - BidDB createBid method")
-        query = "INSERT INTO " + BidDB.bidTablename + " (project_id, buyer_id, bid_amount, bid_type, bid_hours) VALUES (%s, %s, %s, %s, %s)"
-        params = (bid_info['project_id'], bid_info['buyer_id'], bid_info['bid_amount'], bid_info['bid_type'], bid_info['bid_hours'])
+        self.logger.info("IN - BidDB.createBid")
+        #bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours, creation_time
+        query = "INSERT INTO " + BidDB.bidTablename + \
+                " (bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours, creation_time) " \
+                "VALUES (%s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP) ON DUPLICATE KEY " \
+                "UPDATE bid_amount =%s, bid_type =%s, bid_hours =%s"
+        params = (bid_info['bid_id'], bid_info['project_id'], bid_info['buyer_id'], bid_info['bid_amount'], bid_info['bid_type'], bid_info['bid_hours'],
+                bid_info['bid_amount'], bid_info['bid_type'], bid_info['bid_hours'])
         self.logger.debug("Query: " + query)
         self.logger.debug("Params: %s, %s, %s, %s, %s",
                           bid_info['project_id'], bid_info['buyer_id'], bid_info['bid_amount'], bid_info['bid_type'], bid_info['bid_hours'])
@@ -53,7 +59,7 @@ class BidDB(DataBaseDriver.DataBaseDriver):
     ## Returns: Returns dataframe with all the bids
     ##
     def getAllBids(self):
-        self.logger.info("IN - BidDB getAllBids method")
+        self.logger.info("IN - BidDB.getAllBids")
         query = "SELECT bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours, creation_time FROM " + BidDB.bidTablename
         self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query)
@@ -68,39 +74,9 @@ class BidDB(DataBaseDriver.DataBaseDriver):
     ## Returns: Returns dataframe with bid's info
     ##
     def getBidInfo(self, bid_id):
-        self.logger.info("IN - BidDB getBidInfo method")
+        self.logger.info("IN - BidDB.getBidInfo")
         query = "SELECT bid_id, project_id, buyer_id, bid_amount, bid_type," \
                 " bid_hours, creation_time FROM " + BidDB.bidTablename + " WHERE bid_id = " + str(bid_id)
-        self.logger.debug("Query: " + query)
-        return self.runSelectDfQuery(query)
-
-    ##
-    ## Name: setBidAmount
-    ## Description: This function sets the bid amount
-    ## for a bid in db
-    ## Parameters: bid_amount, bid_id
-    ##
-    ## Returns: Returns True if updated successfully
-    ##
-    def setBidAmount(self, bid_amount, bid_id):
-        self.logger.info("IN - BidDB setBidAmount method")
-        query = "UPDATE " + BidDB.bidTablename + " SET bid_amount = " + str(bid_amount) + " WHERE bid_id = " + str(bid_id)
-        self.logger.debug("Query: " + query)
-        return self.runUpdateQuery(query)
-
-    ##
-    ## Name: getBidsForProject
-    ## Description: This function gets all the bids
-    ## for a project_id
-    ##
-    ## Parameters: project_id
-    ##
-    ## Returns: Returns dataframe with bids for a project_id
-    ##
-    def getBidsForProject(self, project_id):
-        self.logger.info("IN - BidDB getBidsForProject method")
-        query = "SELECT bid_id, project_id, buyer_id, bid_amount, bid_type, " \
-                "bid_hours, creation_time FROM " + BidDB.bidTablename + " WHERE project_id = " + str(project_id)
         self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query)
 
@@ -114,7 +90,7 @@ class BidDB(DataBaseDriver.DataBaseDriver):
     ## Returns: Returns dataframe with bids for a buyer_id
     ##
     def getBidsForBuyer(self, buyer_id):
-        self.logger.info("IN - BidDB getBidsForBuyer method")
+        self.logger.info("IN - BidDB.getBidsForBuyer")
         query = "SELECT bid_id, project_id, buyer_id, bid_amount, bid_type, " \
                 "bid_hours, creation_time FROM " + BidDB.bidTablename + " WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
@@ -131,7 +107,7 @@ class BidDB(DataBaseDriver.DataBaseDriver):
     ## Returns: Returns bid's amount (float) else False
     ##
     def getBidAmount(self, bid_id):
-        self.logger.info("IN - BidDB getBidAmount method")
+        self.logger.info("IN - BidDB.getBidAmount")
         bid_info = self.getBidInfo(bid_id)
         if bid_info.bid_type[0] == "hourly":
             self.logger.debug("Bid type of 'hourly'")
@@ -146,6 +122,20 @@ class BidDB(DataBaseDriver.DataBaseDriver):
             self.logger.error("Wrong bid_amount is asked, no bid_type")
         return bid_amount
 
+    ##
+    ## Name: removeBid
+    ## Description: This function removes bid
+    ## from the db
+    ##
+    ## Parameters: bid_id
+    ##
+    ## Returns: Returns True if deleted else False
+    ##
+    def removeBid(self,bid_id):
+        self.logger.info("IN - BidDB.removeBid")
+        query = "DELETE FROM " + BidDB.bidTablename + " WHERE bid_id=" + str(bid_id)
+        self.logger.debug("Query: " + query)
+        return self.runDeleteQuery(query)
 
     ##
     ## Name: load
@@ -157,11 +147,13 @@ class BidDB(DataBaseDriver.DataBaseDriver):
     ## Returns: True if all rows inserted else false
     ##
     def load(self, df):
-        self.logger.info("IN - BidDB load method")
+        self.logger.info("IN - BidDB.load")
         check = True
         for index, row in df.iterrows():
-            bid_dict = {'project_id' : row['project_id'], 'buyer_id' : row['buyer_id'],
-                    'bid_amount': row['bid_amount'], 'bid_type': row['bid_type'], 'bid_hours' : row['bid_hours']}
+
+            bid_dict = {'bid_id' : row['bid_id'], 'project_id' : row['project_id'], 'buyer_id' : row['buyer_id'],
+                    'bid_amount': row['bid_amount'], 'bid_type': row['bid_type'], 'bid_hours' : row['bid_hours'],
+                        'creation_time' :str(datetime.datetime.now())}
             if not self.createBid(bid_dict):
                 self.logger.error("Could not load data in Bid table: ")
                 self.logger.error(row)
@@ -169,3 +161,52 @@ class BidDB(DataBaseDriver.DataBaseDriver):
             self.logger.debug("Loaded data in Bid table: " )
             self.logger.debug(row)
         return check
+
+    ##
+    ## Name: jsonEncoder
+    ## Description: This function converts the passed
+    ## dataframe for BidDB Class into json and
+    ## checks the format of code sent
+    ##
+    ## Parameters: dataframe df
+    ##
+    ## Returns: returns json data
+    ##
+    def jsonEncoder(self,input_df):
+        try:
+            #bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours, creation_time
+            column_list = input_df.columns.tolist()
+            if 'bid_id' not in column_list or 'project_id' not in column_list \
+            or 'buyer_id' not in column_list or 'bid_amount' not in column_list \
+            or 'bid_type' not in column_list or 'bid_hours' not in column_list or 'creation_time' not in column_list:
+                return None
+            output_json = input_df.to_json(orient='records')
+            return output_json
+        except Exception, e:
+            self.logger.error("Cannot convert input dataframe to json: " + str(e))
+            return None
+
+    ##
+    ## Name: jsonDecoder
+    ## Description: This function converts passed json data
+    ## for BidDB Class into dict and checks if the
+    ## json has required fields
+    ##
+    ## Parameters: json
+    ##
+    ## Returns: Returns dict
+    ##
+    def jsonDecoder(self, input_json):
+        try:
+            output_dict = json.loads(input_json)[0]
+        # the dict should have bid_id, project_id, buyer_id, bid_amount, bid_type, bid_hours
+            if not output_dict['bid_id'] or not output_dict['project_id'] \
+                or not output_dict['buyer_id']or not output_dict['bid_amount'] \
+                    or not output_dict['bid_type'] or not output_dict['bid_hours'] :
+                return None
+            else:
+                return output_dict
+
+        except IndexError, e:
+            self.logger.error("Input data passed is not correct: " + str(e))
+            return None

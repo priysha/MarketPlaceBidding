@@ -11,6 +11,8 @@
 # Module Import #
 import DataBaseDriver
 from constants import *
+import datetime
+import json
 import logging.config
 logging.config.fileConfig(LOGGING_CONF)
 
@@ -34,13 +36,16 @@ class SellerDB(DataBaseDriver.DataBaseDriver):
     ## Returns: returns True if buyer is created
     ##
     def createSeller(self, seller):
-        self.logger.info("IN - SellerDB createSeller method")
+        self.logger.info("IN - SellerDB.createSeller")
         if not self.getSellerInfo(seller['seller_id']).empty:
             self.logger.info("Seller already exists!")
             return False
-        query = "INSERT INTO " + SellerDB.sellerTablename + " (seller_id, first_name, last_name, location, job_title, company) " \
-                                                              "VALUES (%s, %s, %s, %s, %s, %s) "
-        params = (seller['seller_id'], seller['first_name'],seller['last_name'] , seller['location'], seller['job_title'],seller['company'])
+        query = "INSERT INTO " + SellerDB.sellerTablename + \
+                " (seller_id, first_name, last_name, location, job_title, company, creation_time) " \
+                "VALUES (%s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP) ON DUPLICATE KEY " \
+                "UPDATE first_name = %s, last_name = %s, location = %s, job_title = %s, company = %s"
+        params = (seller['seller_id'], seller['first_name'],seller['last_name'] , seller['location'], seller['job_title'],seller['company'],
+                  seller['first_name'], seller['last_name'], seller['location'], seller['job_title'], seller['company'])
         self.logger.debug("Query: " + query)
         self.logger.debug("Params: %s, %s, %s, %s, %s, %s",
                           seller['seller_id'], seller['first_name'], seller['last_name'], seller['location'],
@@ -57,7 +62,7 @@ class SellerDB(DataBaseDriver.DataBaseDriver):
     ## Returns: Dataframe with seller info
     ##
     def getSellerInfo(self, seller_id):
-        self.logger.info("IN - SellerDB getSellerInfo method")
+        self.logger.info("IN - SellerDB.getSellerInfo")
 
         query = "SELECT seller_id, first_name, last_name, location,job_title, company, creation_time FROM "\
                 + SellerDB.sellerTablename + " WHERE seller_id = '" + seller_id + "'"
@@ -74,161 +79,27 @@ class SellerDB(DataBaseDriver.DataBaseDriver):
     ## Returns: Dataframe with info of all sellers
     ##
     def getAllSellers(self):
-        self.logger.info("IN - SellerDB getAllSellers method")
+        self.logger.info("IN - SellerDB.getAllSellers")
         query = "SELECT seller_id, first_name, last_name, location,job_title, company, creation_time FROM " \
                 + SellerDB.sellerTablename
         self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query)
 
     ##
-    ## Name: setSellerFirstName
-    ## Description: This function returns first_name
-    ## of the seller from the db
+    ## Name: removeSeller
+    ## Description: This function removes seller
+    ## from the db
     ##
     ## Parameters: seller_id
     ##
-    ## Returns: returns first_name of the seller
+    ## Returns: Returns True if deleted else False
     ##
-    def getSellerFirstName(self, seller_id):
-        self.logger.info("IN - SellerDB getSellerFirstName method")
-        query = "SELECT first_name FROM " + SellerDB.sellerTablename + " WHERE seller_id = '" + seller_id + "'"
+    def removeSeller(self,seller_id):
+        self.logger.info("IN - BuyerDB.removeBuyer")
+        query = "DELETE FROM " + SellerDB.sellerTablename + " WHERE seller_id='" + seller_id +"'"
         self.logger.debug("Query: " + query)
-        return self.runSelectDfQuery(query).first_name[0]
+        return self.runDeleteQuery(query)
 
-    ##
-    ## Name: setSellerFirstName
-    ## Description: This function updates first_name
-    ## of the seller in the db
-    ##
-    ## Parameters: seller_id, first_name
-    ##
-    ## Returns: True if updated else false
-    ##
-    def setSellerFirstName(self, seller_id, first_name):
-        self.logger.info("IN - SellerDB setSellerFirstName method")
-        query = "UPDATE " + SellerDB.sellerTablename + " SET first_name = '" + first_name + "' WHERE seller_id = '" + seller_id + "'"
-        self.logger.debug("Query: " + query)
-        return self.runUpdateQuery(query)
-
-    ##
-    ## Name: getSellerLastName
-    ## Description: This function returns last_name
-    ## of the seller from the db
-    ##
-    ## Parameters: seller_id
-    ##
-    ## Returns: returns last_name of the seller
-    ##
-    def getSellerLastName(self, seller_id):
-        self.logger.info("IN - SellerDB getSellerLastName method")
-        query = "SELECT last_name FROM " + SellerDB.sellerTablename + " WHERE seller_id = '" + seller_id + "'"
-        self.logger.debug("Query: " + query)
-        return self.runSelectDfQuery(query).last_name[0]
-
-    ##
-    ## Name: setSellerLastName
-    ## Description: This function updates last_name
-    ## of the seller in the db
-    ##
-    ## Parameters: seller_id, last_name
-    ##
-    ## Returns: True if updated else false
-    ##
-    def setSellerLastName(self, seller_id, last_name):
-        self.logger.info("IN - SellerDB setSellerLastName method")
-        query = "UPDATE " + SellerDB.sellerTablename + " SET last_name = '" + last_name + "' WHERE seller_id = '" + seller_id + "'"
-        self.logger.debug("Query: " + query)
-        return self.runUpdateQuery(query)
-
-    ##
-    ## Name: getSellerLocation
-    ## Description: This function returns location
-    ## of the seller from the db
-    ##
-    ## Parameters: seller_id
-    ##
-    ## Returns: returns location of the selle
-    ##
-    def getSellerLocation(self, seller_id):
-        self.logger.info("IN - SellerDB getSellerLocation method")
-        query = "SELECT location FROM " + SellerDB.sellerTablename + " WHERE seller_id = '" + seller_id + "'"
-        self.logger.debug("Query: " + query)
-        return self.runSelectDfQuery(query).location[0]
-
-    ##
-    ## Name: setBuyerSkills
-    ## Description: This function updates location
-    ## of the seller in the db
-    ##
-    ## Parameters: seller_id, location
-    ##
-    ## Returns: True if updated else false
-    ##
-    def setSellerLocation(self, seller_id, location):
-        self.logger.info("IN - SellerDB setSellerLocation method")
-        query = "UPDATE " + SellerDB.sellerTablename + " SET location = '" + location + "' WHERE seller_id = '" + seller_id + "'"
-        self.logger.debug("Query: " + query)
-        return self.runUpdateQuery(query)
-
-    ##
-    ## Name: getSellerJobTitle
-    ## Description: This function returns job_title
-    ## of the seller from the db
-    ##
-    ## Parameters: seller_id
-    ##
-    ## Returns: returns job_title of the selle
-    ##
-    def getSellerJobTitle(self, seller_id):
-        self.logger.info("IN - SellerDB getSellerJobTitle method")
-        query = "SELECT job_title FROM " + SellerDB.sellerTablename + " WHERE seller_id = '" + seller_id + "'"
-        self.logger.debug("Query: " + query)
-        return self.runSelectDfQuery(query).job_title[0]
-
-    ##
-    ## Name: setSellerJobTitle
-    ## Description: This function updates job_title
-    ## of the seller in the db
-    ##
-    ## Parameters: seller_id, job_title
-    ##
-    ## Returns: True if updated else false
-    ##
-    def setSellerJobTitle(self, seller_id, job_title):
-        self.logger.info("IN - SellerDB setSellerJobTitle method")
-        query = "UPDATE " + SellerDB.sellerTablename + " SET job_title = '" + job_title + "' WHERE seller_id = '" + seller_id + "'"
-        self.logger.debug("Query: " + query)
-        return self.runUpdateQuery(query)
-
-    ##
-    ## Name: getSellerCompany
-    ## Description: This function returns company
-    ## of the seller from the db
-    ##
-    ## Parameters: seller_id
-    ##
-    ## Returns: returns company of the selle
-    ##
-    def getSellerCompany(self, seller_id):
-        self.logger.info("IN - SellerDB getSellerCompany method")
-        query = "SELECT company FROM " + SellerDB.sellerTablename + " WHERE seller_id = '" + seller_id + "'"
-        self.logger.debug("Query: " + query)
-        return self.runSelectDfQuery(query).company[0]
-
-    ##
-    ## Name: setSellerCompany
-    ## Description: This function updates company
-    ## of the seller in the db
-    ##
-    ## Parameters: seller_id, company
-    ##
-    ## Returns: True if updated else false
-    ##
-    def setSellerCompany(self, seller_id, company):
-        self.logger.info("IN - SellerDB setSellerCompany method")
-        query = "UPDATE " + SellerDB.sellerTablename + " SET company = '" + company + "' WHERE seller_id = '" + seller_id + "'"
-        self.logger.debug("Query: " + query)
-        return self.runUpdateQuery(query)
 
     ##
     ## Name: load
@@ -244,9 +115,61 @@ class SellerDB(DataBaseDriver.DataBaseDriver):
         check = True
         for index, row in df.iterrows():
             seller_dict = {'seller_id' : row['seller_id'],'first_name' : row['first_name'], 'last_name' : row['last_name'],
-                    'location': row['location'], 'job_title' : row['job_title'], 'company' : row['company']}
+                    'location': row['location'], 'job_title' : row['job_title'], 'company' : row['company'],
+                           'creation_time' :str(datetime.datetime.now())}
             if not self.createSeller(seller_dict):
                 self.logger.error("Could not load data in Seller table: " + row)
                 check = False
             self.logger.debug("Loaded data in Seller table: " + row)
         return check
+
+    ##
+    ## Name: jsonEncoder
+    ## Description: This function converts the passed
+    ## dataframe for Sellerdb class into json and
+    ## checks the format of code sent
+    ##
+    ## Parameters: dataframe df
+    ##
+    ## Returns: returns json data
+    ##
+    def jsonEncoder(self,input_df):
+        try:
+            # seller_id, first_name, last_name, location, job_title,company creation_time
+            column_list = input_df.columns.tolist()
+            if 'seller_id' not in column_list or 'first_name' not in column_list \
+            or 'last_name' not in column_list or 'job_title' not in column_list \
+            or 'location' not in column_list or 'company' not in column_list or 'creation_time' not in column_list:
+                return None
+
+            output_json = input_df.to_json(orient='records')
+            return output_json
+        except Exception, e:
+            self.logger.error("Cannot convert input dataframe to json: " + str(e))
+            return None
+
+    ##
+    ## Name: jsonDecoder
+    ## Description: This function converts passed json data
+    ## for Sellerdb class into dict and checks if the
+    ## json has required fields
+    ##
+    ## Parameters: json
+    ##
+    ## Returns: Returns dict
+    ##
+    def jsonDecoder(self, input_json):
+        try:
+            output_dict = json.loads(input_json)[0]
+            # the dict should have seller_id, first_name, last_name, location, skills
+            if not output_dict['seller_id'] or not output_dict['first_name'] \
+                or not output_dict['last_name']or not output_dict['location'] \
+                    or not output_dict['job_title'] or not output_dict['company']:
+                return None
+            else:
+                return output_dict
+
+        except IndexError, e:
+            self.logger.error("Input data passed is not correct: " + str(e))
+            return None
+

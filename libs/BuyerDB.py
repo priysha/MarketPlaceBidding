@@ -11,6 +11,8 @@
 # Module Import #
 import DataBaseDriver
 from constants import *
+import datetime
+import json
 import logging.config
 logging.config.fileConfig(LOGGING_CONF)
 
@@ -34,12 +36,16 @@ class BuyerDB(DataBaseDriver.DataBaseDriver):
     ## Returns: returns True if buyer is created
     ##
     def createBuyer(self, buyer):
-        self.logger.info("IN - BuyerDB createBuyer method")
+        self.logger.info("IN - BuyerDB.createBuyer")
         if not self.getBuyerInfo(buyer['buyer_id']).empty:
             self.logger.info("Buyer already exists!")
             return False
-        query = "INSERT INTO " + BuyerDB.buyerTablename + " (buyer_id, first_name, last_name, location, skills) VALUES (%s, %s, %s, %s, %s) "
-        params = (buyer['buyer_id'], buyer['first_name'],buyer['last_name'] , buyer['location'], buyer['skills'])
+        query = "INSERT INTO " + BuyerDB.buyerTablename + \
+                " (buyer_id, first_name, last_name, location, skills, creation_time) " \
+                "VALUES (%s, %s, %s, %s, %s, CURRENT_TIMESTAMP) ON DUPLICATE KEY " \
+                "UPDATE first_name = %s, last_name = %s, location = %s, skills = %s"
+        params = (buyer['buyer_id'], buyer['first_name'],buyer['last_name'] , buyer['location'], buyer['skills'],
+                  buyer['first_name'], buyer['last_name'], buyer['location'], buyer['skills'])
         self.logger.debug("Query: " + query)
         self.logger.debug("Params: %s, %s, %s, %s, %s",
                           buyer['buyer_id'], buyer['first_name'], buyer['last_name'], buyer['location'], buyer['skills'])
@@ -55,7 +61,7 @@ class BuyerDB(DataBaseDriver.DataBaseDriver):
     ## Returns: Dataframe containing buyer's info
     ##
     def getBuyerInfo(self, buyer_id):
-        self.logger.info("IN - BuyerDB getBuyerInfo method")
+        self.logger.info("IN - BuyerDB.getBuyerInfo")
         query = "SELECT buyer_id, first_name, last_name, location, skills, creation_time FROM "\
                 + BuyerDB.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
@@ -71,131 +77,26 @@ class BuyerDB(DataBaseDriver.DataBaseDriver):
     ## Returns: dataframe with all the buyers' info
     ##
     def getAllBuyers(self):
-        self.logger.info("IN - BuyerDB getAllBuyers method")
+        self.logger.info("IN - BuyerDB.getAllBuyers")
         query = "SELECT buyer_id, first_name, last_name, location, skills, creation_time FROM " \
                 + BuyerDB.buyerTablename
         self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query)
 
     ##
-    ## Name: getBuyerFirstName
-    ## Description: This function returns first_name
-    ## of the buyer from the db
+    ## Name: removeBuyer
+    ## Description: This function removes buyer
+    ## from the db
     ##
     ## Parameters: buyer_id
     ##
-    ## Returns: returns buyer's first_name
+    ## Returns: Returns True if deleted else False
     ##
-    def getBuyerFirstName(self, buyer_id):
-        self.logger.info("IN - BuyerDB getBuyerFirstName method")
-        query = "SELECT first_name FROM " + BuyerDB.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
+    def removeBuyer(self,buyer_id):
+        self.logger.info("IN - BuyerDB.removeBuyer")
+        query = "DELETE FROM " + BuyerDB.buyerTablename + " WHERE buyer_id='" + buyer_id + "'"
         self.logger.debug("Query: " + query)
-        return self.runSelectDfQuery(query).first_name[0]
-
-    ##
-    ## Name: setBuyerFirstName
-    ## Description: This function updates first name
-    ## of the buyer in the db
-    ##
-    ## Parameters: buyer_id, first_name
-    ##
-    ## Returns: True if updated else false
-    ##
-    def setBuyerFirstName(self, buyer_id, first_name):
-        self.logger.info("IN - BuyerDB setBuyerFirstName method")
-        query = "UPDATE " + BuyerDB.buyerTablename + " SET first_name = '" + first_name + "' WHERE buyer_id = '" + buyer_id + "'"
-        self.logger.debug("Query: " + query)
-        return self.runUpdateQuery(query)
-
-    ##
-    ## Name: getBuyerLastName
-    ## Description: This function returns last_name
-    ## of the buyer from the db
-    ##
-    ## Parameters: buyer_id
-    ##
-    ## Returns: returns buyer's last_name
-    ##
-    def getBuyerLastName(self, buyer_id):
-        self.logger.info("IN - BuyerDB getBuyerLastName method")
-        query = "SELECT last_name FROM " + BuyerDB.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
-        self.logger.debug("Query: " + query)
-        return self.runSelectDfQuery(query).last_name[0]
-
-    ##
-    ## Name: setBuyerLastName
-    ## Description: This function updates last_name
-    ## of the buyer in the db
-    ##
-    ## Parameters: buyer_id, last_name
-    ##
-    ## Returns: True if updated else false
-    ##
-    def setBuyerLastName(self, buyer_id, last_name):
-        self.logger.info("IN - BuyerDB setBuyerLastName method")
-        query = "UPDATE " + BuyerDB.buyerTablename + " SET last_name = '" + last_name + "' WHERE buyer_id = '" + buyer_id + "'"
-        self.logger.debug("Query: " + query)
-        return self.runUpdateQuery(query)
-
-    ##
-    ## Name: getBuyerLocation
-    ## Description: This function returns location
-    ## of the buyer from the db
-    ##
-    ## Parameters: buyer_id
-    ##
-    ## Returns: returns buyer's location
-    ##
-    def getBuyerLocation(self, buyer_id):
-        self.logger.info("IN - BuyerDB getBuyerLocation method")
-        query = "SELECT location FROM " + BuyerDB.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
-        self.logger.debug("Query: " + query)
-        return self.runSelectDfQuery(query).location[0]
-
-    ##
-    ## Name: setBuyerLocation
-    ## Description: This function updates location
-    ## of the buyer in the db
-    ##
-    ## Parameters: buyer_id, location
-    ##
-    ## Returns: True if updated else false
-    ##
-    def setBuyerLocation(self, buyer_id, location):
-        self.logger.info("IN - BuyerDB setBuyerLocation method")
-        query = "UPDATE " + BuyerDB.buyerTablename + " SET location = '" + location + "' WHERE buyer_id = '" + buyer_id + "'"
-        self.logger.debug("Query: " + query)
-        return self.runUpdateQuery(query)
-
-    ##
-    ## Name: getBuyerSkills
-    ## Description: This function returns skills
-    ## of the buyer from the db
-    ##
-    ## Parameters: buyer_id
-    ##
-    ## Returns: returns buyer's skills
-    ##
-    def getBuyerSkills(self, buyer_id):
-        self.logger.info("IN - BuyerDB getBuyerSkills method")
-        query = "SELECT skills FROM " + BuyerDB.buyerTablename + " WHERE buyer_id = '" + buyer_id + "'"
-        self.logger.debug("Query: " + query)
-        return self.runSelectDfQuery(query).skills[0]
-
-    ##
-    ## Name: setBuyerSkills
-    ## Description: This function updates skills
-    ## of the buyer in the db
-    ##
-    ## Parameters: buyer_id, skills
-    ##
-    ## Returns: True if updated else false
-    ##
-    def setBuyerSkills(self, buyer_id, skills):
-        self.logger.info("IN - BuyerDB setBuyerSkills method")
-        query = "UPDATE " + BuyerDB.buyerTablename + " SET skills = '" + skills + "' WHERE buyer_id = '" + buyer_id + "'"
-        self.logger.debug("Query: " + query)
-        return self.runUpdateQuery(query)
+        return self.runDeleteQuery(query)
 
     ##
     ## Name: load
@@ -211,9 +112,60 @@ class BuyerDB(DataBaseDriver.DataBaseDriver):
         check = True
         for index, row in df.iterrows():
             buyer_dict = {'buyer_id': row['buyer_id'],'first_name' : row['first_name'], 'last_name' : row['last_name'],
-                    'location': row['location'], 'skills' : row['skills']}
+                    'location': row['location'], 'skills' : row['skills'],'creation_time' :str(datetime.datetime.now())}
             if not self.createBuyer(buyer_dict):
                 self.logger.error("Could not load data in Buyer table: " + row)
                 check = False
             self.logger.debug("Loaded data in Buyer table: " + row)
         return check
+
+    ##
+    ## Name: jsonEncoder
+    ## Description: This function converts the passed
+    ## dataframe for Buyerdb class into json and
+    ## checks the format of code sent
+    ##
+    ## Parameters: dataframe df
+    ##
+    ## Returns: returns json data
+    ##
+    def jsonEncoder(self,input_df):
+        try:
+            # buyer_id, first_name, last_name, location, skills, creation_time
+            column_list = input_df.columns.tolist()
+            if 'buyer_id' not in column_list or 'first_name' not in column_list \
+            or 'last_name' not in column_list or 'skills' not in column_list \
+            or 'location' not in column_list or 'creation_time' not in column_list:
+                return None
+
+            output_json = input_df.to_json(orient='records')
+            return output_json
+        except Exception, e:
+            self.logger.error("Cannot convert input dataframe to json: " + str(e))
+            return None
+
+    ##
+    ## Name: jsonDecoder
+    ## Description: This function converts passed json data
+    ## for Buyerdb class nto dict and checks if the json
+    ## has required fields
+    ##
+    ## Parameters: json
+    ##
+    ## Returns: Returns dict
+    ##
+    def jsonDecoder(self, input_json):
+        try:
+            output_dict = json.loads(input_json)[0]
+            # the dict should have buyer_id, first_name, last_name, location, skills
+            if not output_dict['buyer_id'] or not output_dict['first_name'] \
+                or not output_dict['last_name']or not output_dict['location'] \
+                    or not output_dict['skills']:
+                return None
+            else:
+                return output_dict
+
+        except IndexError, e:
+            self.logger.error("Input data passed is not correct: " + str(e))
+            return None
+

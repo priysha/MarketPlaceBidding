@@ -53,11 +53,11 @@ class BidDBTest(unittest.TestCase):
     ## Returns: None
     ##
     def testCreateBid(self):
-        bid_dict_hourly = {'project_id' : '3' , 'buyer_id' : 'smarr9', 'bid_amount' : '20', 'bid_type' : 'hourly', 'bid_hours' : 1000}
+        bid_dict_hourly = {'bid_id': '88','project_id' : '3' , 'buyer_id' : 'smarr9', 'bid_amount' : '20', 'bid_type' : 'hourly', 'bid_hours' : 1000}
         self.assertEquals(True, self.Bid.createBid(bid_dict_hourly))
         self.assertEquals(True, 'smarr9' in self.Bid.getAllBids().buyer_id.values)
 
-        bid_dict_fixed = {'project_id': '10', 'buyer_id': 'rstonehamj', 'bid_amount': '2000', 'bid_type': 'fixed',
+        bid_dict_fixed = {'bid_id': '89','project_id': '10', 'buyer_id': 'rstonehamj', 'bid_amount': '2000', 'bid_type': 'fixed',
                            'bid_hours': 0}
         self.assertEquals(True, self.Bid.createBid(bid_dict_fixed))
         self.assertEquals(True, 'rstonehamj' in self.Bid.getAllBids().buyer_id.values)
@@ -77,21 +77,6 @@ class BidDBTest(unittest.TestCase):
 
 
     ##
-    ## Name: testSetBidAmount
-    ## Description: This method tests setBidAmount()
-    ## method for BidDB class
-    ##
-    ## Parameters: None
-    ##
-    ## Returns: None
-    ##
-    def testSetBidAmount(self):
-        bid_id = int(self.Bid.getAllBids().bid_id[0])
-        bid_amount = 500
-        self.assertEquals(True, self.Bid.setBidAmount(bid_amount,bid_id))
-        self.assertEquals(bid_amount,self.Bid.getBidInfo(bid_id).bid_amount[0])
-
-    ##
     ## Name: testGetBidAmount
     ## Description: This method tests getBidAmount()
     ## method for BidDB class
@@ -101,9 +86,8 @@ class BidDBTest(unittest.TestCase):
     ## Returns: None
     ##
     def testGetBidAmount(self):
-        bid_id = int(self.Bid.getAllBids().bid_id[1])
-        #bid amount = 913.44
-        self.assertEquals(913.44, self.Bid.getBidAmount(bid_id))
+        bid_id = 10
+        self.assertEquals(33273.6, self.Bid.getBidAmount(bid_id))
 
 
     ##
@@ -117,21 +101,24 @@ class BidDBTest(unittest.TestCase):
     ##
     def testGetBidsForBuyer(self):
         buyer_id = 'priysha'
+
         self.assertEquals(False, self.Bid.getBidsForBuyer(buyer_id).empty)
-        self.assertEquals(True, 8 in self.Bid.getBidsForBuyer(buyer_id).project_id.values)
+        self.assertEquals(True, '8' in self.Bid.getBidsForBuyer(buyer_id).project_id.values)
 
     ##
-    ## Name: testGetBidsForProject
-    ## Description: This method tests getBidsForProject()
+    ## Name: testRemoveBid
+    ## Description: This method tests removeBid()
     ## method for BidDB class
     ##
     ## Parameters: None
     ##
     ## Returns: None
     ##
-    def testGetBidsForProject(self):
-        project_id = 2
-        self.assertEquals(False, self.Bid.getBidsForProject(project_id).empty)
+    def testRemoveBid(self):
+        bid_id = 3
+        self.assertEquals(True, self.Bid.removeBid(bid_id))
+        self.assertEquals(True, self.Bid.getBidInfo(bid_id).empty)
+
 
 
 

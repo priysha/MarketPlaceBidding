@@ -11,6 +11,7 @@
 import pymysql
 import pandas as pd
 from constants import *
+import json
 import logging
 import logging.config
 logging.config.fileConfig(LOGGING_CONF)
@@ -28,11 +29,13 @@ class DataBaseDriver(object):
                                     passwd=DB_PASSWORD,
                                     db=DB_NAME)
         self.cursor = self.conn.cursor()
+        self.cursorDict = self.conn.cursor(pymysql.cursors.DictCursor)
 
     def __del__(self):
         self.logger.info("IN - DataBaseDriver destructor")
         self.cursor.close()
         self.conn.close()
+        self.cursorDict.close()
 
     ##
     ## Name: getConn
@@ -44,7 +47,7 @@ class DataBaseDriver(object):
     ## Returns: Return the MySql connector
     ##
     def getConn(self):
-        self.logger.info("IN - DataBaseDriver getConn")
+        self.logger.info("IN - DataBaseDriver.getConn")
         return self.conn
 
     ##
@@ -56,7 +59,20 @@ class DataBaseDriver(object):
     ## Returns: Return the MySql cursor
     ##
     def getCursor(self):
-        self.logger.info("IN - DataBaseDriver getCursor")
+        self.logger.info("IN - DataBaseDriver.getCursor")
+        return self.cursor
+
+    ##
+    ## Name: getCursorDict
+    ## Description: Getter function that returns the MySql cursor
+    ## which returns data in dictionary format
+    ##
+    ## Parameters: conn
+    ##
+    ## Returns: Return the MySql cursor
+    ##
+    def getCursorDict(self):
+        self.logger.info("IN - DataBaseDriver.getCursorDict")
         return self.cursor
 
     ##
@@ -71,109 +87,6 @@ class DataBaseDriver(object):
         self.logger.info("IN - DataBaseDriver commitConn")
         self.conn.commit()
 
-    ##
-    ## Name: executeQuery
-    ## Description: This function runs given query
-    ## and returns value if SELECT query is run
-    ##
-    ## Parameters: query
-    ##
-    ## Returns: True if the query runs successfully
-    ## returns query result in list for select query
-    ##
-    def executeQuery(self, query):
-        self.logger.info("IN - DataBaseDriver executeQuery")
-        try:
-            self.cursor.execute(query)
-            self.commitConn()
-            self.logger.debug("Query executed and committed")
-
-            if "SELECT" in query or "SHOW" in query:
-                db_resp = self.cursor.fetchall()
-                self.logger.debug("Query data fetched")
-                return db_resp
-            else:
-                return True
-
-        except Exception as e:
-            self.logger.error("\nError in database query: " + query +
-                          "\nError Status:\n" + str(e))
-            return False
-
-    ##
-    ## Name: prepareSelectQuery
-    ## Description: This function prepares select query
-    ## using given params
-    ##
-    ## Parameters: table_name, fields, where_clause
-    ##
-    ## Returns: returns select query result if successful
-    ##
-    def prepareSelectQuery(self, table_name, fields, where_clause='1=1'):
-        self.logger.info("IN - DataBaseDriver prepareSelectQuery")
-        selectQuery = "SELECT " + fields + " FROM " + table_name + " WHERE " + where_clause
-        self.logger.debug("Query: " + selectQuery)
-        return self.executeQuery(selectQuery)
-
-    ##
-    ## Name: prepareInsertQuery
-    ## Description: This function prepares insert query
-    ## using given params
-    ##
-    ## Parameters: table_name, fields, values
-    ##
-    ## Returns: True if the query runs successfully
-    ##
-    def prepareInsertQuery(self, table_name, fields, values):
-        self.logger.info("IN - DataBaseDriver prepareSelectQuery")
-        insertQuery = " INSERT INTO " + table_name + fields + " VALUES " + values
-        self.logger.debug("Query: " + insertQuery)
-        return self.executeQuery(insertQuery)
-
-    ##
-    ## Name: prepareUpdateQuery
-    ## Description: This function prepares update query
-    ## using given params
-    ##
-    ## Parameters: table_name, setVal, where_clause
-    ##
-    ## Returns: True if the query runs successfully
-    ##
-    def prepareUpdateQuery(self, table_name, setVal, where_clause='1=1'):
-        self.logger.info("IN - DataBaseDriver prepareUpdateQuery")
-        updateQuery = "UPDATE " + table_name + " SET " + setVal + " WHERE " + where_clause
-        self.logger.debug("Query: " + updateQuery)
-        return self.executeQuery(updateQuery)
-
-    ##
-    ## Name: runUpdateQuery
-    ## Description: This function prepares delete query
-    ## using given params
-    ##
-    ## Parameters: table_name, where_clause
-    ##
-    ## Returns: True if the query runs successfully
-    ##
-    def prepareDeleteQuery(self, table_name, where_clause='1=1'):
-        self.logger.info("IN - DataBaseDriver prepareDeleteQuery")
-        deleteQuery = "DELETE FROM " + table_name + " WHERE " + where_clause
-        self.logger.debug("Query: " + deleteQuery)
-        return self.executeQuery(deleteQuery)
-
-    ##
-    ## Name: prepareReplaceQuery
-    ## Description: This function prepares replace query
-    ## using given params
-    ##
-    ## Parameters: table_name, fields, values
-    ##
-    ## Returns: True if the query runs successfully
-    ##
-    def prepareReplaceQuery(self, table_name, fields, values):
-        self.logger.info("IN - DataBaseDriver prepareReplaceQuery")
-        replaceQuery = " REPLACE INTO " + table_name + fields + " VALUES " + values
-        self.logger.debug("Query: " + replaceQuery)
-        return self.executeQuery(replaceQuery)
 
     ##
     ## Name: runUpdateQuery
@@ -275,8 +188,9 @@ class DataBaseDriver(object):
     ## Returns: returns True if successful
     ##
     def runInsertQuery(self,query, params):
-        self.logger.info("IN - DataBaseDriver prepareSelectQuery")
+        self.logger.info("IN - DataBaseDriver runInsertQuery")
         self.logger.debug("Query: " + query)
+        self.logger.debug(params)
         try:
             self.cursor.execute(query, params)
             self.commitConn()

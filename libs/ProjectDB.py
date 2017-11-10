@@ -12,7 +12,9 @@
 # Module Import #
 import DataBaseDriver
 from constants import *
+import datetime
 import logging.config
+import json
 logging.config.fileConfig(LOGGING_CONF)
 
 ##
@@ -35,12 +37,17 @@ class ProjectDB(DataBaseDriver.DataBaseDriver):
     ## Returns: returns True if project is created
     ##
     def createProject(self, project):
-        self.logger.info("IN - ProjectDB createProject method")
+        self.logger.info("IN - ProjectDB.createProject")
+        #project_id, project_name, location, bid_end_time, seller_id, buyer_id, description, creation_time
         query = "INSERT INTO " + ProjectDB.projectTablename + \
-                " (project_name, location, bid_end_time, seller_id, description) " \
-                "VALUES (%s, %s, %s, %s, %s) "
-        params = (project['project_name'], project['location'], project['bid_end_time'],
-                  project['seller_id'], project['description'])
+                " (project_id, project_name, location, bid_end_time, seller_id, buyer_id, description, creation_time) " \
+                "VALUES (%s, %s, %s, %s, %s, %s, %s, CURRENT_TIMESTAMP) ON DUPLICATE KEY " \
+                "UPDATE project_name = %s, location = %s, bid_end_time = %s, " \
+                "seller_id = %s, buyer_id = %s, description = %s"
+        params = (project['project_id'], project['project_name'], project['location'], project['bid_end_time'],
+                  project['seller_id'], project['buyer_id'], project['description'],
+                  project['project_name'], project['location'], project['bid_end_time'],
+                  project['seller_id'], project['buyer_id'],project['description'])
         self.logger.debug("Query: " + query)
         self.logger.debug("Params: %s, %s, %s, %s, %s",
                           project['project_name'], project['location'], project['bid_end_time'],
@@ -57,11 +64,11 @@ class ProjectDB(DataBaseDriver.DataBaseDriver):
     ## Returns: returns project id
     ##
     def getProjectId(self, project_name, seller_id):
-        self.logger.info("IN - ProjectDB getProjectId method")
+        self.logger.info("IN - ProjectDB.getProjectId")
         query = "SELECT project_id from " + ProjectDB.projectTablename + \
                 " WHERE project_name = '" + project_name + "' AND seller_id = '" + seller_id + "'"
         self.logger.debug("Query: " + query)
-        return int(self.runSelectDfQuery(query).project_id[0])
+        return self.runSelectDfQuery(query).project_id[0]
 
 
     ##
@@ -74,7 +81,7 @@ class ProjectDB(DataBaseDriver.DataBaseDriver):
     ## Returns: returns dataframe containing info for project
     ##
     def getProjectInfo(self, project_id):
-        self.logger.info("IN - ProjectDB getProjectInfo method")
+        self.logger.info("IN - ProjectDB.getProjectInfo")
         query = "SELECT project_id, project_name, location, bid_end_time, " \
                 "seller_id, buyer_id, description, creation_time FROM " + ProjectDB.projectTablename + " WHERE project_id = " + str(project_id)
         self.logger.debug("Query: " + query)
@@ -91,7 +98,7 @@ class ProjectDB(DataBaseDriver.DataBaseDriver):
     ## all the projects
     ##
     def getAllProjects(self):
-        self.logger.info("IN - ProjectDB getAllProjects method")
+        self.logger.info("IN - ProjectDB.getAllProjects")
         query = "SELECT project_id, project_name, location, bid_end_time, " \
                 "seller_id, buyer_id, description, creation_time FROM " + ProjectDB.projectTablename
         self.logger.debug("Query: " + query)
@@ -108,7 +115,7 @@ class ProjectDB(DataBaseDriver.DataBaseDriver):
     ## all the projects
     ##
     def getAllProjectsForBuyers(self,buyer_id):
-        self.logger.info("IN - ProjectDB getAllProjectsForBuyers method")
+        self.logger.info("IN - ProjectDB.getAllProjectsForBuyers")
         query = "SELECT project_id, project_name, location, bid_end_time, " \
                 "seller_id, buyer_id, description, creation_time FROM " + ProjectDB.projectTablename + " WHERE buyer_id = '" + buyer_id + "'"
         self.logger.debug("Query: " + query)
@@ -125,71 +132,29 @@ class ProjectDB(DataBaseDriver.DataBaseDriver):
     ## all the projects
     ##
     def getAllProjectsForSellers(self, seller_id):
-        self.logger.info("IN - ProjectDB getAllProjectsForSellers method")
+        self.logger.info("IN - ProjectDB.getAllProjectsForSellers")
         query = "SELECT project_id, project_name, location, bid_end_time, " \
                 "seller_id, buyer_id, description, creation_time FROM " + ProjectDB.projectTablename + " WHERE seller_id = '" + seller_id + "'"
         self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query)
 
     ##
-    ## Name: getProjectNameForProject
-    ## Description: This function returns name
-    ## for a given project
+    ## Name: getMostRecentNProjects
+    ## Description: This function is called to retrieve
+    ## top n most recent projects
     ##
-    ## Parameters: project_id
+    ## Parameters: n
     ##
-    ## Returns: returns project name
+    ## Returns: returns dataframe with top n most recent
+    ## projects' info if exists else returns empty dataframe
     ##
-    def getProjectNameForProject(self, project_id):
-        self.logger.info("IN - ProjectDB getProjectNameForProject method")
-        query = "SELECT project_name FROM " + ProjectDB.projectTablename + " WHERE project_id = " + str(project_id)
+    def getMostRecentNProjects(self, n):
+        self.logger.info("IN - ProjectDB.getMostRecentNProjects")
+        query = "SELECT project_id, project_name, location, bid_end_time, " \
+                "seller_id, buyer_id, description, creation_time FROM " \
+                + ProjectDB.projectTablename + " ORDER BY creation_time DESC LIMIT " + str(n)
         self.logger.debug("Query: " + query)
-        return self.runSelectDfQuery(query).project_name[0]
-
-    ##
-    ## Name: setProjectNameForProject
-    ## Description: This function updates the project
-    ## name in the database
-    ##
-    ## Parameters: project_id, project_name
-    ##
-    ## Returns: returns True if updated else False
-    ##
-    def setProjectNameForProject(self, project_id, project_name):
-        self.logger.info("IN - ProjectDB setProjectNameForProject method")
-        query = "UPDATE " + ProjectDB.projectTablename + " SET project_name = '" + project_name +  "' WHERE project_id = " + str(project_id)
-        self.logger.debug("Query: " + query)
-        return self.runUpdateQuery(query)
-
-    ##
-    ## Name: getLocationForProject
-    ## Description: This function returns project location
-    ## for a given project
-    ##
-    ## Parameters: project_id
-    ##
-    ## Returns: returns project location
-    ##
-    def getLocationForProject(self, project_id):
-        self.logger.info("IN - ProjectDB getLocationForProject method")
-        query = "SELECT location FROM " + ProjectDB.projectTablename + " WHERE project_id = " + str(project_id)
-        self.logger.debug("Query: " + query)
-        return self.runSelectDfQuery(query).location[0]
-
-    ##
-    ## Name: setLocationForProject
-    ## Description: This function updates project location
-    ## in the db
-    ##
-    ## Parameters: project_id, location
-    ##
-    ## Returns: returns True if updated else False
-    ##
-    def setLocationForProject(self, project_id, location):
-        self.logger.info("IN - ProjectDB setLocationForProject method")
-        query = "UPDATE " + ProjectDB.projectTablename + " SET location = '" + location +  "' WHERE project_id = " + str(project_id)
-        self.logger.debug("Query: " + query)
-        return self.runUpdateQuery(query)
+        return self.runSelectDfQuery(query)
 
     ##
     ## Name: setBuyerForProject
@@ -201,25 +166,10 @@ class ProjectDB(DataBaseDriver.DataBaseDriver):
     ## Returns: returns True if updated else False
     ##
     def setBuyerForProject(self, project_id, buyer_id):
-        self.logger.info("IN - ProjectDB setBuyerForProject method")
+        self.logger.info("IN - ProjectDB.setBuyerForProject")
         query = "UPDATE " + ProjectDB.projectTablename + " SET buyer_id = '" + buyer_id + "' WHERE project_id = " + str(project_id)
         self.logger.debug("Query: " + query)
         return self.runUpdateQuery(query)
-
-    ##
-    ## Name: getBuyerForProject
-    ## Description: This function returns the buyer_id
-    ## for a project in the db
-    ##
-    ## Parameters: project_id
-    ##
-    ## Returns: returns the buyer_id for the project
-    ##
-    def getBuyerForProject(self, project_id):
-        self.logger.info("IN - ProjectDB getBuyerForProject method")
-        query = "SELECT buyer_id FROM " + ProjectDB.projectTablename + " WHERE project_id = " + str(project_id)
-        self.logger.debug("Query: " + query)
-        return self.runSelectDfQuery(query).buyer_id[0]
 
     ##
     ## Name: getBidEndTimeForProject
@@ -231,59 +181,25 @@ class ProjectDB(DataBaseDriver.DataBaseDriver):
     ## Returns: returns bid_end_time
     ##
     def getBidEndTimeForProject(self, project_id):
-        self.logger.info("IN - ProjectDB getBidEndTimeForProject method")
+        self.logger.info("IN - ProjectDB.getBidEndTimeForProject")
         query = "SELECT bid_end_time FROM " + ProjectDB.projectTablename + " WHERE project_id = " + str(project_id)
         self.logger.debug("Query: " + query)
         return self.runSelectDfQuery(query).bid_end_time[0]
 
     ##
-    ## Name: setBidEndTimeForProject
-    ## Description: This function updates project's bid_end_time
-    ## in the db
+    ## Name: removeProject
+    ## Description: This function removes project
+    ## from the db
     ##
-    ## Parameters: project_id, bid_end_time
+    ## Parameters: project_id
     ##
-    ## Returns: returns True if updated else False
+    ## Returns: Returns True if deleted else False
     ##
-    def setBidEndTimeForProject(self, project_id, bid_end_time):
-        self.logger.info("IN - ProjectDB setBidEndTimeForProject method")
-        query = "UPDATE " + ProjectDB.projectTablename + " SET bid_end_time = '" + bid_end_time + "' WHERE project_id = " + str(
-            project_id)
+    def removeProject(self,project_id):
+        self.logger.info("IN - BidDB.removeBid")
+        query = "DELETE FROM " + ProjectDB.projectTablename + " WHERE project_id=" + str(project_id)
         self.logger.debug("Query: " + query)
-        return self.runUpdateQuery(query)
-
-        ##
-        ## Name: getDescriptionForProject
-        ## Description: This function returns project description
-        ## from the db
-        ##
-        ## Parameters: project_id
-        ##
-        ## Returns: returns project description
-        ##
-
-    def getDescriptionForProject(self, project_id):
-        self.logger.info("IN - ProjectDB getDescriptionForProject method")
-        query = "SELECT description FROM " + ProjectDB.projectTablename + " WHERE project_id = " + str(project_id)
-        self.logger.debug("Query: " + query)
-        return self.runSelectDfQuery(query).description[0]
-
-        ##
-        ## Name: setDescriptionForProject
-        ## Description: This function updates project's description
-        ## in the db
-        ##
-        ## Parameters: project_id, description
-        ##
-        ## Returns: returns True if updated else False
-        ##
-
-    def setDescriptionForProject(self, project_id, description):
-        self.logger.info("IN - ProjectDB setDescriptionForProject method")
-        query = "UPDATE " + ProjectDB.projectTablename + " SET description = '" + description + "' WHERE project_id = " + str(
-            project_id)
-        self.logger.debug("Query: " + query)
-        return self.runUpdateQuery(query)
+        return self.runDeleteQuery(query)
 
     ##
     ## Name: load
@@ -295,15 +211,79 @@ class ProjectDB(DataBaseDriver.DataBaseDriver):
     ## Returns: True if all rows inserted else false
     ##
     def load(self, df):
-        self.logger.info("IN - ProjectDB load method")
+        self.logger.info("IN - ProjectDB.load")
         check = False
         for index, row in df.iterrows():
-            project_dict = {'project_name' : row['project_name'], 'bid_end_time' : row['bid_end_time'], 'location': row['location'],
-                         'seller_id' : row['seller_id'], 'description': row['description']}
+
+            project_dict = {'project_id': row['project_id'], 'project_name' : row['project_name'], 'bid_end_time' : row['bid_end_time'],
+                            'location': row['location'], 'seller_id' : row['seller_id'], 'buyer_id': None, 'description': row['description'],
+                            'creation_time' :str(datetime.datetime.now())}
             if not self.createProject(project_dict):
-                self.logger.error("Could not load data in Project table: " + row)
+                self.logger.error("Could not load data in Project table: ")
+                self.logger.error(row)
                 check = False
-            self.logger.debug("Loaded data in Buyer table: " + row)
+            self.logger.debug("Loaded data in Project table: ")
+            self.logger.debug(row)
         return check
+
+    ##
+    ## Name: jsonEncoder
+    ## Description: This function converts the passed
+    ## dataframe for ProjectDB class into json and
+    ## checks the format of code sent
+    ##
+    ## Parameters: dataframe df
+    ##
+    ## Returns: returns json data
+    ##
+    def jsonEncoder(self,input_df):
+        column_list = input_df.columns.tolist()
+
+        try:
+            #project_id, project_name, location, bid_end_time, seller_id, buyer_id, description, creation_time
+            column_list = input_df.columns.tolist()
+            print column_list
+            if 'project_id' not in column_list or 'project_name' not in column_list \
+            or 'location' not in column_list or 'bid_end_time' not in column_list \
+            or 'seller_id' not in column_list or 'buyer_id' not in column_list \
+            or 'description' not in column_list or 'creation_time' not in column_list:
+                print "here"
+                return None
+
+            output_json = input_df.to_json(orient='records')
+            print output_json
+            return output_json
+        except TypeError, e:
+            self.logger.error("Cannot convert input dataframe to json: " + str(e))
+            return None
+
+    ##
+    ## Name: jsonDecoder
+    ## Description: This function converts passed json data
+    ## for ProjectDB class into dict and checks
+    ## if the json has required fields
+    ##
+    ## Parameters: json
+    ##
+    ## Returns: Returns dict
+    ##
+    def jsonDecoder(self, input_json):
+        try:
+            output_dict = json.loads(input_json)[0]
+        # the dict should have project_id, project_name, bid_end_time, seller_id and description
+            if not output_dict['project_id'] or not output_dict['project_name'] or not output_dict['location']\
+                or not output_dict['bid_end_time']or not output_dict['seller_id'] or not output_dict['buyer_id'] or not output_dict['description']:
+                return None
+            else:
+                return output_dict
+
+        except IndexError, e:
+            self.logger.error("Input data passed is not correct: " + str(e))
+            return None
+
+
+
+
+
 
 

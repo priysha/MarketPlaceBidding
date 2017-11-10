@@ -108,59 +108,16 @@ class SellerDBTest(unittest.TestCase):
         self.assertEquals(False, result.empty)
         self.assertEquals(True, seller_id in result.seller_id.values)
 
-
     ##
-    ## Name: testGetSellerFirstName
-    ## Description: This method tests getSellerFirstName()
-    ## method for SellerDB class for non-existing buyer
-    ##
-    ## Parameters: None
-    ##
-    ## Returns: None
-    ##
-    def testGetSellerFirstName(self):
-        seller_id = 'priysha'
-        self.assertEquals('Priysha', self.Seller.getSellerFirstName(seller_id))
-
-    ##
-    ## Name: testSetSellerFirstName
-    ## Description: This method tests setSellerFirstName()
-    ## method for SellerDB class for non-existing buyer
+    ## Name: testRemoveSeller
+    ## Description: This method tests removeSeller()
+    ## method for SellerDB class
     ##
     ## Parameters: None
     ##
     ## Returns: None
     ##
-    def testSetSellerFirstName(self):
-        seller_id = 'sjacsonr'
-        new_first_name = 'Foo'
-        self.assertEquals(True, self.Seller.setSellerFirstName(seller_id,new_first_name))
-        self.assertEquals(new_first_name, self.Seller.getSellerFirstName(seller_id))
-
-    ##
-    ## Name: testGetSellerLastName
-    ## Description: This method tests getSellerLastName()
-    ## method for SellerDB class for non-existing buyer
-    ##
-    ## Parameters: None
-    ##
-    ## Returns: None
-    ##
-    def testGetSellerLastName(self):
-        seller_id = 'priysha'
-        self.assertEquals('Pradhan', self.Seller.getSellerLastName(seller_id))
-
-    ##
-    ## Name: testSetSellerLastName
-    ## Description: This method tests setSellerLastName()
-    ## method for SellerDB class for non-existing buyer
-    ##
-    ## Parameters: None
-    ##
-    ## Returns: None
-    ##
-    def testSetSellerLastName(self):
-        seller_id = 'sjacsonr'
-        new_last_name = 'Bar'
-        self.assertEquals(True, self.Seller.setSellerLastName(seller_id,new_last_name))
-        self.assertEquals(new_last_name, self.Seller.getSellerLastName(seller_id))
+    def testRemoveSeller(self):
+        seller_id = 'bwetherbyb'
+        self.assertEquals(True, self.Seller.removeSeller(seller_id))
+        self.assertEquals(True, self.Seller.getSellerInfo(seller_id).empty)

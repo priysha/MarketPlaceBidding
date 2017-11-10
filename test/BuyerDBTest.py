@@ -107,57 +107,16 @@ class BuyerDBTest(unittest.TestCase):
         self.assertEquals(True, self.Buyer.getBuyerInfo(buyer_id).empty)
 
     ##
-    ## Name: testGetBuyerFirstName
-    ## Description: This method tests getBuyerFirstName()
-    ## method for BuyerDB class for non-existing buyer
+    ## Name: testRemoveBuyer
+    ## Description: This method tests removeBuyer()
+    ## method for BuyerDB class
     ##
     ## Parameters: None
     ##
     ## Returns: None
     ##
-    def testGetBuyerFirstName(self):
-        buyer_id = 'priysha'
-        self.assertEquals('Priysha', self.Buyer.getBuyerFirstName(buyer_id))
+    def testRemoveBuyer(self):
+        buyer_id = 'cshilstonek'
+        self.assertEquals(True, self.Buyer.removeBuyer(buyer_id))
+        self.assertEquals(True, self.Buyer.getBuyerInfo(buyer_id).empty)
 
-    ##
-    ## Name: testGetBuyerFirstName
-    ## Description: This method tests setBuyerFirstName()
-    ## method for BuyerDB class for non-existing buyer
-    ##
-    ## Parameters: None
-    ##
-    ## Returns: None
-    ##
-    def testSetBuyerFirstName(self):
-        buyer_id = 'emccooker'
-        new_first_name = 'Bar'
-        self.assertEquals(True, self.Buyer.setBuyerFirstName(buyer_id,new_first_name))
-        self.assertEquals(new_first_name, self.Buyer.getBuyerFirstName(buyer_id))
-
-    ##
-    ## Name: testGetBuyerLastName
-    ## Description: This method tests getBuyerLastName()
-    ## method for BuyerDB class for non-existing buyer
-    ##
-    ## Parameters: None
-    ##
-    ## Returns: None
-    ##
-    def testGetBuyerLastName(self):
-        buyer_id = 'gcaddiesi'
-        self.assertEquals('Caddies', self.Buyer.getBuyerLastName(buyer_id))
-
-    ##
-    ## Name: testSetBuyerLastName
-    ## Description: This method tests setBuyerLastName()
-    ## method for BuyerDB class for non-existing buyer
-    ##
-    ## Parameters: None
-    ##
-    ## Returns: None
-    ##
-    def testSetBuyerLastName(self):
-        buyer_id = 'odargann'
-        new_last_name = 'Bar'
-        self.assertEquals(True, self.Buyer.setBuyerLastName(buyer_id,new_last_name))
-        self.assertEquals(new_last_name, self.Buyer.getBuyerLastName(buyer_id))
