@@ -159,4 +159,4 @@ api.add_resource(ProjectMinBidAPI, '/projects/<id>/min_bid', endpoint="project_m
 api.add_resource(MostRecentNProjects, '/projects/most_recent/<n>', endpoint="project_most_recent")
 api.add_resource(MostRecentNProjects, '/projects/most_recent', endpoint="project_most_recent100")
 if __name__ == '__main__':
-     app.run()
+    market_place.run()
