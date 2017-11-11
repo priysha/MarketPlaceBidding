@@ -28,12 +28,12 @@ class BidDB(DataBaseDriver.DataBaseDriver):
         DataBaseDriver.DataBaseDriver.__init__(self)
 
     ##
-    ## Name: createBuyer
-    ## Description: This function creates a new buyer
+    ## Name: createBid
+    ## Description: This function creates a new bid
     ##
-    ## Parameters: buyer dict with required values
+    ## Parameters: bid dataframe with required values
     ##
-    ## Returns: returns True if buyer is created
+    ## Returns: returns True if bid is created
     ##
     def createBid(self, bid_info):
         self.logger.info("IN - BidDB.createBid")

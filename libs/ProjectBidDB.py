@@ -2,8 +2,9 @@
 ##
 ## File: ProjectBidDB.py
 ## Author: Priysha Pradhan
-## Description: This is the main class where Bidding process
-## is handled.
+## Description: This is the main class where eligible and
+## minimum bids for a project are retrieved, this class is
+## composed from BidDB and ProjectDB class
 ##
 ##########################################################
 

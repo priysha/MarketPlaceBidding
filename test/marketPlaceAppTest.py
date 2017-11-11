@@ -3,7 +3,7 @@
 ## File: marketPlaceAppTest.py
 ## Author: Priysha Pradhan
 ## Description: This file tests the put and delete for the
-## app
+## marketPlaceApp rest api
 ##
 ##########################################################
 
@@ -15,12 +15,15 @@ from BuyerDB import BuyerDB
 from SellerDB import SellerDB
 import json
 import requests
+from requests.auth import HTTPBasicAuth
+from constants import *
 
 BuyerDB = BuyerDB()
 SellerDB = SellerDB()
 BidDB = BidDB()
 ProjectDB = ProjectDB()
 api_headers = {'Content-Type': 'application/json'}
+auth = HTTPBasicAuth(USERNAME, PASSWORD)
 ##
 ## Class: marketPlaceAppTest
 ## Description: This class is the unittest driver for marketPlaceApp
@@ -41,7 +44,7 @@ class marketPlaceAppTest(unittest.TestCase):
         project_url = "http://localhost:5000/projects"
         project_data = {'data': {"project_id": "45", "project_name": "ABCD", "location": "New York",
                                  "bid_end_time":"2017-11-19","seller_id":"foo","buyer_id":None, "description":"ABC","creation_time":""}}
-        requests.put(project_url, headers=api_headers, data=json.dumps(project_data))
+        requests.put(project_url, headers=api_headers, data=json.dumps(project_data), auth=auth)
         self.assertEquals("ABCD",ProjectDB.getProjectInfo(45).project_name[0])
 
     ##
@@ -57,7 +60,7 @@ class marketPlaceAppTest(unittest.TestCase):
         delete_project_id = '35'
         project_url = "http://localhost:5000/projects/" + delete_project_id
 
-        requests.delete(project_url, headers=api_headers)
+        requests.delete(project_url, headers=api_headers, auth=auth)
         self.assertEquals(True,ProjectDB.getProjectInfo(delete_project_id).empty)
 
     ##
@@ -74,7 +77,7 @@ class marketPlaceAppTest(unittest.TestCase):
         seller_data = {'data': {"seller_id": "test_seller", "first_name": "Test", "last_name": "Seller",
                                 "location": "foo", "job_title": "", "company": "",
                                 "creation_time": ""}}
-        requests.put(seller_url, headers=api_headers, data=json.dumps(seller_data))
+        requests.put(seller_url, headers=api_headers, data=json.dumps(seller_data), auth=auth)
         self.assertEquals("Test", SellerDB.getSellerInfo('test_seller').first_name[0])
 
     ##
@@ -90,7 +93,7 @@ class marketPlaceAppTest(unittest.TestCase):
         delete_seller_id = 'foobar'
         seller_url = "http://localhost:5000/sellers/" + delete_seller_id
 
-        requests.delete(seller_url, headers=api_headers)
+        requests.delete(seller_url, headers=api_headers, auth=auth)
         self.assertEquals(True,SellerDB.getSellerInfo(delete_seller_id).empty)
 
     ##
@@ -107,7 +110,7 @@ class marketPlaceAppTest(unittest.TestCase):
         buyer_data = {'data':{"buyer_id":"test_buyer","first_name":"Test","last_name":"Buyer",
                       "location":"NC","skills":"","creation_time":""}}
 
-        requests.put(buyer_url, headers=api_headers, data=json.dumps(buyer_data))
+        requests.put(buyer_url, headers=api_headers, data=json.dumps(buyer_data), auth=auth)
         self.assertEquals("Test", BuyerDB.getBuyerInfo('test_buyer').first_name[0])
 
     ##
@@ -123,7 +126,7 @@ class marketPlaceAppTest(unittest.TestCase):
         delete_buyer_id = 'foobar'
         buyer_url = "http://localhost:5000/buyers/" + delete_buyer_id
 
-        requests.delete(buyer_url, headers=api_headers)
+        requests.delete(buyer_url, headers=api_headers, auth=auth)
         self.assertEquals(True,BuyerDB.getBuyerInfo(delete_buyer_id).empty)
 
     ##
@@ -141,7 +144,7 @@ class marketPlaceAppTest(unittest.TestCase):
                              "bid_type": "hourly", "bid_hours": 80, "creation_time": ""
                              }}
 
-        requests.put(bid_url, headers=api_headers, data=json.dumps(bid_data))
+        requests.put(bid_url, headers=api_headers, data=json.dumps(bid_data), auth=auth)
         self.assertEquals("foo", BidDB.getBidInfo(100).buyer_id[0])
 
     ##
@@ -157,7 +160,7 @@ class marketPlaceAppTest(unittest.TestCase):
         delete_bid_id = '88'
         bid_url = "http://localhost:5000/bids/" + delete_bid_id
 
-        requests.delete(bid_url, headers=api_headers)
+        requests.delete(bid_url, headers=api_headers, auth=auth)
         self.assertEquals(True,BidDB.getBidInfo(delete_bid_id).empty)
 
 
