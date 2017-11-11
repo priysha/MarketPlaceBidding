@@ -162,11 +162,9 @@ class BidDBTest(unittest.TestCase):
     ## Returns: None
     ##
     def testjsonDecoder(self):
-        test_data = self.Bid.jsonEncoder(self.Bid.getBidInfo(10))
+        test_data = self.Bid.getBidInfo(10).to_dict(orient='records')
 
-        actual_result = self.Bid.jsonDecoder(test_data)
-        expected_result = json.loads(test_data)[0]
-        self.assertEquals(sorted(actual_result),sorted(expected_result))
+        self.assertEquals(sorted(test_data[0]),sorted(self.Bid.jsonDecoder(test_data[0])))
 
 
 

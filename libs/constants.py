@@ -34,3 +34,10 @@ PROJECT_DATA = '/Users/Priysha/Documents/personal_git/MarketPlaceBidding/test/pr
 BUYER_DATA = '/Users/Priysha/Documents/personal_git/MarketPlaceBidding/test/buyers.csv'
 SELLER_DATA = '/Users/Priysha/Documents/personal_git/MarketPlaceBidding/test/sellers.csv'
 LOGGING_CONF = '/Users/Priysha/Documents/personal_git/MarketPlaceBidding/log/logging.conf'
+
+##########################################################
+## Authentication Info
+##########################################################
+
+USERNAME = "admin"
+PASSWORD = "password"

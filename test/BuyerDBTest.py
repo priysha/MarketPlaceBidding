@@ -65,22 +65,6 @@ class BuyerDBTest(unittest.TestCase):
 
 
     ##
-    ## Name: testCreateExistingBuyer
-    ## Description: This method tests createBuyer()
-    ## method for BuyerDB class for existing buyer
-    ##
-    ## Parameters: None
-    ##
-    ## Returns: None
-    ##
-    def testCreateExistingBuyer(self):
-        buyer_dict = {'buyer_id': 'foo', 'first_name': 'foo', 'last_name': 'bar',
-                      'location': '', 'skills': ''}
-
-        #should pass
-        self.assertEquals(False, self.Buyer.createBuyer(buyer_dict))
-
-    ##
     ## Name: testGetBuyerInfo
     ## Description: This method tests getBuyerInfo()
     ## method for BuyerDB class
@@ -162,10 +146,7 @@ class BuyerDBTest(unittest.TestCase):
     ## Returns: None
     ##
     def testjsonDecoder(self):
-        test_data = self.Buyer.jsonEncoder(self.Buyer.getBuyerInfo('odargann'))
+        test_data = self.Buyer.getBuyerInfo('odargann').to_dict(orient='records')
 
-        actual_result = self.Buyer.jsonDecoder(test_data)
-        expected_result = json.loads(test_data)[0]
-        self.assertEquals(sorted(actual_result),sorted(expected_result))
-
+        self.assertEquals(sorted(test_data[0]),sorted(self.Buyer.jsonDecoder(test_data[0])))
 

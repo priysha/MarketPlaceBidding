@@ -236,12 +236,9 @@ class ProjectDBTest(unittest.TestCase):
     ## Returns: None
     ##
     def testjsonDecoder(self):
-        test_data = self.Project.jsonEncoder(self.Project.getProjectInfo(5))
+        test_data = self.Project.getProjectInfo(5).to_dict(orient='records')
 
-        actual_result = self.Project.jsonDecoder(test_data)
-        expected_result = json.loads(test_data)[0]
-        self.assertEquals(sorted(actual_result),sorted(expected_result))
-
+        self.assertEquals(sorted(test_data[0]), sorted(self.Project.jsonDecoder(test_data[0])))
 
 
 

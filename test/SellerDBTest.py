@@ -49,22 +49,6 @@ class SellerDBTest(unittest.TestCase):
 
         self.assertEquals(True, 'Priysha' in self.Seller.getAllSellers().first_name.values)
 
-    ##
-    ## Name: testCreateExistingSeller
-    ## Description: This method tests createSeller()
-    ## method for SellerDB class for existing seller
-    ##
-    ## Parameters: None
-    ##
-    ## Returns: None
-    ##
-    def testCreateExistingSeller(self):
-
-        seller_dict = {'seller_id': 'priysha', 'first_name': 'foo', 'last_name': 'bar',
-                       'location': '', 'job_title': '', 'company': ''}
-
-        #should pass
-        self.assertEquals(False, self.Seller.createSeller(seller_dict))
 
     ##
     ## Name: testGetSellerInfo
@@ -164,10 +148,8 @@ class SellerDBTest(unittest.TestCase):
     ## Returns: None
     ##
     def testjsonDecoder(self):
-        test_data = self.Seller.jsonEncoder(self.Seller.getSellerInfo('slankester6'))
+        test_data = self.Seller.getSellerInfo('slankester6').to_dict(orient='records')
 
-        actual_result = self.Seller.jsonDecoder(test_data)
-        expected_result = json.loads(test_data)[0]
-        self.assertEquals(sorted(actual_result),sorted(expected_result))
+        self.assertEquals(sorted(test_data[0]), sorted(self.Seller.jsonDecoder(test_data[0])))
 
 

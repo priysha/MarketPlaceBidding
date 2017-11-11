@@ -59,3 +59,5 @@ class ProjectBidDBTest(unittest.TestCase):
         self.assertEquals(False, result.empty)
         self.assertEquals(round(343.83,2), round(float(result.bid_amount[0]),2))
 
+
+
